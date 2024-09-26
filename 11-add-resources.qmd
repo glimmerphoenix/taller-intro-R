@@ -1,0 +1,42 @@
+# Recursos adicionales
+
+### Ejercicios y referencias sobre `tidyverse`
+
+Llegados a este punto, lo más importante es realizar la mayor cantidad posible
+de ejercicios y ejemplos para afianzar nuestro conocimiento de la interfaz de
+`dplyr`. En este punto, sobre todo si tenemos todavía poca experiencia en
+programación (pero si la tenemos, *también*), es importante tener **mucha
+paciencia** tanto con el propio lenguaje como con nosotros mismos.
+
+`dplyr` define una serie de operaciones para manipulación y consulta de datos que
+no son arbitrarias. Llevan definidas desde hace décadas, cuando expertos en bases
+de datos pensaron en la forma de organizar la información de manera más eficiente
+y cómo recuperarla y modificarla posteriormente.
+
+Por tanto, es importante no desesperarse y poco a poco ir habituándose a las
+funciones existentes y a **construir consultas** con estas piezas básicas.
+
+Recomendamos a continuación varias fuentes en las que se pueden encontrar muchos
+ejemplos adicionales y ejercicios para practicar:
+
+1. La versión online del libro *R for Data Science* de H. Wikcham [@Wickham2017]
+incluye en el [capítulo 5](https://r4ds.had.co.nz/transform.html) más ejemplos
+de estas mismas operaciones, utilizando datos del paquete `nycflights13`.
+2. Los materiales en línea del curso `Stat545` (<https://stat545.com/>), 
+creado por J. Bryan contienen varios capítulos relevantes para repasar
+y practicar. Varios de estos capítulos también proponen ejercicios
+adicionales para resolver:
+  * El [capítulo 6](https://stat545.com/dplyr-intro.html) es una introducción a las
+  operaciones básicas con `dplyr`.
+  * El [capítulo 7](https://stat545.com/dplyr-single.html) amplía con más 
+  ejemplos la explicación de las funciones que solo involucran a una tabla.
+  * El [capítulo 14](https://stat545.com/multiple-tibbles.html) se muestra como
+  ampliar una tabla añadiendo más filas o más columnas procedentes de otras
+  tablas.
+  * El [capítulo 15](https://stat545.com/join-cheatsheet.html) amplía 
+  las operaciones *join*, explicando gráficamente y de forma clara cómo
+  se combinan las tablas con cada operación y el resultado final.
+3. El [capítulo 3](https://moderndive.com/3-wrangling.html) del 
+libro *Modern Dive into R* de C. Ismay y A.Y. Kim, contiene más ejemplos y
+explicaciones gráficas para entender todas estas operaciones.
+

@@ -1,0 +1,53 @@
+# El lenguaje R
+
+## ¿Qué es R?
+
+R es un lenguje de programación especialmente pensado para el análisis y la visualización de datos. Fue creado por Ross Ihaka y Robert Gentleman como una versión libre del lenguaje estadístico S, creado en Bell Labs. Su uso está ampliamente extendido en investigación, docencia e industria. Empresas como Google, Facebook, Twitter, NYT, Pfizer, Santander, BBVA y Teléfonica, entre otras, utilizan este lenguje en sus desarrollos. Entre otras características, R cuenta con:
+- capacidad para el almacenamiento y manipulación efectiva de datos,
+- operadores para realizar cálculos sobre variables indexadas (Arrays), en particular matrices,
+- una amplia colección de herramientas para el análisis de datos,
+- multitud de opciones para el análisis gráfico de datos, y
+- como cualquier otro lenguaje de programación, también incluye sentencias condicionales, ciclos, funciones recursivas y posibilidad de entradas y salidas.
+
+## RStudio
+
+RStudio es un entorno de programación con R creado por la compañía norteamericana [Posit PBC](https://posit.co/). Este entorno de desarrollo cuenta con un interprete de R que evalua expresiones aritméticas, lógicas y llamadas a funciones o asignaciones. Algunas de estas expresiones (siempre y cuando sean correctas) pueden producir una salida visible que se puede almacenar en alguna variable, en disco o en un fichero. También es posible leer y escribir ficheros de datos, así como generar y guardar gráficos, crear *scripts* (archivos con listados de comandos ejecutables escritos en R) o crear ficheros de informes.
+
+## ¿Cómo se mantiene R en la actualidad?
+
+Por un lado está la **R Foundation**, una fundación sin ánimo de lucro que gestiona IPR. Por otro lado tenemos **RCore Team**, un grupo de personas con privilegios para cambiar el codigo base de R. Adicionalmente están los **R Contributors**, numerosos desarrolladores que han realizado diversas aportaciones al proyecto. 
+
+**R Consortium**, recientemente constituido. https://www.r-consortium.org.
+
+**Comunidad R Hispano**. (http://r-es.org) Organiza jornadas anuales (conferencias, talleres...). Grupos locales, meetups (http://madrid.r-es.org)
+
+## Ventajas e inconvenientes de R.
+
+Dentro de las ventajas de R podemos destacar las siguientes:
+- Se trata de una herramienta de software libre, gratuito.
+- La comunidad que le da soporte es una comunidad sólida, con múltiples participantes del mundo académico y de la industria.
+- Es posible obtener soporte comercial mediante proveedores.
+- Ya ha conseguio suficiente masa crítica.
+- Podemos adaptarlo y personalizarlo mediante el desarrollo de funciones, paquetes o plantillas de documentos.
+- Casi cualquier innovación en estadística ya está implementada en R.
+- Facilita la creación y autorimatización de flujos de trabajo y análisis reproducibles, utilizando herramientas adicionales como [Quarto](https://quarto.org).
+
+A pesar de todas sus bondades, podemos encontrar algún inconveniente:
+- Hay que aprender a programar (aunque solo sea un poco).
+- Para aquellos que saben programar en otros lenguajes, sobre todo viniendo de orientación a objetos, el lenguaje R no resulta intuitivo, es decir, presenta una cierta curva de aprendizaje.
+- Existen interfaces gráficas, pero es importante acostumbrarse a revisar el código y la salida. Solo así comprendemos qué hace realemnte el método o algoritmo que estamos aplicando.
+
+
+## Paquetes R.
+
+
+## Fuentes de información sobre R
+
+Cuenta de Posit PBC en Instagram
+
+Grupos de usuarios R
+
+Meetups sobre R
+
+Canal Posit PBC en Youtube
+

@@ -1,0 +1,200 @@
+# Importación y exportación de datos
+
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, rows.print=15)
+library('readr')
+```
+
+## Importación de datos
+
+Hasta ahora, nos hemos basado generalmente en datos que ya están previamente
+cargados y disponibles en paquetes de R para nuestros ejemplos. Sin embargo,
+lo habitual en un proyecto es que tengamos que leer los datos de algún tipo
+de fuente externa a R:
+
+* **Archivo textual**: Los datos pueden estar almacenados en formato libre,
+pero lo normal es que sigan una pauta para organizar su presentación, según
+algún **formato estándar** de representación de datos.
+  * **CSV** (Comma Separated Values): Los datos se escriben insertando una
+  línea por cada fila de la tabla, y separando los valores de cada columna
+  mediante comas. Los strings suelen ir delimitados por dobles comillas (").
+  Desgraciadamente, no existe una convención única sobre qué carácteres usar
+  para delimitar strings o separar los valores de cada columna. A veces
+  también se pueden usar puntos y coma, tabuladores, etc. Debemos informarnos
+  sobre el formato empleado o descubrirlo nosotros, inspeccionando algunas
+  líneas del archivo en crudo.
+  
+  * **JSON** (JavaScript Object Notation): Es un formato que se ha popularizado
+  bastante, porque lo suelen emplear muchos servicios y APIs web que exportan
+  datos. Es bastante compacto y permite representar arrays y listas arbitrarias
+  de objetos. También se puede usar este formato para guardar datos en
+  archivos de texto.
+
+* **Base de datos** (normalmente relacional): Guarda los datos en tablas
+similares a un data.frame (o tibble). R proporciona paquetes que permiten
+conectarnos a muchos tipos de bases de datos para realizar consultas y
+recuperar información. Normalmente, el resultado que la base de datos envía
+como respuesta a nuestra consulta se formatea automáticamente como un data.frame
+(lo hacen las propias bibliotecas conectoras de R).
+
+* **Formatos binarios** (Excel, OpenOffice, LibreOffice, etc.): En ocasiones los datos
+se han creado previamente en un programa ofimático o de otro tipo, y tenemos que
+importarlos en R. El caso habitual es Excel que, hoy en día, continúa siendo 
+una herramienta muy habitual en gestión y cálculo de datos.
+
+No es posible cubrir toda esta casuística en el tiempo de curso. Por ello,
+nos vamos a centrar en la lectura de datos CSV y la lectura de datos
+de Excel para cubrir dos ejemplos muy comunes de importanción de datos en R.
+
+
+### Importar datos de archivos de texto: CSV
+
+Para la mayoría de formatos de almacenamiento en archivos de texto, las funciones
+del paquete `readr`, que también forma parte del núcleo básico de tidyverse,
+son una buena alternativa para cargar de manera fiable nuestros datos en R.
+
+Podemos ejecutar en consola el siguiente comando, para mostrar una lista de
+todas las funciones incluidas en este paquete:
+
+```{r, eval=FALSE}
+help(package="readr")
+```
+
+Todas las funciones que comienzan por `readr_` están pensadas para automatizar
+la lectura de datos de archivos textuales. Por desgracia, no existe un formato
+universal de representación de datos en CSV. Así que hay diferentes funciones
+para cada caso. Presentamos en la tabla \@ref(tab:funcs-read) las principales.
+
+Table: (\#tab:funcs-read) Funciones típicas de lectura de datos en formato CSV
+y similares.
+
+| Nombre función | Descripción                                                |
+|:---------------|:-----------------------------------------------------------|
+| `read_delim()` | Función genérica, hay que especificar delimitador. |
+| `read_csv()`   | Asume delimitador es "," y que "." separa decimales. |
+| `read_csv2()`  | Asume delimitador es ";" y que "," separa decimales. |
+| `read_tsv()`   | Asume delimitador es "\\t" (tabulador) |
+
+Veamos un ejemplo que muestre la potencia de estas funciones. En el subdirectorio 
+`data` del directorio de este manual, tenemos el archivo `ACMETelephoneABT.csv`.
+Este archivo proviene de un ejemplo de un conocido (y muy recomendable) libro
+de introducción a la ciencia de datos y el aprendizaje máquina [@kelleher2015].
+
+Ahora comprobamos lo fácil que es leer los datos, en una sola línea de código R:
+
+```{r read-ACME-data}
+ACMETelephoneABT <- read_csv("data/ACMETelephoneABT.csv", na = c("", " "))
+class(ACMETelephoneABT)  # Comprobamos clase del objeto
+dim(ACMETelephoneABT)  # Dimensiones de la tabla
+head(ACMETelephoneABT, n = 75) # 5 páginas de tabla de resultados
+```
+
+Conviene resaltar algunos puntos importantes:
+
+* La función `read_csv()` utilizada sin argumentos (como en este ejemplo) intenta usar
+heurísticos sencillos para *adivinar* el tipo de datos adecuado para formatear los
+valores de cada columna. Si no ocultamos los avisos, la función nos indica
+(como vemos arriba en este documento) qué formatos ha utilizado para leer
+cada una de las columnas. Conviene no ocultar esta información, ya que muchos
+errores en preparación y limpieza de datos provienen de confusiones con el
+tipo de datos asignado a una columna.
+
+* Los valores de tipo string (en tibble marcados como `<chr>`) **no se convierten a factores
+de forma automática**, sino que se dejan como cadena de caracteres. Por tanto, si deseamos
+que se considere a los valores de alguna columna explícitamente como factor, habrá
+que especificarlo en el momento de leer los datos, o bien convertirlo explícitamente más
+adelante. Será más conveniente elegir una u otra opción dependiendo de si tenemos que
+limpiar intensamente los datos de esa columna o ya vienen en buen estado.
+
+* Es imprtante especificar qué convención se usa para indicar los datos faltantes en el
+archivo. Suele ser arbitrario (y, por desgracia, a veces caótico), obligándonos a limpiar
+los datos siguiendo el método de prueba y error. Por defecto, la función considera el
+argumento `na = c("", "NA")`, es decir un stríng vacío o el string "NA" marcan un dato
+faltante en la tabla. En nuestro caso, bien porque nos han avisado o por una inspección
+preliminar del contenido del archivo sabemos que, en su lugar, los datos faltantes se
+marcan con string vacío o con espacio en blanco (" ").
+
+Con esto hemos leído de forma aparentemente sencilla los datos de un archivo CSV. En este
+caso, hemos usado `read_csv()` porque los autores son británicos, y por tanto usan la
+convención de separar en cada fila los valores de cada columna mediante "," y usar
+"." como caracter para delimitar la parte decimal de un número.
+
+Sin embargo, más adelante volveremos a tratar este dataset y comprobaremos que, como 
+suele ser habitual en un caso real, la lectura inicial de datos no es más que el
+primer paso de un proceso de **limpieza de datos**, que suele **consumir en torno
+a un 80% del tiempo** de trabajo en el proyecto para el científico de datos.
+
+Por último, es importante resaltar que en RStudio podemos también usar de forma
+equivalente una **interfaz gráfica** para diseñar interactivamente el comando de lectura
+del archivo CSV que vamos a ejecutar. Para ello, en el panel multipropósito (normalmente
+arriba a la derecha), pinchamos en la pestaña *"Environment"* y pulsamos el botón
+*"Import Dataset"*. Después, seleccionamos la opción *"From Text (readr)..."* y aparece
+un cuadro de diálogo. En la parte superior, pinchando en el botón *"Browse"* podemos
+navegar el disco para seleccionar el archivo a cargar.
+
+Al seleccionarlo, en el
+cuadro de diálogo aparece una previsualización del que será el resultado de la lectura
+una vez ejecutado el comando, que se va construyendo en la parte inferior derecha del
+cuadro diálogo. Este comando se ejecutará automáticamente en consola al confirmar el
+proceso, pulsando el botón *"Import"*. En la parte superior de las columnas, podemos
+pinchar en los títulos de columna para desplegar una larga lista con todos los tipos
+de datos disponibles para formatear dicha columna. Si elegimos un nuevo tipo de datos
+que no es el considerado por defecto por la función, el comando de lectura se actualiza
+automáticamente para formatear la columna según el nuevo tipo de dato elegido.
+
+### Importar datos de archivos Excel
+
+Importar datos desde un archivo Excel, siempre que no contenga características
+especiales (macros, multicolumnas o multifilas, automatismos, etc.), es también
+facilmente abordable mediante el paquete `readxl` y la función `read_excel()`
+incluida en el mismo.
+
+En este caso también se puede teclear el comando en consola (o en un script
+de R), o bien usar el cuadro diálogo interactivo para diseñar el comando de lectura
+del fichero de Excel. A esta segunda opción se accede también pulsando en la 
+pestaña *"Environment"* del panel multipropósito el botón *"Import Dataset"*,
+y seleccionando *"From Excel..."*.
+
+Enviamos a los lectores interesados en probar un ejemplo de lectura de ficheros
+Excel a realizar el ejercicio guiado propuesto en el 
+[capítulo 4](https://moderndive.com/4-tidy.html#using-rstudios-interface) 
+del libro en línea "Modern Dive into R" (sec. 4.1.2).
+
+### Otras herramientas de importación de datos
+
+En este curso solo cubrimos los casos más típicos y sencillos de importación
+de datos. Sin embargo, este paso puede acarrear muchos quebraderos de cabeza
+a los científicos de datos que deben abordarlo. Especialmente difícil resulta
+la lectura rápida y eficiente de archivos muy largos, que pueden contener
+cientos de miles o decenas de millones de líneas (o incluso más), cada 
+una representando una fila de la futura tabla con todos los valores para cada
+columna.
+
+Por este motivo, presentamos aquí un par de alternativas para que el lector que
+se enfrente en alguna ocasión a este reto tenga pistas sobre dónde empezar
+a documentarse para resolver el problema:
+
+* El paquete `vroom` (cuidado, no confundir con `broom`), es una alternativa
+reciente para lectura/escritura de datos extremadamente rápida y eficiente en R. Referimos
+al lector interesado a la [viñeta de introducción a `vroom`](https://cran.r-project.org/web/packages/vroom/vignettes/vroom.html)
+para más detalles. Entre las funciones más resaltables tenemos:
+  * Lectura automatizada de múltiples archivos.
+  * Lectura de archivos comprimidos.
+  * Lectura de archivos en ubicaciones remotas (con una URL).
+
+* Otro proyecto que merece la pena destacar es [Apache Arrow](https://arrow.apache.org/),
+que aspira a convertirse en el formato universal, independiente de plataforma
+para representación y serialización de datos en memoria. Cuenta con paquetes
+y librerías de enlace en muchos lenguajes de programación, incluido el
+[paquete `arrow`](https://arrow.apache.org/docs/r/) en R. Su gran ventaja es
+que se emplea un formato universal de representación de datos extremadamente
+eficiente, que se mantiene inalterado con independencia del lenguaje de
+programación o plataforma de ejecución que empleemos.
+
+
+
+
+
+
+
+

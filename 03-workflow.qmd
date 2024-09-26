@@ -1,0 +1,69 @@
+# Organización de proyectos
+
+Los **proyectos** nos permiten trabajar de manera más efectiva en RStudio. Un proyecto mantiene
+información sobre todos los elementos de programación que necesitamos (el espacio de trabajo,
+el directorio de trabajo, las variables de entorno, etc.). De este modo, podemos cerrar el proyecto
+y al volver a abrirlo todo estará preparado para continuar desde el momento en que lo dejamos.
+
+En la sección @sec-projects ya se ha explicado paso a paso cómo podemos crear un nuevo proyecto
+con RStudio.
+
+
+## Estructura de directorios
+
+Además de crear un proyecto, resulta conveniente seguir un esquema consistente para la creación
+de carpetas dentro del directorio principal de nuestro proyecto. De este modo, todo estará siempre
+bien organizado y cuando acudamos a un proyecto que se creó hace tiempo nos resultará más sencillo
+encontrar rápidamente los recursos que buscamos.
+
+No se puede dar una fórmula general para un listado de carpetas válido para cualquier proyecto, pero
+si se pueden sugerir carpetas que suelen ser útiles. Cada programador o equipo debe decidir, en función
+del tipo de proyectos, los recursos a gestionar y sus objetivos, qué combinación de carpetas es más
+adecuada en cada caso.
+
+- {{< fa folder >}} `data`: directorio para almacenar los archivos de datos disponibles. Por ejemplo, datos
+que hemos descargado previamente o que se descargarán periodicamente de forma automatizada mediante
+herramientas o *scripts*, datos generados por nuestros programas, etc.
+
+- {{< fa folder >}} `R` o `r`: carpeta para guardar nuestros *scripts*. Incluso en el caso en que sólo
+tengamos un *script* en nuestro proyecto, es recomendable crearla porque es muy probable que el proyecto
+crezca y terminemos creando más (se debe evitar a toda costa crear *scripts* "kilométricos").
+
+- {{< fa folder >}} `doc`: para documentación de nuestro proyecto, ejemplos de uso, etc. En el caso de que
+usemos una herramienta de documentación específica habrá que leer su manual de uso para seguir exactamente
+la estructura que necesite.
+
+- {{< fa folder >}} `deliverables` o `inform`: para contener informes o documentos de resumen creados con
+Quarto o RMarkdown con extractos y resúmenes de resultados.
+
+- {{< fa folder >}} `slides` o `diapos`: si tenemos que preparar presentaciones con diapositivas puede ser
+una buena idea organizarlas en su propio directorio independiente.
+
+- {{< fa folder >}} `img`: si nuestro proyecto emplea imágenes (mapas, tomas satelitales, fotografías, etc.)
+es una buena idea organizarlas todas dentro de una misma carpeta, aparte del resto de datos.
+
+- {{< fa folder >}} `test`: puede ser útil para almacenar *scripts* de prueba que todavía no son del todo
+correctos o no están probados a fondo. También para incluir pruebas formales de corrección de nuestros
+*scripts* (comprobación de robustez).
+
+- {{< fa folder >}} `tmp`: para almacenar archivos de datos intermedios o ficheros efímeros, que no pretendemos
+conservar más que para unas pocas ejecuciones (pruebas, etc.).
+
+- {{< fa folder >}} `log`: si nuestro proyecto involucra una gran cantidad de operaciones que pueden consumir
+mucho tiempo de ejecución, es conveniente que se generen ficheros de registro o *logs* del progreso de dichas
+operaciones.
+
+- {{< fa folder >}} `util` o `utils`: conserva *scripts* que suelen contener funciones y otras herramientas de
+utilidad que se emplean para realizar operaciones básicas en los *scripts* principales del directorio `R`. De esta
+forma, se *modulariza* el código, separándolo en ficheros diferentes para gestionarlo y mantenerlo mejor (recordemos
+que hay que evitar meter todo en un solo archivo enorme).
+
+- {{< fa folder >}} `aux`, `notas`, `utils`, `labs`, `practicas`, `ejercicios`, etc.: posibles directorios que pueden
+surgir en fución del tipo de proyecto que abordemos (prácticas de un curso, experimentos, laboratorios y otros).
+
+
+## Tipos de proyectos
+
+
+
+

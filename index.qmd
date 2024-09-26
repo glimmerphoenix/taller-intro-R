@@ -1,0 +1,30 @@
+# Introducción {.unnumbered}
+
+This book describes how to use Quarto, a software for scientific
+document production, to create publications in the areas of Ecology
+and Plant Research.
+
+Quarto has become a powerful and verstaile addition in the research
+toolkit, providing complete support to implement **reproducible** research
+workflows. The quest for open access research, including not only the final
+product (manuscripts) but also ancillary research materials (source code,
+datasets, figures, pipelines, setup files, etc.) is a prominent concern
+among scholars and practitioners in many fields. Prestigious publicatons
+require authors to submit these materials with manuscript drafts to let 
+other colleagues reproduce and validate the results, replicate
+studies in new cohorts or improve the intepretability of results.
+
+Quarto let us combine formatted text and executable source code into
+a single document. That source code *chunks* can be written in different programming
+langugaes such as R, Python, Julia or Observable. As we will see, it is 
+even possible to combine different programming languages in the same document 
+or collection of documents, providing even more versatility to the mix.
+
+This is a **practical guide**, presenting hands-on examples and commands to 
+produce your own Quarto documents in short time. In addition,
+along this way key concepts and best practices are also presented to steer
+new Quarto apprentices in the right direction.
+
+To learn more about Quarto visit the comprehensive guide at
+<https://quarto.org/docs/guide/>. In particular, Quarto books like this one
+are documented at <https://quarto.org/docs/books>.
