@@ -3366,7 +3366,7 @@ max(4,5,6,12,-4)</pre>
 <pre class = 'prettyprint lang-r'># Media de una secuencia de 30 elementos elegidos al azar de entre el 1 y el 100.
 mean(sample(1:100, 30))</pre>
 
-<pre >## [1] 47</pre>
+<pre >## [1] 46.26667</pre>
 
 </article></slide><slide class=""><hgroup><h2>Funciones: creación</h2></hgroup><article  id="funciones-creación" class="smaller ">
 
@@ -3522,7 +3522,7 @@ seq(length = 10, from = -2, by = 0.2)</pre>
 <pre class = 'prettyprint lang-r'># Secuencias aleatorias:
 rnorm(4, mean=10, sd=3)</pre>
 
-<pre >## [1]  6.120218  9.539576  9.599129 13.941611</pre>
+<pre >## [1]  8.867443 10.158625 11.810886  7.713076</pre>
 
 </article></slide><slide class=""><hgroup><h2>Vectores: creación</h2></hgroup><article  id="vectores-creación-4" class="smaller ">
 
@@ -4250,7 +4250,7 @@ class(grupos)</pre>
 
 <ul>
 <li>Dia <code>&lt;date&gt;</code></li>
-<li>Tiemmpo <code>&lt;time&gt;</code></li>
+<li>Tiempo <code>&lt;time&gt;</code></li>
 <li>Dia-tiempo <code>&lt;dttm&gt;</code></li>
 </ul></li>
 <li><strong>ISO8601</strong>: año-mes-día horas:minutos:segundos</li>
@@ -4262,7 +4262,7 @@ class(grupos)</pre>
 
 <pre class = 'prettyprint lang-r'>now()</pre>
 
-<pre >## [1] &quot;2024-09-27 13:22:34 CEST&quot;</pre>
+<pre >## [1] &quot;2024-09-27 16:51:41 CEST&quot;</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>1.9 Importación y exportación de datos</h2></hgroup><article  id="importación-y-exportación-de-datos" class="smaller ">
 
@@ -4504,7 +4504,74 @@ df |&gt;
 ## 3 Jane Doe     treatment_a     16
 ## 4 Jane Doe     treatment_b     11
 ## 5 Mary Johnson treatment_a      3
-## 6 Mary Johnson treatment_b      1</pre></article></slide>
+## 6 Mary Johnson treatment_b      1</pre>
+
+</article></slide><slide class=""><hgroup><h2>Principios de tidy data: unión</h2></hgroup><article  id="principios-de-tidy-data-unión" class="smaller ">
+
+<ul>
+<li><code>left_join()</code>: all rows from x</li>
+<li><code>right_join()</code>: all rows from y</li>
+<li><code>full_join()</code>: all rows from both x and y</li>
+<li><code>semi_join()</code>: all rows from x where there are matching values in y, keeping just columns from x</li>
+<li><code>inner_join()</code>: all rows from x where there are matching values in y, return all combination of multiple matches in the case of multiple matches</li>
+<li><code>anti_join()</code>: return all rows from x where there are not matching values in y, never duplicate rows of x</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Principios de tidy data: unión</h2></hgroup><article  id="principios-de-tidy-data-unión-1" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>x &lt;- tibble(
+    id = c(1, 2, 3),
+    value_x = c(&quot;x1&quot;, &quot;x2&quot;, &quot;x3&quot;))
+x = as.data.frame(x)
+x</pre>
+
+<pre >##   id value_x
+## 1  1      x1
+## 2  2      x2
+## 3  3      x3</pre>
+
+<pre class = 'prettyprint lang-r'>y &lt;- tibble(
+    id = c(1, 2, 4),
+    value_y = c(&quot;y1&quot;, &quot;y2&quot;, &quot;y4&quot;))
+y = as.data.frame(y)
+y</pre>
+
+<pre >##   id value_y
+## 1  1      y1
+## 2  2      y2
+## 3  4      y4</pre>
+
+</article></slide><slide class=""><hgroup><h2>Principios de tidy data: unión</h2></hgroup><article  id="principios-de-tidy-data-unión-2" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>z1 &lt;- x |&gt; left_join(y,
+                    by = &quot;id&quot;)
+z1</pre>
+
+<pre >##   id value_x value_y
+## 1  1      x1      y1
+## 2  2      x2      y2
+## 3  3      x3    &lt;NA&gt;</pre>
+
+<pre class = 'prettyprint lang-r'>z2 &lt;- x |&gt; right_join(y,
+                      by = &quot;id&quot;)
+z2</pre>
+
+<pre >##   id value_x value_y
+## 1  1      x1      y1
+## 2  2      x2      y2
+## 3  4    &lt;NA&gt;      y4</pre>
+
+</article></slide><slide class=""><hgroup><h2>Principios de tidy data: unión</h2></hgroup><article  id="principios-de-tidy-data-unión-3" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>z3 &lt;- x |&gt; full_join(y,
+                     by = &quot;id&quot;)
+z3</pre>
+
+<pre >##   id value_x value_y
+## 1  1      x1      y1
+## 2  2      x2      y2
+## 3  3      x3    &lt;NA&gt;
+## 4  4    &lt;NA&gt;      y4</pre></article></slide>
 
 
   <slide class="backdrop"></slide>

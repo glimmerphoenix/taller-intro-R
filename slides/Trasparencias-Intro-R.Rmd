@@ -841,4 +841,45 @@ df |>
   )
 ```
 
+## Principios de tidy data: unión
 
+- `left_join()`: all rows from x
+- `right_join()`: all rows from y
+- `full_join()`: all rows from both x and y
+- `semi_join()`: all rows from x where there are matching values in y, keeping just columns from x
+- `inner_join()`: all rows from x where there are matching values in y, return all combination of multiple matches in the case of multiple matches
+- `anti_join()`: return all rows from x where there are not matching values in y, never duplicate rows of x
+
+## Principios de tidy data: unión
+
+```{r joins, echo=TRUE}
+x <- tibble(
+    id = c(1, 2, 3),
+    value_x = c("x1", "x2", "x3"))
+x = as.data.frame(x)
+x
+y <- tibble(
+    id = c(1, 2, 4),
+    value_y = c("y1", "y2", "y4"))
+y = as.data.frame(y)
+y
+```
+
+## Principios de tidy data: unión
+
+```{r joins2, echo=TRUE}
+z1 <- x |> left_join(y,
+                    by = "id")
+z1
+z2 <- x |> right_join(y,
+                      by = "id")
+z2
+```
+
+## Principios de tidy data: unión
+
+```{r joins3, echo=TRUE}
+z3 <- x |> full_join(y,
+                     by = "id")
+z3
+```
