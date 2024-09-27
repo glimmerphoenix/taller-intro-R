@@ -48,10 +48,20 @@ cadena = "Caracteres"
 ```
 
 ## Tipos de objetos
+
 Asignación de valores:
 
-- Asignación: <-, =. Cualquier variable solo puede tener un *único valor* en cada instante.
+- Asignación: <-, =. 
+- Cualquier variable solo puede tener un *único valor* en cada instante.
 - Se evalua la expresión de la derecha
+
+```{r imagen-asig, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/asignacion.png")
+```
+
+
+## Tipos de objetos
 
 ```{r data-asign, echo=TRUE}
 # Variable numérica:
@@ -62,7 +72,7 @@ y
 y = 10.0
 y
 
-#Variable alabética
+#Variable alfabética
 nom = "Juan"
 nom
 ```
@@ -85,9 +95,9 @@ ls()
 
 ```{r operators, echo=TRUE}
 var1 <- 1.2
-var1
-var1 = 0.25
-var1
+var2 = 0.25
+var3 = 3*sin(var2)+23.57
+var3
 
 z = 3
 i = (z*2+75)/2
@@ -97,7 +107,7 @@ i
 ## Operadores lógicos
 
 - Operadores lógicos: <, <=, >, >=, ==, y !=. 
-- Siendo V1 y v2 variables lógicas
+- Siendo v1 y v2 variables lógicas
   + v1&v2: conjunción
   + v1|v2: disyunción
   + !v1: negación de V1
@@ -105,10 +115,7 @@ i
 ```{r operators2, echo=TRUE}
 a <- 2>3
 a
-
 b <- 5<10
-b
-
 c <- a&b
 c
 ```
@@ -131,8 +138,8 @@ c
 ```{r funcion-max, echo=TRUE}
 # Esta instrucción devuelve el máximo de todos los números que se le han pasado por argumento
 max(4,5,6,12,-4)
-# Máximo de una secuencia de 30 elementos elegidos al azar de entre el 1 y el 100.
-max(sample(1:100, 30))
+# Media de una secuencia de 30 elementos elegidos al azar de entre el 1 y el 100.
+mean(sample(1:100, 30))
 ```
 
 
@@ -152,7 +159,6 @@ convUnitsToMeters = function(val, from="km"){
   else return (val*mult)
 }
 convUnitsToMeters(23,"km")
-convUnitsToMeters(23)
 convUnitsToMeters(from = "cm", val = 40)
 ```
 
@@ -201,7 +207,6 @@ v2
 
 # Tamaño del vector
 length(v1)
-length(v2)
 ```
 
 ## Vectores: creación
@@ -219,7 +224,7 @@ length(v)
 
 ## Vectores: creación
 
-- Creación de vector mediante función seq():
+- Creación de vector mediante función `seq()`:
 ```{r vectores1-0, echo=TRUE}
 x = seq(-3, 3, by=.5) #inicio, fin, salto
 x
@@ -233,7 +238,7 @@ seq(length = 10, from = -2, by = 0.2)
 
 ## Vectores: creación
 
-- Creación de vector mediante repetición de secuencia:
+- Creación de vector mediante repetición de secuencia o secuencias aleatorias:
 
 ```{r vectores1-1, echo=TRUE}
 rep(5, 4)
@@ -255,14 +260,11 @@ x
 
 ## Vectores: indexación
 
-`NA`: dato faltante. Las operaciones no se pueden realizar, pero no da error.
-```{r vectores2, echo=TRUE}
+- Acceso a determinados elementos de un vector
+- `NA`: dato faltante. Las operaciones no se pueden realizar, pero no da error.
+```{r indexacion, echo=TRUE}
 vl = c(FALSE, TRUE, NA, TRUE, TRUE)
 vl
-```
-
-Acceso a determinados elementos de un vector
-```{r indexacion, echo=TRUE}
 # Elemento que se encuentra en la 5º posición
 vl[1:3]
 # OJO: en R, el acceder a una posición que NO existe no genera ningún error
@@ -271,7 +273,7 @@ vl[7]
 
 ## Vectores: indexación
 
-Indexación mediante **máscara**.
+- Indexación mediante **máscara**.
 ```{r indexacion2, echo=TRUE}
 x = c(0, -3, 4, -1, 45, 90, -5)
 x[x>0]
@@ -295,7 +297,7 @@ x
 
 ## Vectores: operaciones vectorizadas
 
-Las operaciones sobre vectores se realizan elemento a elemento.
+- Las operaciones sobre vectores se realizan elemento a elemento.
 ```{r vectores4, echo=TRUE}
 v1 = c(1, 3, 5)
 v2 = c(18, 9, 28)
@@ -320,7 +322,7 @@ v1 + v2
 
 ## Factores: definición
 
-Manejo de valores categóricos.
+- Manejo de valores categóricos.
 
 ```{r data-factors, echo=TRUE}
 cats = c(rep("malo", 2), rep("regular", 2),
@@ -333,7 +335,7 @@ levels(fcats)  ## Niveles de categorías reconocidos
 
 ## Factores
 
-Por defecto, R trata los factores como si fuesen variables *nominales*, no *ordinales*.
+- Por defecto, R trata los factores como si fuesen variables *nominales*, no *ordinales*.
 
 ```{r data-factors-ord, echo=TRUE}
 ## Establecer explicitamente un orden de los niveles
@@ -344,7 +346,7 @@ ofcats
 
 ## Factores
 
-Con una variable de tipo factor se pueden contar las ocurrencias de cada posible valor.
+- Con una variable de tipo factor se pueden contar las ocurrencias de cada posible valor.
 
 ```{r data-factors-op, echo=TRUE}
 fgenero = factor(c("m", "f", "m", "m", "m"), levels = c("f","m"))
@@ -358,7 +360,7 @@ t
 
 ## Factores
 
-- Función **gl()**: generación de secuencias a partir de factores. 
+- Función **gl()**: generación de factores a partir de secuencias. 
 
 ```{r secuencias4, echo=TRUE}
 # gl(número de niveles, número de repeticiones)
@@ -378,7 +380,9 @@ gl(2, 5, labels = c("female", "male"))
 - Estructura **homogénea** de almacenamiento.
 
 ```{r matrices1, echo=TRUE}
+# Vector
 m = c(45, 23, 66, 77, 33, 44, 56, 12, 78, 23)
+m
 # El contenido del vector se reparte a través de la matriz con 2 filas y 5 columnas.
 dim(m) = c(2, 5)
 m
@@ -386,7 +390,7 @@ m
 
 ## Matrices: creación
 
-Construcción de una matriz mediante la función `matrix(contenido de la matriz en forma de vector, número de filas, número de columnas)`.
+- Construcción de una matriz mediante la función `matrix(contenido de la matriz en forma de vector, número de filas, número de columnas)`.
 
 ```{r matrices2, echo=TRUE}
 # La matriz se va rellenando por columnas
@@ -399,9 +403,9 @@ m
 
 ## Arrays: creación
 
-Creación de un array multidimensional mediante la función `array()`. 
+- Creación de un array multidimensional mediante la función `array()`. 
 
-Hay que indicarle el contenido del array y la dimensión.
+- Hay que indicarle el contenido del array y la dimensión.
 
 ```{r array, echo=TRUE}
 # Array de dimensión 4x3x2
@@ -424,7 +428,7 @@ results
 
 ## Matrices y Arrays: indexación
 
-Se puede acceder a los elementos de una matriz igual que se puede acceder a los elementos de un vector.
+- Se puede acceder a los elementos de una matriz igual que se puede acceder a los elementos de un vector.
 
 ```{r indexacion-matrices, echo=TRUE}
 m[1, ] # elementos de una fila
@@ -435,7 +439,7 @@ m[-2, 1]# Elemetos de una columna menos los que están en una determinada fila
 
 ## Matrices y Arrays: indexación
 
-La indexación en arrays es igual que en las matrices.
+- La indexación en arrays es igual que en las matrices.
 
 ```{r indexacion-matrices2, echo=TRUE}
 a[1, 3, 2]
@@ -446,7 +450,7 @@ a[c(2, 3), , -2] # elementos de las filas 2 y 3, todas las columnas, solo los qu
 
 ## Matrices y Arrays: indexación
 
-Se puede indexar por nombre.
+- Se puede indexar por nombre.
 
 ```{r indexacion3, echo=TRUE}
 results["store1", ]
@@ -480,7 +484,7 @@ m4
 
 ## Matrices y Arrays: operaciones artiméticas
 
-Al igual que en los vectores, estas operaciones están vectorizadas.
+- Al igual que en los vectores, estas operaciones están vectorizadas.
 
 ```{r matrices6, echo=TRUE}
 m1 = matrix(c(45, 23, 66, 77, 33, 44), 2, 3)
@@ -502,10 +506,10 @@ m1 - m2
 
 ## Listas: definición y construcción
 
-Colección **heterogénea** y **ordenada** de elementos:
+- Colección **heterogénea** y **ordenada** de elementos:
 
-- Permiten crear **agrupaciones de elementos de distinto tipo**.
-- Cada elemento de una lista puede ser un tipo de dato individual: un vector, una matriz, etc.
+  - Permiten crear **agrupaciones de elementos de distinto tipo**.
+  - Cada elemento de una lista puede ser un tipo de dato individual: un vector, una matriz, etc.
 
 ```{r list-index, echo=TRUE}
 l1 = list(primero=c(1,2,3,4),
@@ -520,7 +524,6 @@ Dar nombre a los elementos después de crear la lista.
 
 ```{r lista2, echo=TRUE}
 my.lst2 = list(12584, "Marcos", c(8.5, 10, 17,9.75))
-my.lst2
 names(my.lst2) = c("id", "name", "marks")
 my.lst2
 ```
@@ -544,6 +547,8 @@ l1$primero[1]
 l1[[3]] # Si no ponemos corchetes, obtenemos una sublista de la lista original
 
 ## ¿Cómo obtenemos el elemento [2,2] de la matriz en tercer lugar de la lista?
+l1[[3]][2,2]
+l1$tercer[2,2]
 ```
 
 ## Listas: modificación
@@ -580,8 +585,6 @@ priori, puesto que pueden contener cualquier tipo de información en cualquier
 formato. 
     + Ejemplo: transcripciones de conversaciones sobre las que aplicamos PLN.
 
-## Data Frames en R
-
 - En el lenguaje R, se creo un tipo o estructura de datos que permite almacenar
 datos estructurados, semejante a una tabla en una base de datos.
 - Esperamos tener las variables por columnas y los casos (sujetos, elementos) en
@@ -605,19 +608,18 @@ df1
 ## Data Frames: características
 
 ```{r data-frames-caract, echo=TRUE}
+# Número de filas
 nrow(df1)
+# Número de columnas
 ncol(df1)
+# Dimensión
 dim(df1)
-
-# Podemos cambiar el nombre de las columnas de un Data Frame
-# names(df1)=c("col1","col2","col3")
 ```
 
 ## Data Frames: características
 
 ```{r data-frames-caract2, echo=TRUE}
 names(df1)
-
 # Podemos cambiar el nombre de las columnas de un Data Frame
 names(df1)=c("col1","col2","col3")
 df1
@@ -638,7 +640,7 @@ tail(CO2)  ## Muestra las 6 últimas filas
 
 ```{r data-frames-index, echo=TRUE}
 ## Nominal (mediante nombre)
-df1$Group
+df1$col3
 ## Índice numérico (como una lista)
 df1[[2]]
 ```
@@ -689,7 +691,7 @@ grupos
 - Paquete `lubridate` -> `library(tidyverse)`
 - Objetos:
   + Dia `<date>`
-  + Tiemmpo `<time>`
+  + Tiempo `<time>`
   + Dia-tiempo `<dttm>`
 
 - **ISO8601**: año-mes-día horas:minutos:segundos
@@ -840,125 +842,3 @@ df |>
 ```
 
 
-# 1.11 Fechas
-
-# 1.12 Un poco de estadística con R
-
-## Funciones resumen
-
-```{r summaries-i, echo=TRUE}
-summary(CO2)
-```
-
-## Varianza y desviación típica
-
-```{r var-sd, echo=TRUE}
-var(CO2$uptake)
-sd(CO2$uptake)
-```
-
-## Tablas de contingencias (vars. cualitativas)
-
-```{r contingency, echo=TRUE}
-with(CO2, table(Type, Treatment))
-
-## ftable() proporciona un formato compacto
-ftable(UCBAdmissions)
-```
-
-## Tablas de contingencias (vars. cualitativas)
-
-```{r contingency-margin, echo=TRUE}
-## Tablas de frecuencias marginales
-## margin = 2 o 3 para otras variables
-margin.table(UCBAdmissions, margin = 1) 
-```
-
-## Tablas de contingencias (vars. cualitativas)
-
-```{r contingency-perc,  echo=TRUE }
-## Porcentajes sobre el total de de admitidos/excluidos 
-## por Dpto.
-ftable(prop.table(UCBAdmissions, margin = 1))
-```
-
-## Histograma de valores
-
-```{r hist, echo=TRUE, fig.height=3.25, fig.width=4.5}
-hist(CO2$uptake)
-```
-
-## Función de densidad de probabilidad
-
-```{r density, echo=TRUE, fig.height=3.25, fig.width=4.5}
-plot(density(CO2$uptake))
-```
-
-## Mejorando la representación gráfica
-
-\begin{huge}
-Demasiado "simples" estos gráficos, ¿no es así?
-\end{huge}
-
-\vspace{1cm}
-- Vamos a mejorarlos un poco con el paquete `ggplot2`
-
-```{r ggplot2, echo=TRUE, message=FALSE}
-library(ggplot2)
-```
-
-
-## Histograma con ggplot2
-
-```{r ggplot2-hist, echo=TRUE, message=FALSE, fig.height=2.5, fig.width=4}
-ggplot(CO2, aes(x=uptake)) +
-  geom_histogram(fill="white", colour="black") +
-  ggtitle("Histograma de  CO2$uptake")
-```
-
-## Densidad de probabilidad con ggplot2
-```{r ggplot2-density, echo=TRUE, message=FALSE, fig.height=2.5, fig.width=4}
-ggplot(CO2, aes(x=uptake)) +
-  geom_density(fill="green", alpha = .3)  +
-  ggtitle("Histograma de  CO2$uptake")
-```
-
-# EJERCICIOS
-
-## Ejercicio 1
-
-- Leer los datos del ficheero `Superstore_Sales.csv` en la variable `superstore_sales`.
-- A partir de los datos de dicha variable:
-    1. Calcular la tabla de contingencias entre la variable "Ship Mode" y la variable "Region".
-    2. Obtener el resumen numérico de las variabls "Sales", "Unit Price" y "Shipping Cost".
-    3. Representar la función de densidad de probabilidad de la variable "Shipping Cost".
-    
-**Nota importante**: Debido a los espacios en blanco en los nombres originales de las
-columnas, se deben cambiar de nombre en el proceso las columnas afectadas (o leerlas
-correctamente desde el comienzo).
-
-## Ejercicio 2
-
-- Observe el siguiente gráfico:
-```{r scatter-hdi-cpi, echo=TRUE, eval=FALSE}
-economist_data <- read.csv("C:/Users/Chus Algar Díaz/Documents/D/CursosFormacion/UCLM-2024/Intro_R/data/EconomistData.csv")
-
-ggplot(economist_data, aes(x=CPI, y=HDI)) +
-  geom_point() +
-  geom_smooth(method="lm")
-```
-
-## Ejercicio 2
-
-```{r scatter-hdi-cpi-graph, fig.height=7}
-economist_data <- read.csv("C:/Users/Chus Algar Díaz/Documents/D/CursosFormacion/UCLM-2024/Intro_R/data/EconomistData.csv")
-ggplot(economist_data, aes(x=CPI, y=HDI)) +
-  geom_point() +
-  geom_smooth(method="lm") +
-  ggtitle("HDI vs. CPI en diferentes países")
-```
-
-## Ejercicio 2
-
-1. ¿Parece existir algún tipo de conexión entre los valores de ambas variables? ¿Por qué?
-2. ¿Es adecuado el ajuste lineal que propone la gráfica? Razona la respuesta.
