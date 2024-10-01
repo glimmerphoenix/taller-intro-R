@@ -22,12 +22,169 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 ```
 
-# 1. Introducción al lenguaje R. Programación científica en R
+# 1. Introducción a R y RStudio.
 
-# 1.1 Tipos de datos
+# 1.1 ¿Qué es R y RStudio?
+
+## ¿Qué es R?
+
+- R: lenguje de programación para el análisis y la visualización de datos. 
+
+  - Creado por **Ross Ihaka** y **Robert Gentleman** a partir del lenguaje estadístico S.
+  - Uso extendido en investigación, docencia e industria (Google, Facebook, Twitter, NYT, Pfizer, Santander, BBVA, Teléfonica, etc.).
+  - Almacenamiento y manipulación efectiva de datos.
+  - Operadores para realizar cálculos sobre variables indexadas (Arrays), en particular matrices.
+  - Herramientas para el análisis de datos.
+  - Multitud de opciones para el análisis gráfico.
+  - Sentencias condicionales, ciclos, funciones recursivas y posibilidad de entradas y salidas.
+
+## ¿Qué es RStudio?
+
+- RStudio: entorno de progrmación. 
+
+  - Interprete de R que evalua expresiones (aritméticas, lógicas, llamadas a funciones o asignaciones). 
+  - Algunas de estas expresiones (siempre y cuando sean correctas) pueden producir una salida visible que se puede almacenar en alguna variable, en disco o en un fichero. 
+  - Leer y escribir ficheros de datos.
+  - Generar y guardar gráficos. 
+  - Crear scripts.
+  - Crear ficheros de informes.
+
+
+# 1.2 Ventajas e inconvenientes de R.
+
+## Ventajas e inconvenientes de R.
+
+|    Ventajas   |   Inconvenientes  |
+|:--------------| :-----------------|
+| Herramienta de software libre, gratuito | Aprender a programar |
+| Comunidad sólida con participantes del mundo académico y la industria   | No intuitivo |
+| Desarrollar funciones, paquetes o plantillas de documentos |  Comprender lo que hace el código |
+| Al día con las novedades estadísticas | Acostumbrarse a revisar el código y la salida |
+| Creación y automatización de flujos de trabajo y análisis reproducibles| Algunas funciones novedosas necesitan más rodaje |
+
+
+# 1.3 Trabajando con RStudio.
+
+## Entrorno de programación RStudio.
+
+Diagnóstico de sintáxis: 
+
+  - cruz roja (error sintáctico)
+  - exclamación amarilla (variable u objeto no utilizado o no declarado)
+  - círculo azul (ayuda)
+  
+```{r imagen-IDE, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/RStudio-IDE.png")
+```
+
+
+## Consola
+
+Es un interprete interactivo de comandos.
+
+- Instrucciones: expresión (se evalua, se imprime, se pierde) o asignación (se evalua, se guarda).
+- Solicitudes de ayuda, ejemplo: *help(solve)* o *?solve*.
+- Llamadas a funciones
+- Instrucciones que generen gráficas. 
+- Si produce salida -> debajo de la línea de código
+  
+```{r imagen-consola, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/consola.jpg")
+```
+
+
+## Panel de programación
+
+Panel de programación: variables de entorno, el historial de comandos, el control de versiones, etc. 
+
+- *Enviroment*: contenido de los objetos
+- Los podemos guardar en un fichero .RData. -> recuperar los objetos de una sesión anterior
+- Conjunto de objetos almacenados en cada momento: *espacio de trabajo (workspace)*.  
+
+```{r imagen-enviroment, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/environment.jpg")
+```
+
+## History
+
+Historial de comandos introducidos.
+
+- Todas las instrucciones de la línea de comandos se guardan aquí. 
+- Guardar en un fichero .Rhistory. 
+- Cargar un fichero .Rhistory. 
+- *Escoba* borrar todo el histórico de instrucciones.
+
+```{r imagen-history, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/history.jpg")
+```
+
+## Panel multifunción
+
+Panel multifunción = navegador de archivos + carrusel de gráficas + gestor de paquetes + ayuda en línea + visualizador. 
+
+- *Files*: explorar archivos en nuestro ordenador.
+- *Plots*: gráficos que vayamos construyendo (expotarlas, eliminarlas). 
+- *Packages*: paquetes que tenemos instalados. 
+
+  - *install* instalar nuevos paquetes.
+
+- *Help*: muestra la ayuda solicitada mediante comando. Navegar a través de todos los topics de ayuda, imprimirlos, búsqueda de ayuda general.
+
+```{r imagen-packages, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/packages.jpg")
+```
+
+
+# 1.4 Como hacer un proyecto en RStudio
+
+## Directorio de trabajo
+
+Directorio de trabajo: carpeta con scripts + paquetes + ficheros de datos de entrada + resultados + gráficas. 
+
+```{r imagen-dirtrabajo, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/session.jpg")
+```
+
+## Nuevo proyecto
+
+1º. Menú *File* -> *New Porject*.
+
+```{r imagen-newproject, echo=FALSE, out.width = "30%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/new_project.jpg")
+```
+
+2º. Opción *New Directory*, seleccionams la opción *New Project*:
+
+```{r imagen-newproject2, echo=FALSE, out.width = "30%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/new_project_step2.jpg")
+```
+
+## Nuevo proyecto
+
+3º. Nombre del proyecto y hacemos click en *Create Project*.
+
+```{r imagen-newproject3, echo=FALSE, out.width = "40%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/new_project_step3.jpg")
+```
+
+
+
+# 2. Programación científica en R
+
+# 2.1 Tipos de datos
 
 ## Tipos de objetos
-Los objetos o variables de R pueden almacena:
+
+Los objetos o variables de R pueden almacenar:
 
 - *valores numéricos*
 - *valores alfabéticos* (cadenas de caracteres que van entre comillas dobles o comillas simples)
