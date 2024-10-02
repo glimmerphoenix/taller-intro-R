@@ -122,10 +122,9 @@ div.csl-indent {
     "search-label": "Buscar"
   }
 }</script>
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -359,7 +358,7 @@ div.csl-indent {
 <p>En este capítulo se presenta una introducción a <a href="https://www.tidyverse.org/packages/">tidyverse</a>. Se trata de un conjunto de paquetes R organizados en torno a unos principios de organización de datos para facilitar su análisis, presentados por Hadley Wickham en 2014. A los primeros paquetes publicados por el propio Wickham para implementar estos principios (como <code>dplyr</code> o <code>tidyr</code>), pronto se unieron muchos otros, creando un verdadero ecosistema propio dentro del catálogo de paquetes de R.</p>
 <p>Aunque en sus orígenes, de manera informal, se popularizó el término <em>“hadley-verse”</em> para denominar a estos paquetes, pronto el termino más neutro <em>“tidyverse”</em> tomo su lugar.</p>
 <p>Actualmente, los múltiples paquetes que conforman el tidyverse han contribuido ha unificar la forma de programar y trabajar con datos en el lenguaje R, introduciendo muchas funcionalidades y, sobre todo, marcando un estilo de trabajo y organización de los datos consistente en todos sus componentes.</p>
-<p>En las siguientes secciones nos concentraremos en los dos paquetes básicos de tidyverse: <code>dplyr</code> y <code>tidyr</code>. Estos dos paquetes junto con el operador <code>%&gt;%</code> (pipe) del paquete <code>magrittr</code> forman el núcleo básico de trabajo del tidyverse.</p>
+<p>En las siguientes secciones nos concentraremos en los dos paquetes básicos de tidyverse: <code>dplyr</code> y <code>tidyr</code>. Estos dos paquetes junto con el operador <code>|&gt;</code> (pipe) forman el núcleo básico de trabajo del tidyverse.</p>
 <p>Para cargar el tidyverse en nuestra sesión ejecutamos:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -382,8 +381,13 @@ div.csl-indent {
 <p>Por “tipo de unidad de observación” podemos entender una persona, un tipo de objeto o cualquier otro tipo de elemento que constituya un <em>tipo de unidad de análisis</em> en nuestro estudio. Cualquier conjunto de datos que no siga estos principios se considera <em>messy data</em>.</p>
 <p>Estos principios no son en absoluto originales de Wickham, sino que el autor se limitó a reexpresar algunos principios de normalización del álgebra relacional de Codd <span class="citation" data-cites="codd1990relational">(<a href="references.html#ref-codd1990relational" role="doc-biblioref">Codd, 1990</a>)</span>, aunque en un lenguaje más accesible para estadísticos y otros profesionales del análisis de datos que no tengan, necesariamente, conocimientos de teoría de bases de datos.</p>
 <p>Podemos notar rápidamente la influencia de estos principios en un ejemplo sencillo. Consideremos la siguiente tabla, presentada como ejemplo en el artículo original de Wickham, con datos de un hipotético análisis clínico sobre pacientes:</p>
+<div id="tbl-messy-data-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-messy-data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;6.1: Ejemplo de un conjunto de datos que no sigue los principios de <em>tidy data</em>.
+</figcaption>
+<div aria-describedby="tbl-messy-data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>(#tab:messy-data-1) Ejemplo de un conjunto de datos típico.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -409,9 +413,17 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>Si tenemos alguna experiencia previa analizando datos con herramientas como hojas de cálculo, y reflexionamos un poco, es muy probable que hayamos visto con anterioridad una estructura de organización de datos parecida. Ahora, presentamos una segunda versión, con los mismos datos pero organizados de manera distinta:</p>
+<div id="tbl-messy-data-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-messy-data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;6.2: El mismo dataset que en la Tabla <a href="#tbl-messy-data-1" class="quarto-xref">Tabla&nbsp;<span>6.1</span></a>, pero con estructura diferente.
+</figcaption>
+<div aria-describedby="tbl-messy-data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>(#tab:messy-data-2) El mismo dataset que en la Tabla @ref(tab:messy-data-1), pero con estructura diferente.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -435,11 +447,19 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>Si comparamos la Tabla @ref(tab:messy-data-1) y la Tabla @ref(tab:messy-data-2) podemos comprobar que contienen la misma información. Sin embargo, la estructura es diferente. En la Tabla @ref(tab:messy-data-1) la primera columna contiene los nombres de los pacientes, mientras que las dos siguientes hacia la derecha contienen los resultados de la prueba de cada paciente para el tratamiento A y el B, respectivamente. En su lugar, en la Tabla @ref(tab:messy-data-2) las filas recogen los datos de todos los pacientes para cada tratamiento, y las columnas corresponden a los datos de cada paciente.</p>
-<p>Aunque en ambos casos los datos son “correctos” en sentido técnico (la información es la misma en ambos casos y suponemos que no hay fallos en la introducción de datos), enseguida podemos imaginar que un script de R (o cualquier otro lenguaje) que espere recibir los datos en el formato de la Tabla @ref(tab:messy-data-1) y, en cambio, los reciba en el formato de la Tabla @ref(tab:messy-data-2) seguramente va a devolver errores. Y ello pese a que la información es correcta en ambos casos.</p>
+</div>
+</figure>
+</div>
+<p>Si comparamos la tabla <a href="#tbl-messy-data-1" class="quarto-xref">Tabla&nbsp;<span>6.1</span></a> y la tabla <a href="#tbl-messy-data-2" class="quarto-xref">Tabla&nbsp;<span>6.2</span></a> podemos comprobar que contienen la misma información. Sin embargo, la estructura es diferente. En la tabla <a href="#tbl-messy-data-1" class="quarto-xref">Tabla&nbsp;<span>6.1</span></a> la primera columna contiene los nombres de los pacientes, mientras que las dos siguientes hacia la derecha contienen los resultados de la prueba de cada paciente para el tratamiento A y el B, respectivamente. En su lugar, en la Tabla <a href="#tbl-messy-data-2" class="quarto-xref">Tabla&nbsp;<span>6.2</span></a> las filas recogen los datos de todos los pacientes para cada tratamiento, y las columnas corresponden a los datos de cada paciente.</p>
+<p>Aunque en ambos casos los datos son “correctos” en sentido técnico (la información es la misma en ambos casos y suponemos que no hay fallos en la introducción de datos), enseguida podemos imaginar que un script de R (o cualquier otro lenguaje) que espere recibir los datos en el formato de la Tabla <a href="#tbl-messy-data-1" class="quarto-xref">Tabla&nbsp;<span>6.1</span></a> y, en cambio, los reciba en el formato de la Tabla <a href="#tbl-messy-data-2" class="quarto-xref">Tabla&nbsp;<span>6.2</span></a> seguramente va a devolver errores. Y ello pese a que la información es correcta en ambos casos.</p>
 <p>En consecuencia, es importante establecer explícitamente un acuerdo entre los investigadores para organizar siempre los datos de la misma manera. De esta forma, sabemos qué formato de datos esperamos encontrar y se puede intentar “reclamar” al origen de los datos que siga esta convención de representación de la información (aunque no siempre esto es posible).</p>
+<div id="tbl-tidy-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tidy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;6.3: El mismo dataset, pero ahora en formato <em>tidy data</em>.
+</figcaption>
+<div aria-describedby="tbl-tidy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>(#tab:tidy-data) El mismo dataset, pero ahora en formato <em>tidy data</em>.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">name</th>
@@ -480,7 +500,10 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>La tabla @ref(tab:tidy-data) muestra cómo se representan los datos siguiendo la convención establecida por las reglas de tidy data:</p>
+</div>
+</figure>
+</div>
+<p>La tabla <a href="#tbl-tidy-data" class="quarto-xref">Tabla&nbsp;<span>6.3</span></a> muestra cómo se representan los datos siguiendo la convención establecida por las reglas de <em>tidy data</em>:</p>
 <ul>
 <li>Hay 3 variables (nombre de paciente, tratamiento y resultado), una en cada columna.</li>
 <li>Hay 6 filas, una por cada unidad de observación (aquí la unidad de observación es la combinación paciente + tratamiento).</li>
@@ -496,71 +519,77 @@ div.csl-indent {
 <p>Kuhn, principal autor del paquete <code>caret</code> <span class="citation" data-cites="kuhn2013applied">(<a href="references.html#ref-kuhn2013applied" role="doc-biblioref">Kuhn &amp; Johnson, 2013</a>)</span>, uno de los más usados para diseño e implementación de modelos de aprendizaje máquina en R, se encarga ahora de liderar el desarrollo de <strong><code>tidymodels</code></strong>, un metapaquete similar a <code>tidyverse</code> que automatiza la instalación y carga de un <strong>conjunto de paquetes</strong> (algunos existentes en tidyverse y otros nuevos) para <strong>desarrollo y evaluación de modelos</strong>. Por el momento, aunque conviene no pereder de vista esta iniciativa el proyecto sigue todavía lejos de alcanzar una versión estable y consolidada.</p>
 <section id="resumen-de-paquetes-principales-en-tidyverse" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="resumen-de-paquetes-principales-en-tidyverse"><span class="header-section-number">6.2.1</span> Resumen de paquetes principales en tidyverse</h3>
-<p>La Tabla @ref(tab:tidyverse-packages) resume algunos de los paquetes más importantes que encontraremos en el ecosistema tidyverse.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
-<caption>Paquetes principales del ecosistema *tidyverse*</caption>
+<p>La tabla <a href="#tbl-tidyverse-packages" class="quarto-xref">Tabla&nbsp;<span>6.4</span></a> resume algunos de los paquetes más importantes que encontraremos en el ecosistema tidyverse.</p>
+<div id="tbl-tidyverse-packages" class="striped hover quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tidyverse-packages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;6.4: Paquetes relevantes del ecosistema <code>tidyverse</code>.
+</figcaption>
+<div aria-describedby="tbl-tidyverse-packages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Paquete</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Descripcion</th>
+<th>Paquete</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">`tibble`</td>
-<td style="text-align: left;">Tipo de datos básico para almacenar tablas de datos, similar a un data frame pero con nuevas funcionalidades.</td>
+<td><code>tibble</code></td>
+<td style="text-align: left;">Tipo de datos básico para almacenar tablas de datos, similar a un data frame pero con nuevas funcionalidades</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">`dplyr`</td>
-<td style="text-align: left;">Proporciona una gramática para manipulación de datos, inspirada en las operaciones que se pueden realizar en bases de datos.</td>
+<td><code>dplyr</code></td>
+<td style="text-align: left;">Proporciona una gramática para manipulación de datos, inspirada en las operaciones que se pueden realizar en bases de datos</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">`tidyr`</td>
-<td style="text-align: left;">Herramientas que ayudan a transformar los datos para que cumplan las reglas de tidy data.</td>
+<td><code>tidyr</code></td>
+<td style="text-align: left;">Herramientas que ayudan a transformar los datos para que cumplan las reglas de <em>tidy data</em></td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">`ggplot2`</td>
+<td><code>ggplot2</code></td>
 <td style="text-align: left;">Sistema que proporciona un lenguaje declarativo para crear visualizaciones de datos, basado en una gramática de gráficos. Siguen un procedimiento estructurado para describir el diseño del gráfico a realizar</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">`readr`</td>
-<td style="text-align: left;">Funciones eficientes para lectura/escritura de datos estructurados, que proprociona herramientas para resolver problemas comunes en este proceso.</td>
+<td><code>readr</code></td>
+<td style="text-align: left;">Funciones eficientes para lectura/escritura de datos estructurados, que proprociona herramientas para resolver problemas comunes en este proceso</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">`purrr`</td>
-<td style="text-align: left;">Conjunto de herramientas para programación funcional con R, que permite reemplazar bucles (como `for`) por código más eficiente, expresivo y conciso.</td>
+<td><code>purrr</code></td>
+<td style="text-align: left;">Herramientas para programación funcional con R, que permite reemplazar bucles (como <code>for</code>) por código más eficiente, expresivo y conciso</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">`stringr`</td>
-<td style="text-align: left;">Conjunto de funciones para operativizar el trabajo con cadenas de caracteres en el contexto del tidyverse.</td>
+<td><code>stringr</code></td>
+<td style="text-align: left;">Funciones para operativizar el trabajo con cadenas de caracteres en el contexto del tidyverse</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">`forcats`</td>
-<td style="text-align: left;">Conjunto de funciones para trabajo con variables categóricas (llamadas *factores* en R.</td>
+<td><code>forcats</code></td>
+<td style="text-align: left;">Funciones para trabajo con variables categóricas (llamadas <em>factores</em> en R)</td>
 </tr>
 </tbody>
 </table>
-
-
 </div>
+</figure>
 </div>
 </section>
 <section id="método-de-trabajo-con-tidyverse" class="level3" data-number="6.2.2">
 <h3 data-number="6.2.2" class="anchored" data-anchor-id="método-de-trabajo-con-tidyverse"><span class="header-section-number">6.2.2</span> Método de trabajo con tidyverse</h3>
-<p>El método de trabajo en tidyverse suele estar fuertemente ligado a la utilización del operador <em>pipe</em> (<code>%&gt;%</code>) del paquete <code>magrittr</code>. Esencialmente, este operador simplifica la sintaxis necesaria para realizar llamadas anidadas a funciones, de forma que el resultado de la operación anterior actúe como entrada del siguiente paso. Imaginemos que tenemos un objeto similar a un data frame (en la siguiente sección se introducen los objetos tibble) llamado <code>df</code>, al que queremos aplicar dos funciones de preparación de datos:</p>
+<p>El método de trabajo en tidyverse suele estar fuertemente ligado a la utilización del operador <em>pipe</em> (<code>|&gt;</code>). Esencialmente, este operador simplifica la sintaxis necesaria para realizar llamadas anidadas a funciones, de forma que el resultado de la operación anterior actúe como entrada del siguiente paso. Imaginemos que tenemos un objeto similar a un data frame (en la siguiente sección se introducen los objetos tibble) llamado <code>df</code>, al que queremos aplicar dos funciones de preparación de datos:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f2</span>(<span class="fu">f1</span>(df), arg_f2)  <span class="co"># Se complica rápido con muchas funciones</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># y es difícil de leer. La fución f2 toma</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># un argumento adicional para definir la operación</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># a realizar</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Por el contrario, si usamos el operador <code>%&gt;%</code> podemos escribir cada paso de la cadena de operaciones en una línea diferente. De esta manera, podemos sintácticamente separar cada paso de nuestra cadena de operaciones, de forma que el código queda mucho más legible:</p>
+<p>Por el contrario, si usamos el operador <code>|&gt;</code> podemos escribir cada paso de la cadena de operaciones en una línea diferente. De esta manera, podemos sintácticamente separar cada paso de nuestra cadena de operaciones, de forma que el código queda mucho más legible:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># x %&gt;% f(y) se convierte en f(x, y)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  f1 <span class="sc">%&gt;%</span>     <span class="co"># Recibe como primer argumento de entrada df</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># x |&gt; f(y) se convierte en f(x, y)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  f1 <span class="sc">|&gt;</span>     <span class="co"># Recibe como primer argumento de entrada df</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">f2</span>(arg_f2) <span class="co"># Recibe el resultado del paso anterior, f1(df)</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>             <span class="co"># arg_f2 se pasa a continuación como argumento de entrada</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -625,63 +654,69 @@ div.csl-indent {
 <section id="preparación-de-datos-con-tidyverse-tidyr" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="preparación-de-datos-con-tidyverse-tidyr"><span class="header-section-number">6.3</span> Preparación de datos con tidyverse: tidyr</h2>
 <p>Puesto que tidyverse asume que los datos se organizarán en tablas que siguen estrictamente sus principios de organización, el primer paso es asegurarnos de que, en efecto, los datos de entrada cumplen estos requisitos.</p>
-<p>En caso contrario, el paquete <code>tidyr</code> porporciona una serie de herramientas que nos van a facilitar el trabajo de convertir nuestros datos a este formato. Algunas de ellas se resumen en la Tabla @ref(tab:tidyr-funcs).</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
-<caption>Principales funciones del paquete `tidyr`</caption>
+<p>En caso contrario, el paquete <code>tidyr</code> porporciona una serie de herramientas que nos van a facilitar el trabajo de convertir nuestros datos a este formato. Algunas de ellas se resumen en la Tabla <a href="#tbl-tidyr-funcs" class="quarto-xref">Tabla&nbsp;<span>6.5</span></a>.</p>
+<div id="tbl-tidyr-funcs" class="striped hover quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tidyr-funcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;6.5: Principales funciones del paquete <code>tidyr</code>
+</figcaption>
+<div aria-describedby="tbl-tidyr-funcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 85%">
+</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Funciones</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Descripcion</th>
+<th>Funciones</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">Pivoting</td>
-<td style="text-align: left;">Operación: Cambiar estructura y dimensiones.</td>
+<td><strong><em>Pivoting</em></strong></td>
+<td style="text-align: left;"><strong><em>Operación: Cambiar estructura y dimensiones</em></strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">`pivot_longer()`</td>
-<td style="text-align: left;">Reemplaza a la función `gather()` en versiones anteriores del paquete. Disminuye el número de columnas e incrementa el número de filas de la tabla (haciéndola más alargada. Por ejemplo, permite colapsar varias columnas cuyos títulos son valores de una variable en una sola columna con un nuevo nombre.</td>
+<td><code>pivot_longer()</code></td>
+<td style="text-align: left;">Reemplaza a la función <code>gather()</code> en versiones anteriores del paquete. Disminuye el número de columnas e incrementa el número de filas de la tabla (haciéndola más alargada. Por ejemplo, permite colapsar varias columnas cuyos títulos son valores de una variable en una sola columna con un nuevo nombre</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">`pivot_wider()`</td>
-<td style="text-align: left;">Reemplaza a la función `spread()` en versiones anteriores del paquete. Aumenta el número de columnas y disminuye el número de filas, haciendo la tabla más ancha. Por ejemplo, permite expandir los nombres de variables que sean valores de una sola columna en varias columnas, con los valores correspondientes en cada u</td>
+<td><code>pivot_wider()</code></td>
+<td style="text-align: left;">Reemplaza a la función <code>spread()</code> en versiones anteriores del paquete. Aumenta el número de columnas y disminuye el número de filas, haciendo la tabla más ancha. Por ejemplo, permite expandir los nombres de variables que sean valores de una sola columna en varias columnas, con los valores correspondientes en cada una</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">Nested data</td>
-<td style="text-align: left;">Operación: Anidar datos o extraer datos anidados.</td>
+<td><strong><em>Nested data</em></strong></td>
+<td style="text-align: left;"><strong><em>Operación: Anidar datos o extraer datos anidados</em></strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">`nest()`</td>
-<td style="text-align: left;">Permite anidar tablas tidy data dentro de otras, de modo que una columna de la tabla sea una lista de data frames (tibbles, en tidyverse).</td>
+<td><code>nest()</code></td>
+<td style="text-align: left;">Permite anidar tablas tidy data dentro de otras, de modo que una columna de la tabla sea una lista de data frames (<code>tibbles</code>, en <code>tidyverse</code>)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">`unnest()`</td>
-<td style="text-align: left;">Implementa la operación contraria a `nest()` extrayendo las data frames anidada en una columna anexándolas por filas y replicando el resto de columnas para alinear los datos.</td>
+<td><code>unnest()</code></td>
+<td style="text-align: left;">Implementa la operación contraria a <code>nest()</code> extrayendo las data frames anidada en una columna anexándolas por filas y replicando el resto de columnas para alinear los datos</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">Rectangling</td>
-<td style="text-align: left;">Operación: Tratamiento de lista de datos anidadas (JSON, XML).</td>
+<td><strong><em>Rectangling</em></strong></td>
+<td style="text-align: left;"><strong><em>Operación: Tratamiento de lista de datos anidadas (JSON, XML)</em></strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">`unnest_longer()`</td>
-<td style="text-align: left;">Toma cada elemento de una columna-lista y lo convierte en una nueva fila.</td>
+<td><code>unnest_longer()</code></td>
+<td style="text-align: left;">Toma cada elemento de una columna-lista y lo convierte en una nueva fila</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold;">`unnest_wider()`</td>
-<td style="text-align: left;">Toma cada argumento de una columna lista y lo convierte en una nueva columna.</td>
+<td><code>unnest_wider()</code></td>
+<td style="text-align: left;">Toma cada argumento de una columna lista y lo convierte en una nueva columna</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold;">`unnest_auto()`</td>
-<td style="text-align: left;">Intenta adivinar la operación apropiada para preparar los datos.</td>
+<td><code>unnest_auto()</code></td>
+<td style="text-align: left;">Intenta adivinar la operación apropiada para preparar los datos</td>
 </tr>
 </tbody>
 </table>
-
-
 </div>
+</figure>
 </div>
 <p>La página web del paquete <code>tidyr</code> <a href="https://tidyr.tidyverse.org/" class="uri">https://tidyr.tidyverse.org/</a> incluye varios artículos y un enlace a la hoja resumen actualizada con la explicación de cada función incluida.</p>
 <p>Nosotros vamos a incluir, a modo de ejemplo, dos casos de uso de las herramientas <code>pivot_longer</code> y <code>pivot_wider</code>. En la página web del paquete <code>tidyr</code>, el artículo <em>Pivoting</em> describe varios ejemplos utilizando datasets de casos reales. Sin embargo, para entender mejor estas dos funciones vamos a emplear otro ejemplo, extraído del <em>R Cookbook</em> de W. Chang<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
@@ -727,7 +762,7 @@ div.csl-indent {
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - values_to: nombre de la columna que contendrá como valores los valores de las</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># columnas colapsadas, procedentes de la tabla original.</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>tib_exp_long <span class="ot">&lt;-</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  experiment_wide <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  experiment_wide <span class="sc">|&gt;</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">'control'</span>, <span class="st">'cond1'</span>, <span class="st">'cond2'</span>), <span class="at">names_to =</span> <span class="st">'condition'</span>,</span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">'measurement'</span>)</span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>tib_exp_long</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -757,7 +792,7 @@ div.csl-indent {
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Argumentos:</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - </span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>tib_exp_wide <span class="ot">&lt;-</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  experiment_long <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  experiment_long <span class="sc">|&gt;</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">'condition'</span>, <span class="at">values_from =</span> <span class="st">'measurement'</span>)</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>tib_exp_wide</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -778,107 +813,113 @@ div.csl-indent {
 <p>El paquete <code>dplyr</code> proporciona dentro de tidyverse todas las funciones para consulta y manipulación de datos en nuestras tablas. En general, la lista de funciones proporcionada se asemeja (a propósito) a la lista de funciones que podemos encontrar en lenguajes de manipulación de datos en sistemas de bases de datos, tales como el conocido SQL (Structured Query Language). Sin embargo, para facilitar la accesibilidad a usuarios sin muchos conocimientos sobre bases de datos, los nombres de las funciones de <code>dplyr</code> suelen ser más claros y explícitos.</p>
 <section id="funciones-principales-en-dplyr" class="level3" data-number="6.4.1">
 <h3 data-number="6.4.1" class="anchored" data-anchor-id="funciones-principales-en-dplyr"><span class="header-section-number">6.4.1</span> Funciones principales en dplyr</h3>
-<p>La Tabla @ref(tab:dplyr-funcs) resume las principales funciones del paquete <code>dplyr</code>.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
-<caption>Principales funciones del paquete `tidyr`</caption>
+<p>La Tabla <a href="#tbl-dplyr-funcs" class="quarto-xref">Tabla&nbsp;<span>6.6</span></a> resume las principales funciones del paquete <code>dplyr</code>.</p>
+<div id="tbl-dplyr-funcs" class="striped hover quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dplyr-funcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;6.6: Principales funciones del paquete <code>dplyr</code>
+</figcaption>
+<div aria-describedby="tbl-dplyr-funcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th" style="text-align: left; color: white !important; background-color: rgba(0, 51, 102, 255) !important;">Funciones</th>
-<th data-quarto-table-cell-role="th" style="text-align: left; color: white !important; background-color: rgba(0, 51, 102, 255) !important;">Descripcion</th>
+<th>Funciones</th>
+<th style="text-align: left;">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left; color: white !important; background-color: rgba(0, 102, 153, 255) !important;">Básicas</td>
-<td style="text-align: left; color: white !important; background-color: rgba(0, 102, 153, 255) !important;">Operaciones básicas de recuperación de datos y creación de nuevas variables.</td>
+<td><strong><em>Básicas</em></strong></td>
+<td style="text-align: left;"><strong><em>Operaciones básicas de recuperación de datos y creación de nuevas variables</em></strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">`select()`</td>
-<td style="text-align: left;">Selecciona las columnas de la tabla que se van a devolver como resultado.</td>
+<td><code>select()</code></td>
+<td style="text-align: left;">Selecciona las columnas de la tabla que se van a devolver como resultado</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">`filter()`</td>
-<td style="text-align: left;">Filtra filas de la tabla, solo se devuelven las que cumplan las condiciones impuestas mediante una expresión lógica (simple o compuesta).</td>
+<td><code>filter()</code></td>
+<td style="text-align: left;">Filtra filas de la tabla, solo se devuelven las que cumplan las condiciones impuestas mediante una expresión lógica (simple o compuesta)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">`summarise()`</td>
-<td style="text-align: left;">Calcula estadísticos resumen sobre las columnas de la tabla que se van a recuperar; en combinación con `group_by()` calcula los resúmenes por cada grupo identificado.</td>
+<td><code>summarise()</code></td>
+<td style="text-align: left;">Calcula estadísticos resumen sobre las columnas de la tabla que se van a recuperar; en combinación con <code>group_by()</code> calcula los resúmenes por cada grupo identificado</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">`arrange()`</td>
-<td style="text-align: left;">Ordena las filas que se van a devolver, según los valores de una o varias variables; el orden puede ser creciente o decreciente; admite variables numéricas o categóricas (orden alfabético).</td>
+<td><code>arrange()</code></td>
+<td style="text-align: left;">Ordena las filas que se van a devolver, según los valores de una o varias variables; el orden puede ser creciente o decreciente; admite variables numéricas o categóricas (orden alfabético)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">`mutate()`</td>
-<td style="text-align: left;">Crea nuevas columnas a partir de valores de otras columnas ya presentes en la tabla; los valores se pueden combinar mediante múltiples operaciones.</td>
+<td><code>mutate()</code></td>
+<td style="text-align: left;">Crea nuevas columnas a partir de valores de otras columnas ya presentes en la tabla; los valores se pueden combinar mediante múltiples operaciones</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; color: white !important; background-color: rgba(0, 102, 153, 255) !important;">Agrupación</td>
-<td style="text-align: left; color: white !important; background-color: rgba(0, 102, 153, 255) !important;">Indica que las operaciones de sucesivos pasos se calcularán por grupos, identificados segun los valores de una o varias variables (columnas).</td>
+<td><strong><em>Agrupación</em></strong></td>
+<td style="text-align: left;"><strong><em>Indica que las operaciones de sucesivos pasos se calcularán por grupos, identificados segun los valores de una o varias variables (columnas)</em></strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">`group_by()`</td>
-<td style="text-align: left;">Agrupar por el valor de una o varias variables.</td>
+<td><code>group_by()</code></td>
+<td style="text-align: left;">Agrupar por el valor de una o varias variables</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; color: white !important; background-color: rgba(0, 102, 153, 255) !important;">Funciones de dos (o más) tablas</td>
-<td style="text-align: left; color: white !important; background-color: rgba(0, 102, 153, 255) !important;">Permiten combinar valores de dos tablas (operaciones con conjuntos, álgebra relacional).</td>
+<td><strong><em>Funciones de dos (o más) tablas</em></strong></td>
+<td style="text-align: left;"><strong><em>Permiten combinar valores de dos tablas (operaciones con conjuntos, álgebra relacional)</em></strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left; color: white !important; background-color: rgba(0, 153, 255, 255) !important;">*Mutating joins*</td>
-<td style="text-align: left; color: white !important; background-color: rgba(0, 153, 255, 255) !important;">Combinan dos o más tablas atendiendo a valores en las columnas.</td>
+<td><em>Mutating joins</em></td>
+<td style="text-align: left;"><em>Combinan dos o más tablas atendiendo a valores en las columnas</em></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">`inner_join()`</td>
-<td style="text-align: left;">Combina dos o más tablas, dejando solo las filas con valores coincidentes en una o varias columnas de ambas o todas las tablas.</td>
+<td><code>inner_join()</code></td>
+<td style="text-align: left;">Combina dos o más tablas, dejando solo las filas con valores coincidentes en una o varias columnas de ambas o todas las tablas</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">`left_join()`</td>
+<td><code>left_join()</code></td>
 <td style="text-align: left;">Combina dos tablas, mostrando todos los valores de una o varias columnas de la primera tabla; si la segunda tabla tiene valores coincidentes en la columna(s) indicada(s) se muestra la correspondencia, si no, se muestra un nulo</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">`right_join()`</td>
+<td><code>right_join()</code></td>
 <td style="text-align: left;">Combina dos tablas, mostrando todos los valores de una o varias columnas de la segunda tabla; si la primera tabla tiene valores coincidentes en la columna(s) indicada(s) se muestra la correspondencia, si no, se muestra un nulo</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">`full_join()`</td>
-<td style="text-align: left;">Realiza el producto cartesiano entre las filas de las dos tablas, es decir, se combina cada fila de la primera tabla con todas las filas de la segunda tabla.</td>
+<td><code>full_join()</code></td>
+<td style="text-align: left;">Realiza el producto cartesiano entre las filas de las dos tablas, es decir, se combina cada fila de la primera tabla con todas las filas de la segunda tabla</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; color: white !important; background-color: rgba(0, 153, 255, 255) !important;">*Filtering joins*</td>
-<td style="text-align: left; color: white !important; background-color: rgba(0, 153, 255, 255) !important;">Unen dos o más tablas pero devolviendo solo filas de la primera tabla.</td>
+<td><em>Filtering joins</em></td>
+<td style="text-align: left;"><em>Unen dos o más tablas pero devolviendo solo filas de la primera tabla</em></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">`semi_join()`</td>
-<td style="text-align: left;">Devuelve datos de la primera tabla que tengan coincidencias en la segunda, atendiendo a los valores de una o varias columnas; no se devuelven datos de la segunda tabla.</td>
+<td><code>semi_join()</code></td>
+<td style="text-align: left;">Devuelve datos de la primera tabla que tengan coincidencias en la segunda, atendiendo a los valores de una o varias columnas; no se devuelven datos de la segunda tabla</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">`anti_join()`</td>
-<td style="text-align: left;">Devuelve datos de la primera tabla que *no tengan* coincidencias en la segunda tabla, atendiendo a los valores de una o varias columnas; no se devuelven datos de la segunda tabla.</td>
+<td><code>anti_join()</code></td>
+<td style="text-align: left;">Devuelve datos de la primera tabla que <em>no tengan</em> coincidencias en la segunda tabla, atendiendo a los valores de una o varias columnas; no se devuelven datos de la segunda tabla</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; color: white !important; background-color: rgba(0, 153, 255, 255) !important;">*Operaciones con conjuntos*</td>
-<td style="text-align: left; color: white !important; background-color: rgba(0, 153, 255, 255) !important;">Operaciones con conjuntos</td>
+<td><em>Operaciones con conjuntos</em></td>
+<td style="text-align: left;"><em>Operaciones con conjuntos</em></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">`union()`</td>
-<td style="text-align: left;">Se unen todas las filas de ambas tablas (unión de conjuntos).</td>
+<td><code>union()</code></td>
+<td style="text-align: left;">Se unen todas las filas de ambas tablas (unión de conjuntos)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">`intersect()`</td>
-<td style="text-align: left;">Solo se devuelven las filas con valores coincidentes en ambas tablas (intersección de conjuntos).</td>
+<td><code>intersect()</code></td>
+<td style="text-align: left;">Solo se devuelven las filas con valores coincidentes en ambas tablas (intersección de conjuntos)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">`setdiff()`</td>
-<td style="text-align: left;">Solo se devuelven las filas con valores *no coincidentes* en ambas tablas (diferencia de conjuntos).</td>
+<td><code>setdiff()</code></td>
+<td style="text-align: left;">Solo se devuelven las filas con valores <em>no coincidentes</em> en ambas tablas (diferencia de conjuntos)</td>
 </tr>
 </tbody>
 </table>
-
-
 </div>
+</figure>
 </div>
 <p>En la página general de “hojas de referencia” (coloquialmente llamadas chuletas o <em>cheatsheets</em> en inglés) de RStudio, podemos encontrar una completa referencia resumen de todas las funciones principales incluidas en <code>dplyr</code>, describiendo qué argumentos recibe cada una y ejemplos de uso (<a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">enlace descarga</a>)</p>
 </section>
@@ -985,8 +1026,8 @@ Sin embargo, nosotros en este curso sí vamos a utilizar algunas de las
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilizamos un select para recuperar las columnas por nombre</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"fertility"</span>, <span class="st">"ppgdp"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"fertility"</span>, <span class="st">"ppgdp"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
@@ -1009,8 +1050,8 @@ Sin embargo, nosotros en este curso sí vamos a utilizar algunas de las
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quitamos suelo urbanizado</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">"pctUrban"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">"pctUrban"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 6
@@ -1024,8 +1065,8 @@ Sin embargo, nosotros en este curso sí vamos a utilizar algunas de las
 6 Caribbean other       2    13750.     81.1            NA  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ahora, quitamos además esperanza de vida</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"pctUrban"</span>, <span class="st">"lifeExpF"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"pctUrban"</span>, <span class="st">"lifeExpF"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
@@ -1048,8 +1089,8 @@ Sin embargo, nosotros en este curso sí vamos a utilizar algunas de las
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Podemos utilizar argumentos numéricos para indicar posición de columna</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># En ese caso, no llevan comillas.</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>) <span class="sc">|&gt;</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
@@ -1073,8 +1114,8 @@ Sin embargo, nosotros en este curso sí vamos a utilizar algunas de las
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usamos la notación de rango consecutivo con nombres de columnas</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Atención: ambos extremos del rango están incluidos en la selección</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"group"</span><span class="sc">:</span><span class="st">"lifeExpF"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"group"</span><span class="sc">:</span><span class="st">"lifeExpF"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
@@ -1088,8 +1129,8 @@ Sin embargo, nosotros en este curso sí vamos a utilizar algunas de las
 6 other       2    13750.     81.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Para la segunda usamos la misma notación, pero con números de columnas</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="sc">|&gt;</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
@@ -1113,8 +1154,8 @@ Sin embargo, nosotros en este curso sí vamos a utilizar algunas de las
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imaginemos que el contenido del vector después de las operaciones es este</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>nombres_cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"fertility"</span>, <span class="st">"ppgdp"</span>, <span class="st">"infantMortality"</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nombres_cols) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nombres_cols) <span class="sc">|&gt;</span></span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Using an external vector in selections was deprecated in tidyselect 1.1.0.
@@ -1152,8 +1193,8 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usamos los operadores de comparación lógica de R para imponer las</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># condiciones de selección de datos</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"other"</span> <span class="sc">&amp;</span> fertility <span class="sc">&gt;</span> <span class="fl">2.1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"other"</span> <span class="sc">&amp;</span> fertility <span class="sc">&gt;</span> <span class="fl">2.1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 7
@@ -1168,8 +1209,8 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((region <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Europe"</span>, <span class="st">"Latin Amer"</span>)) <span class="sc">&amp;</span> ppgdp <span class="sc">&gt;</span> <span class="dv">25000</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((region <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Europe"</span>, <span class="st">"Latin Amer"</span>)) <span class="sc">&amp;</span> ppgdp <span class="sc">&gt;</span> <span class="dv">25000</span>) <span class="sc">|&gt;</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 7
@@ -1195,7 +1236,7 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Qué ocurre si no ponemos el argumento na.rm = TRUE? ¿Por qué?</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_fertility =</span> <span class="fu">mean</span>(fertility, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_ppgdp =</span> <span class="fu">mean</span>(ppgdp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1206,9 +1247,9 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">%&gt;%</span>  <span class="co"># Quitamos NA's</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span>  <span class="co"># Pedimos el resumen agrupados por región</span></span>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">|&gt;</span>  <span class="co"># Quitamos NA's</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">|&gt;</span>  <span class="co"># Pedimos el resumen agrupados por región</span></span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_countries =</span> <span class="fu">n</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
@@ -1234,9 +1275,9 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(group)) <span class="sc">%&gt;%</span>  <span class="co"># Quitamos NA's en grupo</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span>  <span class="co"># Pedimos el resumen agrupados por región</span></span>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(group)) <span class="sc">|&gt;</span>  <span class="co"># Quitamos NA's en grupo</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span>  <span class="co"># Pedimos el resumen agrupados por región</span></span>
 <span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_ppgdp_group =</span> <span class="fu">mean</span>(ppgdp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># Filtramos NA's en ppgdp</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
@@ -1254,9 +1295,9 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(group) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">%&gt;%</span>  <span class="co"># Quitamos NA's en grupo</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group, region) <span class="sc">%&gt;%</span>  <span class="co"># Pedimos el resumen agrupados por grupo, región</span></span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(group) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">|&gt;</span>  <span class="co"># Quitamos NA's en grupo</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group, region) <span class="sc">|&gt;</span>  <span class="co"># Pedimos el resumen agrupados por grupo, región</span></span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_fertility =</span> <span class="fu">mean</span>(fertility, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># Filtramos NA's en ppgdp</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'group'. You can override using the
@@ -1293,10 +1334,10 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Después de la consulta, usamos head() para restringir el número de filas</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># En el siguiente capítulo presentamos top_n() para el mismo uso</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"region"</span>, <span class="st">"ppgdp"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Europe"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(ppgdp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"region"</span>, <span class="st">"ppgdp"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Europe"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(ppgdp)) <span class="sc">|&gt;</span> </span>
 <span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
@@ -1316,12 +1357,12 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, group, fertility) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(group) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group, region) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_fertility =</span> <span class="fu">mean</span>(fertility, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="co"># Volvemos a llamar a select para cambiar el orden de columnas</span></span>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, group, fertility) <span class="sc">|&gt;</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(group) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group, region) <span class="sc">|&gt;</span> </span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_fertility =</span> <span class="fu">mean</span>(fertility, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="co"># Volvemos a llamar a select para cambiar el orden de columnas</span></span>
 <span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(region, group) <span class="co"># Aquí ordenamos por región y dentro de cada una por grupo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'group'. You can override using the
@@ -1358,8 +1399,8 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformar el valor de `ppgdp con log()</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_ppgdp =</span> <span class="fu">log</span>(ppgdp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span> </span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_ppgdp =</span> <span class="fu">log</span>(ppgdp)) <span class="sc">|&gt;</span> </span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
@@ -1380,8 +1421,8 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mort_by_fert =</span> infantMortality<span class="sc">/</span>fertility) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span> </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mort_by_fert =</span> infantMortality<span class="sc">/</span>fertility) <span class="sc">|&gt;</span> </span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
@@ -1429,10 +1470,10 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="co"># https://tibble.tidyverse.org/reference/rownames.html.</span></span>
 <span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Aquí usamos `rownames_to_column()`</span></span>
 <span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var=</span><span class="st">"location"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"location"</span>,<span class="st">"region"</span>, <span class="st">"pctUrban"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(UN2, <span class="at">by=</span><span class="st">"region"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>UN_tibble <span class="sc">|&gt;</span> </span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var=</span><span class="st">"location"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"location"</span>,<span class="st">"region"</span>, <span class="st">"pctUrban"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(UN2, <span class="at">by=</span><span class="st">"region"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">urban_km2 =</span> pctUrban<span class="sc">/</span><span class="dv">100</span> <span class="sc">*</span> area)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 199 × 6

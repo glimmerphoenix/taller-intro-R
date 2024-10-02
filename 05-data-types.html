@@ -104,6 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -307,8 +308,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#matrices-y-arrays." id="toc-matrices-y-arrays." class="nav-link" data-scroll-target="#matrices-y-arrays."><span class="header-section-number">5.3</span> Matrices y Arrays.</a>
   <ul class="collapse">
   <li><a href="#construcción-de-arrays-a-partir-de-vectores." id="toc-construcción-de-arrays-a-partir-de-vectores." class="nav-link" data-scroll-target="#construcción-de-arrays-a-partir-de-vectores."><span class="header-section-number">5.3.1</span> Construcción de arrays a partir de vectores.</a></li>
-  <li><a href="#función-matrix." id="toc-función-matrix." class="nav-link" data-scroll-target="#función-matrix."><span class="header-section-number">5.3.2</span> Función <strong>matrix()</strong>.</a></li>
-  <li><a href="#función-array." id="toc-función-array." class="nav-link" data-scroll-target="#función-array."><span class="header-section-number">5.3.3</span> Función <strong>array()</strong>.</a></li>
+  <li><a href="#función-matrix." id="toc-función-matrix." class="nav-link" data-scroll-target="#función-matrix."><span class="header-section-number">5.3.2</span> Función <code>matrix()</code>.</a></li>
+  <li><a href="#función-array" id="toc-función-array" class="nav-link" data-scroll-target="#función-array"><span class="header-section-number">5.3.3</span> Función <code>array()</code></a></li>
   <li><a href="#nombres-de-filas-y-columnas." id="toc-nombres-de-filas-y-columnas." class="nav-link" data-scroll-target="#nombres-de-filas-y-columnas."><span class="header-section-number">5.3.4</span> Nombres de filas y columnas.</a></li>
   <li><a href="#indexación-de-elementos." id="toc-indexación-de-elementos." class="nav-link" data-scroll-target="#indexación-de-elementos."><span class="header-section-number">5.3.5</span> Indexación de elementos.</a></li>
   <li><a href="#unión-de-matrices-y-vectores" id="toc-unión-de-matrices-y-vectores" class="nav-link" data-scroll-target="#unión-de-matrices-y-vectores"><span class="header-section-number">5.3.6</span> Unión de matrices y vectores</a></li>
@@ -360,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="creacción-de-vectores."><span class="header-section-number">5.1.1</span> Creacción de vectores.</h3>
 <p>Existen varias formas de definir un vector:</p>
 <ul>
-<li>Mediante el operador “:”. Es una forma sencilla de generar secuencias de valores. Este operador tiene la máxima prioridad en una expresión.</li>
+<li>Mediante el operador <code>:</code>. Es una forma sencilla de generar secuencias de valores. Este operador tiene la máxima prioridad en una expresión.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
@@ -384,7 +385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>Una forma fácil de crear un vector en R es mediante la función <strong>c()</strong>, a la que se le indica entre paréntesis los elementos que va contener el vector. El número de elementos de un vector es su tamaño y podemos obtenerlo mediante la función <strong>length()</strong>.</li>
+<li>Una forma fácil de crear un vector en R es mediante la función <code>c()</code>, a la que se le indica entre paréntesis los elementos que va contener el vector. El número de elementos de un vector es su tamaño y podemos obtenerlo mediante la función <code>length()</code>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="fl">53.85</span>, <span class="fl">43.2</span>, <span class="dv">30</span>)</span>
@@ -412,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>Y mediante la función <strong>seq()</strong>. Esta función tiene cinco argumentos, aunque no se utilizan todos simultáneamente. Si se dan los dos primeros indican el comienzo y el final del vector. Si solo se facilitan estos dos argumentos, el resultado coincide con el operador ‘dos puntos’.</li>
+<li>Y mediante la función <code>seq()</code>. Esta función tiene cinco argumentos, aunque no se utilizan todos simultáneamente. Si se dan los dos primeros indican el comienzo y el final del vector. Si solo se facilitan estos dos argumentos, el resultado coincide con el operador ‘dos puntos’.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">by=</span>.<span class="dv">5</span>) <span class="co">#inicio, fin, salto</span></span>
@@ -433,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>Otra forma frecuente de generar secuencias es mediante la función <strong>rep()</strong>:</li>
+<li>Otra forma frecuente de generar secuencias es mediante la función <code>rep()</code>:ç</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">5</span>, <span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -450,27 +451,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>R también tiene diversas funciones parar generar secuencias aleatorias. Todas ellas siguen esta estructura: <code>rfunc(n, par1, par2, ...)</code>, donde <em>func</em> es el nombre de la distribución de probabilidad, <em>n</em> es el número de elementos que se van a generar, y <em>par1, par2, …</em> son el resto de parámetros propios de cada tipo de distribución de probabilidad.</li>
+<li>R también tiene diversas funciones parar generar secuencias aleatorias. Todas ellas siguen esta estructura: <code>rfunc(n, par1, par2, ...)</code>, donde <code>func</code> es el nombre de la distribución de probabilidad, <code>n</code> es el número de elementos que se van a generar, y <code>par1, par2, ...</code> son el resto de parámetros propios de cada tipo de distribución de probabilidad.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución normal</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.1132911  0.2586601 -0.6326023  0.2398083  0.2240728  0.4198906
- [7]  0.4127040  0.8209341  0.4639761  0.8937048</code></pre>
+<pre><code> [1]  0.748738379  0.958580917 -0.731225443 -1.576653820 -0.546596826
+ [6] -0.891073157 -0.513407858  0.395800146  0.573820958  0.008183159</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">4</span>, <span class="at">mean=</span><span class="dv">10</span>, <span class="at">sd=</span><span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.15158 13.65130 11.52590  7.92353</code></pre>
+<pre><code>[1] 13.19473 11.61443 12.26934 10.88486</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución t Student</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rt</span>(<span class="dv">5</span>, <span class="at">df=</span><span class="dv">10</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.09997031 -0.77462029  0.93535868 -0.04254829  0.49507952</code></pre>
+<pre><code>[1] -0.9031705 -0.2568829  2.0453918 -0.6313816 -1.9797877</code></pre>
 </div>
 </div>
 <ul>
-<li>La función <strong>vector()</strong> nos permite crear vectores vacios.</li>
+<li>La función <code>vector()</code> nos permite crear vectores vacios.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">vector</span>()</span>
@@ -492,11 +493,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Algunas funciones de gran utilidad al a hora de trabajar con vectores son:</p>
 <ul>
-<li><strong>min()</strong> y <strong>max()</strong> que seleccionan respectivamente el menor y el mayor valor de sus argumentos, incluso cuando el argumentos son varios vectores,</li>
-<li><strong>range()</strong> cuyo valor es el vector de longitud dos: c(min(x), max(x)),</li>
-<li><strong>sum(x)</strong> que es la suma de todos los elementos de x,</li>
-<li><strong>prod(x)</strong> que es el producto de todos ellos, y</li>
-<li><strong>sort(x)</strong> que devuelve un vector del mismo tamaño que x con los elementos ordenados en orden creciente.</li>
+<li><code>min()</code> y <code>max()</code> que seleccionan respectivamente el menor y el mayor valor de sus argumentos, incluso cuando el argumentos son varios vectores,</li>
+<li><code>range()</code> cuyo valor es el vector de longitud dos: c(min(x), max(x)),</li>
+<li><code>sum(x)</code> que es la suma de todos los elementos de <code>x</code>,</li>
+<li><code>prod(x)</code> que es el producto de todos ellos, y</li>
+<li><code>sort(x)</code> que devuelve un vector del mismo tamaño que <code>x</code> con los elementos ordenados en orden creciente.</li>
 </ul>
 </section>
 <section id="indexación-de-elementos" class="level3" data-number="5.1.3">
@@ -705,7 +706,7 @@ f m
 0 5 </code></pre>
 </div>
 </div>
-<p>La función <strong>gl()</strong> puede utilizarse para generar secuencias a partir de factores. Esta función recibe dos paráemtros, el primer indica el número de niveles y el segundo indica el número de repeticiones de cada nivel.</p>
+<p>La función <code>gl()</code> puede utilizarse para generar secuencias a partir de factores. Esta función recibe dos paráemtros, el primer indica el número de niveles y el segundo indica el número de repeticiones de cada nivel.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -721,7 +722,7 @@ Levels: female male</code></pre>
 </section>
 <section id="matrices-y-arrays." class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="matrices-y-arrays."><span class="header-section-number">5.3</span> Matrices y Arrays.</h2>
-<p>Los arrays nos permiten almacenar elementos en diversas dimensiones. Las matrices son un caso especial de arrays con dos dimensiones. Tanto los arrays como las matrices en R no son más que vectores con un atributo particular que es la dimensión. Por lo tanto, también son estructuras <strong>homogénes</strong> de almacenamiento.</p>
+<p>Los arrays nos permiten almacenar elementos en diversas dimensiones. Las matrices son un caso especial de arrays con dos dimensiones. Tanto los arrays como las matrices en R no son más que vectores con un atributo particular que es la dimensión. Por lo tanto, también son estructuras <strong>homogéneas</strong> de almacenamiento.</p>
 <section id="construcción-de-arrays-a-partir-de-vectores." class="level3" data-number="5.3.1">
 <h3 data-number="5.3.1" class="anchored" data-anchor-id="construcción-de-arrays-a-partir-de-vectores."><span class="header-section-number">5.3.1</span> Construcción de arrays a partir de vectores.</h3>
 <p>Por lo comentado anteriormente podemos construir un array sin más que proporcionandole al vector donde están almacenados los datos con unas dimensiones.</p>
@@ -742,8 +743,8 @@ Levels: female male</code></pre>
 </div>
 </section>
 <section id="función-matrix." class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="función-matrix."><span class="header-section-number">5.3.2</span> Función <strong>matrix()</strong>.</h3>
-<p>También se puede definir directamente una matriz haciendo uso de la función <strong>matrix()</strong>:</p>
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="función-matrix."><span class="header-section-number">5.3.2</span> Función <code>matrix()</code>.</h3>
+<p>También se puede definir directamente una matriz haciendo uso de la función <code>matrix()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1º argumento: contenido de la matriz en forma de vector</span></span>
 <span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2º argumento: número de filas</span></span>
@@ -766,9 +767,9 @@ Levels: female male</code></pre>
 </div>
 </div>
 </section>
-<section id="función-array." class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="función-array."><span class="header-section-number">5.3.3</span> Función <strong>array()</strong>.</h3>
-<p>Para facilitar la creacción de arrays tenemos la función <strong>array()</strong>, que funciona de un modo similar a <strong>matrix()</strong>. En el primer argumento se le indica el contenido del array y mediante el argumento dim le podemos especificar el tamaño de cada una de las dimensiones.</p>
+<section id="función-array" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="función-array"><span class="header-section-number">5.3.3</span> Función <code>array()</code></h3>
+<p>Para facilitar la creacción de arrays tenemos la función <code>array()</code>, que funciona de un modo similar a <code>matrix()</code>. En el primer argumento se le indica el contenido del array y mediante el argumento dim le podemos especificar el tamaño de cada una de las dimensiones.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Array de dimensión 4x3x2</span></span>
 <span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">29</span>, <span class="at">dim=</span><span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>))</span>
@@ -794,7 +795,7 @@ Levels: female male</code></pre>
 </section>
 <section id="nombres-de-filas-y-columnas." class="level3" data-number="5.3.4">
 <h3 data-number="5.3.4" class="anchored" data-anchor-id="nombres-de-filas-y-columnas."><span class="header-section-number">5.3.4</span> Nombres de filas y columnas.</h3>
-<p>En R tenemos las funciones <strong>colnames()</strong> y <strong>rownames()</strong> que nos permiten dar nombres a las filas y a las columnas de una matriz.</p>
+<p>En R tenemos las funciones <code>colnames()</code> y <code>rownames()</code> que nos permiten dar nombres a las filas y a las columnas de una matriz.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">21</span>, <span class="dv">32</span>, <span class="dv">43</span>, <span class="dv">13</span>), <span class="dv">2</span>, <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"1qrt"</span>, <span class="st">"2qrt"</span>, <span class="st">"3qrt"</span>, <span class="st">"4qrt"</span>)</span>
@@ -884,7 +885,7 @@ row2   21   32   43   13</code></pre>
 </section>
 <section id="unión-de-matrices-y-vectores" class="level3" data-number="5.3.6">
 <h3 data-number="5.3.6" class="anchored" data-anchor-id="unión-de-matrices-y-vectores"><span class="header-section-number">5.3.6</span> Unión de matrices y vectores</h3>
-<p>Las funciones <strong>cbind()</strong> y <strong>rbind()</strong> nos permiten construir arrays mediante la unión (por columnas o por filas, respectivamente) de vectores o matrices.</p>
+<p>Las funciones <code>cbind()</code> y <code>rbind()</code> nos permiten construir arrays mediante la unión (por columnas o por filas, respectivamente) de vectores o matrices.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">23</span>, <span class="dv">66</span>, <span class="dv">77</span>, <span class="dv">33</span>, <span class="dv">44</span>, <span class="dv">56</span>, <span class="dv">12</span>, <span class="dv">78</span>, <span class="dv">23</span>), <span class="dv">2</span>, <span class="dv">5</span>)</span>
 <span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>m1</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -967,7 +968,7 @@ row2   21   32   43   13</code></pre>
 <p>Una lista en R consiste en una colección ordeanda de elemntos. Los elementos u objetos almacenados en ella se conocen con el nombre de componentes. A diferencia de los vectores o arrays, los componentes de una lista pueden ser de diferente tipo. A estos componentes les podemos dar nombres igual que hacíamos en los arrays.</p>
 <section id="creacción-de-una-lista." class="level3" data-number="5.4.1">
 <h3 data-number="5.4.1" class="anchored" data-anchor-id="creacción-de-una-lista."><span class="header-section-number">5.4.1</span> Creacción de una lista.</h3>
-<p>Para crear una lista no hay más que darle un nombre a la lista e indicarle a la función <strong>list()</strong> cuales van a ser los elementos que vamos a guardar en ella. A cada uno de estos elementos le podemos dar un nombre.</p>
+<p>Para crear una lista no hay más que darle un nombre a la lista e indicarle a la función <code>list()</code> cuales van a ser los elementos que vamos a guardar en ella. A cada uno de estos elementos le podemos dar un nombre.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lista de tres componentes que llamamos stud.id, stud.name y stud.marks</span></span>
 <span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a>my.lst <span class="ot">=</span> <span class="fu">list</span>(<span class="at">stud.id=</span><span class="dv">69449</span>, <span class="at">stud.name=</span><span class="st">"Ana"</span>, <span class="at">stud.marks=</span><span class="fu">c</span>(<span class="fl">5.25</span>, <span class="dv">10</span>, <span class="fl">7.5</span>, <span class="fl">9.25</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -999,7 +1000,7 @@ $marks
 [1]  8.50 10.00 17.00  9.75</code></pre>
 </div>
 </div>
-<p>La función <strong>unlist()</strong> nos devuelve un vector con tantos elementos como elementos hubiera en la lista que se le pasa por parámetro. Como los vectores solo pueden estar compuestos por elementos del mismo tipo, el uso de esta función además provocará cambios en los tipos de elementos. Lo más normal es que transforme todos los elementos a cadenas de caracteres.</p>
+<p>La función <code>unlist()</code> nos devuelve un vector con tantos elementos como elementos hubiera en la lista que se le pasa por parámetro. Como los vectores solo pueden estar compuestos por elementos del mismo tipo, el uso de esta función además provocará cambios en los tipos de elementos. Lo más normal es que transforme todos los elementos a cadenas de caracteres.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(my.lst2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1109,7 +1110,7 @@ $sex
 [1] "male"</code></pre>
 </div>
 </div>
-<p>Mediante la función <strong>length()</strong> podemos saber el número de componentes de una lista en todo momento.</p>
+<p>Mediante la función <code>length()</code> podemos saber el número de componentes de una lista en todo momento.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb184"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(my.lst)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1133,7 +1134,7 @@ $sex
 <p>El Data Frame es la estructura de datos recomendada para almacenar tablas de datos en R. Desde el punto de vista estructural son similares a las matrices, ya que se trata de estructuras de datos bi-dimensionales. Sin embargo, al contrario que las matrices, e imitando el comportamiento de las listas, los datos que se almacenan en un Data Frame pueden ser de diferentes tipos. En este sentido pueden verse como una extensión de las listas. En definitiva, se trata de <strong>estructuras de almacenamiento bi-dimensioanles de datos heterogéneos</strong>.</p>
 <section id="creacción-de-un-data-frame." class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="creacción-de-un-data-frame."><span class="header-section-number">5.5.1</span> Creacción de un Data Frame.</h3>
-<p>Para la creacción de un Data Frame en R tenemos la función <strong>data.frame()</strong>. La forma de definir el Data Frame es equivalente a la lista, indicamos el nombre de cada columna y los valores que se van almacenar en ella.</p>
+<p>Para la creacción de un Data Frame en R tenemos la función <code>data.frame()</code>. La forma de definir el Data Frame es equivalente a la lista, indicamos el nombre de cada columna y los valores que se van almacenar en ella.</p>
 <p>Es conveniente identificar cada columna con una variable y cada fila con una observación (compuesta por el conjunto de valores de cada una de las variables).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb186"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a>my.dataset <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">site=</span><span class="fu">c</span>(<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'A'</span>,<span class="st">'A'</span>,<span class="st">'B'</span>),</span>
@@ -1153,7 +1154,7 @@ $sex
 </section>
 <section id="características-de-un-data-frame." class="level3" data-number="5.5.2">
 <h3 data-number="5.5.2" class="anchored" data-anchor-id="características-de-un-data-frame."><span class="header-section-number">5.5.2</span> Características de un Data Frame.</h3>
-<p>Podemos conocer el número de filas, columnas y la dimensión de un Data Frame mediante las funciones <strong>nrow()</strong>, <strong>ncol()</strong> y <strong>dim()</strong>.</p>
+<p>Podemos conocer el número de filas, columnas y la dimensión de un Data Frame mediante las funciones <code>nrow()</code>, <code>ncol()</code> y <code>dim()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb188"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(my.dataset)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1168,7 +1169,7 @@ $sex
 <pre><code>[1] 5 3</code></pre>
 </div>
 </div>
-<p>También podemos conocer o cambiar el nombre de las columnas de un Data Frame mediante la función <strong>names()</strong>.</p>
+<p>También podemos conocer o cambiar el nombre de las columnas de un Data Frame mediante la función <code>names()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb194"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(my.dataset)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1228,7 +1229,7 @@ $sex
 &lt;0 rows&gt; (o 0- extensión row.names)</code></pre>
 </div>
 </div>
-<p>Otra opción de obtener una sub-sección de un Data Frame es usando la función <strong>subset()</strong>.</p>
+<p>Otra opción de obtener una sub-sección de un Data Frame es usando la función <code>subset()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb210"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb210-1"><a href="#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(my.dataset, pH <span class="sc">&gt;</span><span class="dv">8</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1242,7 +1243,7 @@ $sex
 &lt;0 rows&gt; (o 0- extensión row.names)</code></pre>
 </div>
 </div>
-<p>La diferencia con el procedimiento anterior es que, si queremos asignar nuevos valores a una sub-sección de un Data Frame, no podemos hacerlo con la función <strong>subset()</strong>, tenemos que obtener la sub-sección con la aplicación de una máscara.</p>
+<p>La diferencia con el procedimiento anterior es que, si queremos asignar nuevos valores a una sub-sección de un Data Frame, no podemos hacerlo con la función <code>subset()</code>, tenemos que obtener la sub-sección con la aplicación de una máscara.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb214"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb214-1"><a href="#cb214-1" aria-hidden="true" tabindex="-1"></a>my.dataset[my.dataset<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"Summer"</span>, <span class="st">"pH"</span>] <span class="ot">=</span> </span>
 <span id="cb214-2"><a href="#cb214-2" aria-hidden="true" tabindex="-1"></a>  my.dataset[my.dataset<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"Summer"</span>, <span class="st">"pH"</span>]<span class="sc">+</span><span class="dv">1</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1266,13 +1267,13 @@ $sex
 </section>
 <section id="extensión-de-data-frames-tibble." class="level3" data-number="5.5.5">
 <h3 data-number="5.5.5" class="anchored" data-anchor-id="extensión-de-data-frames-tibble."><span class="header-section-number">5.5.5</span> Extensión de Data Frames: tibble.</h3>
-<p>Los paquetes <strong>tibble</strong> (Wickham et al., 2016) y <strong>dplyr</strong> (Wickham and Fancis, 2015) nos proporcionan un conjunto de operaciones muy útil para facilitar la manipulación de datos. El paquete <strong>tiblle</strong> define la estructura de datos denominada <em>tibbles</em> considerada como un caso especial de Data Frame. Los <em>tibbles</em> modifican algunos de los comportamientos estandar que hemos visto de los Data Frame:</p>
+<p>Los paquetes <code>tibble</code> (Wickham et al., 2016) y <code>dplyr</code> (Wickham and Fancis, 2015) nos proporcionan un conjunto de operaciones muy útil para facilitar la manipulación de datos. El paquete <code>tiblle</code> define la estructura de datos denominada <em>tibbles</em> considerada como un caso especial de Data Frame. Los <em>tibbles</em> modifican algunos de los comportamientos estandar que hemos visto de los Data Frame:</p>
 <ul>
 <li>los <em>tibbles</em> nunca cambian las columnas caracter en factores como hacen los Data Frame por defecto</li>
 <li>los <em>tibbles</em> tienen más flexibilidad a la hora de nombrar a las columnas.</li>
 <li>los métodos de representación que tienen los <em>tibbles</em> son más convenientes que los de los Data Frame cuando se trabaja con grandes cantidades de datos.</li>
 </ul>
-<p>Para crear un <em>tibble</em> utilizamos la función <strong>tibble()</strong> de R. Su funcionamiento es muy similar al de la función <strong>data.frame()</strong>. Como se puede observar en el siguiente ejemplo, los valores de cada columna se calculan secuencialmente permitiendonos usar los valores de la columna anterior, y los vectores de caracteres no se convierten en factores.</p>
+<p>Para crear un <em>tibble</em> utilizamos la función <code>tibble()</code> de R. Su funcionamiento es muy similar al de la función <code>data.frame()</code>. Como se puede observar en el siguiente ejemplo, los valores de cada columna se calculan secuencialmente permitiendonos usar los valores de la columna anterior, y los vectores de caracteres no se convierten en factores.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb217"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
 <span id="cb217-2"><a href="#cb217-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">TempCels =</span> <span class="fu">sample</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">40</span>, <span class="at">size=</span><span class="dv">100</span>, <span class="at">replace=</span><span class="cn">TRUE</span>),</span>
@@ -1284,15 +1285,15 @@ $sex
    TempCels TempFahr Location
       &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;   
  1       25     77   a       
- 2       13     55.4 a       
- 3       35     95   a       
- 4       27     80.6 a       
- 5       39    102.  a       
- 6       37     98.6 a       
- 7       21     69.8 a       
- 8       -9     15.8 a       
- 9       24     75.2 a       
-10       40    104   a       
+ 2        4     39.2 a       
+ 3       -5     23   a       
+ 4       -4     24.8 a       
+ 5       17     62.6 a       
+ 6        2     35.6 a       
+ 7       24     75.2 a       
+ 8        1     33.8 a       
+ 9       12     53.6 a       
+10       16     60.8 a       
 # ℹ 90 more rows</code></pre>
 </div>
 </div>
@@ -1392,7 +1393,7 @@ $sex
 15          1.2</code></pre>
 </div>
 </div>
-<p>El paquete <strong>dplyr</strong> nos proporciona las funciones <strong>select()</strong> y <strong>filter()</strong> para hacer indexación de elementos. La función <strong>select()</strong> se usa pra seleccionar un conjunto de columnas y la función <strong>filter()</strong> para seleccionar un conjunto de filas.</p>
+<p>El paquete <code>dplyr</code> nos proporciona las funciones <code>select()</code> y <code>filter()</code> para hacer indexación de elementos. La función <code>select()</code> se usa pra seleccionar un conjunto de columnas y la función <code>filter()</code> para seleccionar un conjunto de filas.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb237"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb237-1"><a href="#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -1429,7 +1430,7 @@ Adjuntando el paquete: 'dplyr'</code></pre>
 # ℹ 40 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb243"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb243-1"><a href="#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Podemos hacer lo mismo utilizando el operador pipe:</span></span>
-<span id="cb243-2"><a href="#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(ir, Species<span class="sc">==</span><span class="st">"setosa"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Petal.Width, Petal.Length)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb243-2"><a href="#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(ir, Species<span class="sc">==</span><span class="st">"setosa"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(Petal.Width, Petal.Length)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 50 × 2
    Petal.Width Petal.Length
@@ -1447,7 +1448,7 @@ Adjuntando el paquete: 'dplyr'</code></pre>
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
-<p>NOTA: el operador pipe (%&gt;%) se puede aplicar a cualquier función de R. Significa que, lo que está a su izquierda se pasa como el primer argumento a la función que está a su derecha. Es decir, una expresión del tipo x %&gt;% f(y) es equivalente a f(x,y).</p>
+<p>NOTA: el operador pipe (<code>|&gt;</code>) se puede aplicar a cualquier función de R. Significa que, lo que está a su izquierda se pasa como el primer argumento a la función que está a su derecha. Es decir, una expresión del tipo <code>x |&gt; f(y)</code> es equivalente a <code>f(x,y)</code>.</p>
 
 
 </section>

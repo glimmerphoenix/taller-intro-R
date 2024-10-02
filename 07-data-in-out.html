@@ -124,6 +124,7 @@ div.csl-indent {
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -353,8 +354,8 @@ div.csl-indent {
 <ul>
 <li><p><strong>Archivo textual</strong>: Los datos pueden estar almacenados en formato libre, pero lo normal es que sigan una pauta para organizar su presentación, según algún <strong>formato estándar</strong> de representación de datos.</p>
 <ul>
-<li><p><strong>CSV</strong> (Comma Separated Values): Los datos se escriben insertando una línea por cada fila de la tabla, y separando los valores de cada columna mediante comas. Los strings suelen ir delimitados por dobles comillas (“). Desgraciadamente, no existe una convención única sobre qué carácteres usar para delimitar strings o separar los valores de cada columna. A veces también se pueden usar puntos y coma, tabuladores, etc. Debemos informarnos sobre el formato empleado o descubrirlo nosotros, inspeccionando algunas líneas del archivo en crudo.</p></li>
-<li><p><strong>JSON</strong> (JavaScript Object Notation): Es un formato que se ha popularizado bastante, porque lo suelen emplear muchos servicios y APIs web que exportan datos. Es bastante compacto y permite representar arrays y listas arbitrarias de objetos. También se puede usar este formato para guardar datos en archivos de texto.</p></li>
+<li><p><strong>CSV</strong> (<em>Comma Separated Values</em>): Los datos se escriben insertando una línea por cada fila de la tabla, y separando los valores de cada columna mediante comas. Los strings suelen ir delimitados por dobles comillas (“). Desgraciadamente, no existe una convención única sobre qué carácteres usar para delimitar strings o separar los valores de cada columna. A veces también se pueden usar puntos y coma, tabuladores, etc. Debemos informarnos sobre el formato empleado o descubrirlo nosotros, inspeccionando algunas líneas del archivo en crudo.</p></li>
+<li><p><strong>JSON</strong> (<em>JavaScript Object Notation</em>): Es un formato que se ha popularizado bastante, porque lo suelen emplear muchos servicios y APIs web que exportan datos. Es bastante compacto y permite representar arrays y listas arbitrarias de objetos. También se puede usar este formato para guardar datos en archivos de texto.</p></li>
 </ul></li>
 <li><p><strong>Base de datos</strong> (normalmente relacional): Guarda los datos en tablas similares a un data.frame (o tibble). R proporciona paquetes que permiten conectarnos a muchos tipos de bases de datos para realizar consultas y recuperar información. Normalmente, el resultado que la base de datos envía como respuesta a nuestra consulta se formatea automáticamente como un data.frame (lo hacen las propias bibliotecas conectoras de R).</p></li>
 <li><p><strong>Formatos binarios</strong> (Excel, OpenOffice, LibreOffice, etc.): En ocasiones los datos se han creado previamente en un programa ofimático o de otro tipo, y tenemos que importarlos en R. El caso habitual es Excel que, hoy en día, continúa siendo una herramienta muy habitual en gestión y cálculo de datos.</p></li>
@@ -367,9 +368,14 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">"readr"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Todas las funciones que comienzan por <code>readr_</code> están pensadas para automatizar la lectura de datos de archivos textuales. Por desgracia, no existe un formato universal de representación de datos en CSV. Así que hay diferentes funciones para cada caso. Presentamos en la tabla @ref(tab:funcs-read) las principales.</p>
+<p>Todas las funciones que comienzan por <code>readr_</code> están pensadas para automatizar la lectura de datos de archivos textuales. Por desgracia, no existe un formato universal de representación de datos en CSV. Así que hay diferentes funciones para cada caso. Presentamos en la tabla <a href="#tbl-funcs-read" class="quarto-xref">Tabla&nbsp;<span>7.1</span></a> las principales.</p>
+<div id="tbl-funcs-read" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-funcs-read-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;7.1: Funciones típicas de lectura de datos en formato CSV y similares.
+</figcaption>
+<div aria-describedby="tbl-funcs-read-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>(#tab:funcs-read) Funciones típicas de lectura de datos en formato CSV y similares.</caption>
 <colgroup>
 <col style="width: 21%">
 <col style="width: 78%">
@@ -399,6 +405,9 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>Veamos un ejemplo que muestre la potencia de estas funciones. En el subdirectorio <code>data</code> del directorio de este manual, tenemos el archivo <code>ACMETelephoneABT.csv</code>. Este archivo proviene de un ejemplo de un conocido (y muy recomendable) libro de introducción a la ciencia de datos y el aprendizaje máquina <span class="citation" data-cites="kelleher2015">(<a href="references.html#ref-kelleher2015" role="doc-biblioref">Kelleher et&nbsp;al., 2015</a>)</span>.</p>
 <p>Ahora comprobamos lo fácil que es leer los datos, en una sola línea de código R:</p>
 <div class="cell">
@@ -450,7 +459,7 @@ lgl  (4): children, smartPhone, homeOwner, churn
 <ul>
 <li><p>La función <code>read_csv()</code> utilizada sin argumentos (como en este ejemplo) intenta usar heurísticos sencillos para <em>adivinar</em> el tipo de datos adecuado para formatear los valores de cada columna. Si no ocultamos los avisos, la función nos indica (como vemos arriba en este documento) qué formatos ha utilizado para leer cada una de las columnas. Conviene no ocultar esta información, ya que muchos errores en preparación y limpieza de datos provienen de confusiones con el tipo de datos asignado a una columna.</p></li>
 <li><p>Los valores de tipo string (en tibble marcados como <code>&lt;chr&gt;</code>) <strong>no se convierten a factores de forma automática</strong>, sino que se dejan como cadena de caracteres. Por tanto, si deseamos que se considere a los valores de alguna columna explícitamente como factor, habrá que especificarlo en el momento de leer los datos, o bien convertirlo explícitamente más adelante. Será más conveniente elegir una u otra opción dependiendo de si tenemos que limpiar intensamente los datos de esa columna o ya vienen en buen estado.</p></li>
-<li><p>Es imprtante especificar qué convención se usa para indicar los datos faltantes en el archivo. Suele ser arbitrario (y, por desgracia, a veces caótico), obligándonos a limpiar los datos siguiendo el método de prueba y error. Por defecto, la función considera el argumento <code>na = c("", "NA")</code>, es decir un stríng vacío o el string “NA” marcan un dato faltante en la tabla. En nuestro caso, bien porque nos han avisado o por una inspección preliminar del contenido del archivo sabemos que, en su lugar, los datos faltantes se marcan con string vacío o con espacio en blanco (” “).</p></li>
+<li><p>Es imprtante especificar qué convención se usa para indicar los datos faltantes en el archivo. Suele ser arbitrario (y, por desgracia, a veces caótico), obligándonos a limpiar los datos siguiendo el método de prueba y error. Por defecto, la función considera el argumento <code>na = c("", "NA")</code>, es decir un stríng vacío o el string <code>"NA"</code> marcan un dato faltante en la tabla. En nuestro caso, bien porque nos han avisado o por una inspección preliminar del contenido del archivo sabemos que, en su lugar, los datos faltantes se marcan con string vacío o con espacio en blanco (” “).</p></li>
 </ul>
 <p>Con esto hemos leído de forma aparentemente sencilla los datos de un archivo CSV. En este caso, hemos usado <code>read_csv()</code> porque los autores son británicos, y por tanto usan la convención de separar en cada fila los valores de cada columna mediante “,” y usar “.” como caracter para delimitar la parte decimal de un número.</p>
 <p>Sin embargo, más adelante volveremos a tratar este dataset y comprobaremos que, como suele ser habitual en un caso real, la lectura inicial de datos no es más que el primer paso de un proceso de <strong>limpieza de datos</strong>, que suele <strong>consumir en torno a un 80% del tiempo</strong> de trabajo en el proyecto para el científico de datos.</p>

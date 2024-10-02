@@ -104,6 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -298,8 +299,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#objetos-y-variables." id="toc-objetos-y-variables." class="nav-link active" data-scroll-target="#objetos-y-variables."><span class="header-section-number">4.1</span> Objetos y variables.</a>
   <ul class="collapse">
-  <li><a href="#función-ls." id="toc-función-ls." class="nav-link" data-scroll-target="#función-ls."><span class="header-section-number">4.1.1</span> Función ls().</a></li>
-  <li><a href="#función-rm." id="toc-función-rm." class="nav-link" data-scroll-target="#función-rm."><span class="header-section-number">4.1.2</span> Función rm().</a></li>
+  <li><a href="#función-ls." id="toc-función-ls." class="nav-link" data-scroll-target="#función-ls."><span class="header-section-number">4.1.1</span> Función <code>ls()</code>.</a></li>
+  <li><a href="#función-rm." id="toc-función-rm." class="nav-link" data-scroll-target="#función-rm."><span class="header-section-number">4.1.2</span> Función <code>rm()</code>.</a></li>
   <li><a href="#operadores-aritméticos." id="toc-operadores-aritméticos." class="nav-link" data-scroll-target="#operadores-aritméticos."><span class="header-section-number">4.1.3</span> Operadores aritméticos.</a></li>
   <li><a href="#operadores-lógicos." id="toc-operadores-lógicos." class="nav-link" data-scroll-target="#operadores-lógicos."><span class="header-section-number">4.1.4</span> Operadores lógicos.</a></li>
   </ul></li>
@@ -338,8 +339,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>En este apartado se ofrece un breve repaso a la sintáxis básica de R.</p>
 <p>Los objetos o variables de R pueden almacenar información de diferentes tipos:</p>
 <ul>
-<li><em>valores numéricos</em> en variables de tipo numérico.</li>
-<li><em>valores alfabéticos</em> en variables de tipo carácter, que en realidad son cadenas de caracteres que van entre comillas dobles o comillas simples.</li>
+<li><em>valores numéricos</em> en variables de tipo numérico;</li>
+<li><em>valores alfabéticos</em> en variables de tipo carácter, que en realidad son cadenas de caracteres que van entre comillas dobles o comillas simples;</li>
 <li><em>valores lógicos</em> en variables de tipo booleano, que solo pueden tomar los valores TRUE o FALSE.</li>
 </ul>
 <p>Cuando se crea una variable, la asingación de un valor a esta variable puede hacerse de la siguiente manera:</p>
@@ -385,20 +386,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Por lo tanto, la asingación es una operación en la que se evalua la expresión que hay a la derecha y se le asigna ese valor a la variable de la izquierda.</p>
 <section id="función-ls." class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="función-ls."><span class="header-section-number">4.1.1</span> Función ls().</h3>
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="función-ls."><span class="header-section-number">4.1.1</span> Función <code>ls()</code>.</h3>
 <p>Muestra una lista de todos los objetos o variables que se han creado.</p>
 </section>
 <section id="función-rm." class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="función-rm."><span class="header-section-number">4.1.2</span> Función rm().</h3>
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="función-rm."><span class="header-section-number">4.1.2</span> Función <code>rm()</code>.</h3>
 <p>Libera el espacio de memoria que ocupa el objeto o variable que hayamos indicado entre paréntesis.</p>
 </section>
 <section id="operadores-aritméticos." class="level3" data-number="4.1.3">
 <h3 data-number="4.1.3" class="anchored" data-anchor-id="operadores-aritméticos."><span class="header-section-number">4.1.3</span> Operadores aritméticos.</h3>
-<p>Los operadores aritméticos elementales son los habituales +, -, *, / y ^ para elevar a una potencia. Además están disponibles las funciones <code>log</code>, <code>exp</code>, <code>sin</code>, <code>cos</code>, <code>tan</code> y <code>sqrt</code>.</p>
+<p>Los operadores aritméticos elementales son los habituales <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> y <code>^</code> para elevar a una potencia. Además están disponibles las funciones <code>log</code>, <code>exp</code>, <code>sin</code>, <code>cos</code>, <code>tan</code> y <code>sqrt</code>.</p>
 </section>
 <section id="operadores-lógicos." class="level3" data-number="4.1.4">
 <h3 data-number="4.1.4" class="anchored" data-anchor-id="operadores-lógicos."><span class="header-section-number">4.1.4</span> Operadores lógicos.</h3>
-<p>Los operadores lógicos son: &lt; (menor), &lt;= (menor o igual), &gt; (mayor), &gt;= (mayor o igual), == (igual), y != (distinto). Si v1 y v2 son dos expresiones lógicas, entonces v1&amp;v2 es su intersección (“conjunción”), v1|v2 es su unión (“disyunción”) y !v1 es la negación de V1.</p>
+<p>Los operadores lógicos son: <code>&lt;</code> (menor), <code>&lt;=</code> (menor o igual), <code>&gt;</code> (mayor), <code>&gt;=</code> (mayor o igual), <code>==</code> (igualdad lógica), y <code>!=</code> (distinto). Si <code>v1</code> y <code>v2</code> son dos expresiones lógicas, entonces <code>v1&amp;v2</code> es su intersección (“conjunción”), <code>v1|v2</code> es su unión (“disyunción”) y <code>!v1</code> es la negación de <code>v1</code>.</p>
 </section>
 </section>
 <section id="funciones." class="level2" data-number="4.2">
@@ -414,58 +415,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Máximo de una secuencia de 30 elementos elegidos al azar de entre el 1 y el 100.</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">30</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 90</code></pre>
+<pre><code>[1] 100</code></pre>
 </div>
 </div>
-<p>Al igual que en otros lenguajes de programación, resulta interesante implementar una función cuando necesitas que varias líneas de código se ejecuten varias veces en diferentes puntos de nuestro código. En este caso, ese bloque de código lo encampsulamos dentro de una función, la cual llamaremos cada vez que la necesitemos. Antes de darle un nombre a una función que implementemos nosotros, podemos comprobar si ese nombre no se ha utilizado ya, mediante la función <strong>exists()</strong> (devuelve un TRUE o un FALSE en función de si el nombre de la función ya existe o no, respectivamente).</p>
+<p>Al igual que en otros lenguajes de programación, resulta interesante implementar una función cuando necesitas que varias líneas de código se ejecuten varias veces en diferentes puntos de nuestro código. En este caso, ese bloque de código lo encampsulamos dentro de una función, la cual llamaremos cada vez que la necesitemos. Antes de darle un nombre a una función que implementemos nosotros, podemos comprobar si ese nombre no se ha utilizado ya, mediante la función <code>exists()</code> (devuelve <code>TRUE</code> o <code>FALSE</code> en función de si el nombre de la función ya existe o no, respectivamente).</p>
 <p>La forma de implementar una función es la siguiente:</p>
-<p>nombreFuncion = <em>fuction</em>(argumento1, argumento2,…){ instrucción1 instrucción2 . . . return resultado }</p>
-<p>El cuerpo de la función está delimitado por {} y cada instrucción debe ocupar una línea</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función que calcula el error estandar (raiz cuadrada de la varianza entre el tamaño de la muestra)</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="cf">function</span>(x){</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">=</span> <span class="fu">var</span>(x)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># var(): función de R que devuelve la varianza de un conjunto de valores, en este caso, de x</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(x)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># length(): función de R que devuelve el número de valores en x</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sqrt</span>(v<span class="sc">/</span>n))</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sqrt(): función de R que devuelve la raiz cuadrada</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nombreFuncion <span class="ot">=</span> <span class="er">*</span>fuction<span class="sc">*</span>(argumento1, argumento2,...){</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>   instrucción1</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>   instrucción2</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>   .</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>   .</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>   .</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>   return resultado</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El cuerpo de la función está delimitado por <code>{}</code> y cada instrucción debe ocupar una línea.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función que calcula el error estandar (raiz cuadrada de la varianza entre el tamaño de la muestra)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="cf">function</span>(x){</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">=</span> <span class="fu">var</span>(x)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># var(): función de R que devuelve la varianza de un conjunto de valores, en este caso, de x</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(x)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># length(): función de R que devuelve el número de valores en x</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sqrt</span>(v<span class="sc">/</span>n))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sqrt(): función de R que devuelve la raiz cuadrada</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Una vez que hemos creado la función, podemos usarla:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rnorm(): función de R que devuelve una muestra de 100 números aleatorios tomados una distribución normal con media=20 y desviación estandar=4.</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mySample <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean=</span><span class="dv">20</span>, <span class="at">sd=</span><span class="dv">4</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">se</span>(mySample)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rnorm(): función de R que devuelve una muestra de 100 números aleatorios tomados una distribución normal con media=20 y desviación estandar=4.</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mySample <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean=</span><span class="dv">20</span>, <span class="at">sd=</span><span class="dv">4</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">se</span>(mySample)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4307074</code></pre>
+<pre><code>[1] 0.3880236</code></pre>
 </div>
 </div>
 <section id="parámetros-con-valores-por-defecto." class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="parámetros-con-valores-por-defecto."><span class="header-section-number">4.2.1</span> Parámetros con valores por defecto.</h3>
 <p>Si alguno de los parámetros de nuestra función tiene que tomar algún valor por defecto debemos indicarlo en la cabecera de la función.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Función que convierte un valor en km, decímetros, centímetros o milímetros a metros.</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>convUnitsToMeters <span class="ot">=</span> <span class="cf">function</span>(val, <span class="at">from=</span><span class="st">"km"</span>){</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#La función switch de R compara el contenido de una variable (en este caso "to") con</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#un conjunto de opciones. En el caso de que la variable indicada no se corresponda con</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ninguna de las opciones posibles, se retornará el valor especial NA</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  mult <span class="ot">=</span> <span class="cf">switch</span>(from,<span class="at">km=</span><span class="dv">1000</span>,<span class="at">dm=</span><span class="fl">0.1</span>,<span class="at">cm=</span><span class="fl">0.01</span>,<span class="at">mm=</span><span class="fl">0.001</span>,<span class="cn">NA</span>)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(mult)) <span class="fu">stop</span>(<span class="st">"Unknown target unit of lenght"</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="fu">return</span> (val<span class="sc">*</span>mult)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Si se llama a la función con dos parámetros, el valor por defecto se sustituye</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#por el valor indicado por el usuario</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="dv">23</span>,<span class="st">"km"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Función que convierte un valor en km, decímetros, centímetros o milímetros a metros.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>convUnitsToMeters <span class="ot">=</span> <span class="cf">function</span>(val, <span class="at">from=</span><span class="st">"km"</span>){</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#La función switch de R compara el contenido de una variable (en este caso "to") con</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#un conjunto de opciones. En el caso de que la variable indicada no se corresponda con</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ninguna de las opciones posibles, se retornará el valor especial NA</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  mult <span class="ot">=</span> <span class="cf">switch</span>(from,<span class="at">km=</span><span class="dv">1000</span>,<span class="at">dm=</span><span class="fl">0.1</span>,<span class="at">cm=</span><span class="fl">0.01</span>,<span class="at">mm=</span><span class="fl">0.001</span>,<span class="cn">NA</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(mult)) <span class="fu">stop</span>(<span class="st">"Unknown target unit of lenght"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="fu">return</span> (val<span class="sc">*</span>mult)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Si se llama a la función con dos parámetros, el valor por defecto se sustituye</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co">#por el valor indicado por el usuario</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="dv">23</span>,<span class="st">"km"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 23000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="dv">40</span>,<span class="st">"cm"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="dv">40</span>,<span class="st">"cm"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Si solo se pasa un parámetro, el segundo toma el valor por defecto</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="dv">40</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Si solo se pasa un parámetro, el segundo toma el valor por defecto</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="dv">40</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 40000</code></pre>
 </div>
@@ -473,25 +483,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="llamada-a-una-función." class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="llamada-a-una-función."><span class="header-section-number">4.2.2</span> Llamada a una función.</h3>
-<p>La llamada a una función se puede realizar de dos formas: - Indicando el nombre de los parámetros. En este caso el valor que toma cada parámetro es el indicado.La ventana que ofrece el llamar a una función indicando el nombre de los parámetros, es que podemos omitir el nombre de parámetros que tengan valor por defecto y no queramos modificar ese valor e indicar solo aquel parámetro o parámetros que si queramos modificar.</p>
+<p>La llamada a una función se puede realizar de dos formas:</p>
+<ul>
+<li>Indicando el nombre de los parámetros. En este caso el valor que toma cada parámetro es el indicado.La ventana que ofrece el llamar a una función indicando el nombre de los parámetros, es que podemos omitir el nombre de parámetros que tengan valor por defecto y no queramos modificar ese valor e indicar solo aquel parámetro o parámetros que si queramos modificar.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="at">from=</span><span class="st">"km"</span>,<span class="at">val=</span><span class="fl">56.2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="at">from=</span><span class="st">"km"</span>,<span class="at">val=</span><span class="fl">56.2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 56200</code></pre>
 </div>
 </div>
 <ul>
-<li>Sin indicar el nombre de los parámetros. En este caso el valor de los parámetros se susittye por posición. En el ejemplo que se muestra a continuación, el 1º argumento toma el valor 56.2 y el segundo toma el valor “yard”.</li>
+<li>Sin indicar el nombre de los parámetros. En este caso el valor de los parámetros se susittye por posición. En el ejemplo que se muestra a continuación, el primer argumento toma el valor 56.2 y el segundo toma el valor <code>"yard"</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="fl">56.2</span>,<span class="st">"km"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="fl">56.2</span>,<span class="st">"km"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 56200</code></pre>
 </div>
 </div>
 <p>También es posible mezclar ambas formas de llamar a una función:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="fl">56.2</span>, <span class="at">from=</span><span class="st">"km"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convUnitsToMeters</span>(<span class="fl">56.2</span>, <span class="at">from=</span><span class="st">"km"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 56200</code></pre>
 </div>

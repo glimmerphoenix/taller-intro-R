@@ -124,6 +124,7 @@ div.csl-indent {
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -322,7 +323,6 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#operaciones-de-selección" id="toc-operaciones-de-selección" class="nav-link" data-scroll-target="#operaciones-de-selección"><span class="header-section-number">8.3.1</span> Operaciones de selección</a></li>
   <li><a href="#transformación-de-datos" id="toc-transformación-de-datos" class="nav-link" data-scroll-target="#transformación-de-datos"><span class="header-section-number">8.3.2</span> Transformación de datos</a></li>
-  <li><a href="#combinación-de-tablas-de-datos-funciones-join" id="toc-combinación-de-tablas-de-datos-funciones-join" class="nav-link" data-scroll-target="#combinación-de-tablas-de-datos-funciones-join"><span class="header-section-number">8.3.3</span> Combinación de tablas de datos (funciones <code>join</code>)</a></li>
   </ul></li>
   <li><a href="#resúmenes-estadísticos" id="toc-resúmenes-estadísticos" class="nav-link" data-scroll-target="#resúmenes-estadísticos"><span class="header-section-number">8.4</span> Resúmenes estadísticos</a></li>
   <li><a href="#gráficos-exploratorios" id="toc-gráficos-exploratorios" class="nav-link" data-scroll-target="#gráficos-exploratorios"><span class="header-section-number">8.5</span> Gráficos exploratorios</a></li>
@@ -648,10 +648,13 @@ Tip
 <p><strong>Renombrado de columnas</strong></p>
 <p>Se puede cambiar el nombre de una columna con la función <code>rename(dataframe, newname = "oldname")</code>.</p>
 <p><strong>Separación de valores</strong></p>
-<p>Puede ocurrir que los datos no cumplan los criterios de <em>tidy data</em>, por ejemplo, porque existan múltiples valores en una misma celda.</p>
-</section>
-<section id="combinación-de-tablas-de-datos-funciones-join" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="combinación-de-tablas-de-datos-funciones-join"><span class="header-section-number">8.3.3</span> Combinación de tablas de datos (funciones <code>join</code>)</h3>
+<p>Puede ocurrir que los datos no cumplan los criterios de <em>tidy data</em>, por ejemplo, porque existan múltiples valores en una misma celda. Para este caso podemos usar varias funciones del paquete <code>tidyr</code> que operan sobre <a href="https://tidyr.tidyverse.org/reference/index.html#character-vectors">vectores de tipo caracter</a>.</p>
+<p>Por otro lado, también podemos necesitar unir dos o más columnas, creando un valor único a partir del valor de origen de cada columna. Esto puede ser útil, por ejemplo, para usar esa nueva columna en la búsqueda de valores coincidentes entre dos conjuntos de datos. En ese caso podemos usar la función <code>unite()</code> (<a href="https://tidyr.tidyverse.org/reference/unite.html" class="uri">https://tidyr.tidyverse.org/reference/unite.html</a>).</p>
+<!-- ### Combinación de tablas de datos (funciones `join`)
+
+Las operaciones de tipo `join` permiten combinar las filas de dos o más tablas
+atendiendo a los valores de una o varias columnas que se toman como referencia
+de la comparación. -->
 </section>
 </section>
 <section id="resúmenes-estadísticos" class="level2" data-number="8.4">
