@@ -64,6 +64,14 @@ surgir en fución del tipo de proyecto que abordemos (prácticas de un curso, ex
 
 ## Tipos de proyectos
 
+- Proyecto estándar de análisis de datos.
 
+- Paquete R.
+
+- Sitio web.
+
+- Libros/documentos científicos.
+
+- Presentación con diapositivas.
 
 

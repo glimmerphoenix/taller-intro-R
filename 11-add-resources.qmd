@@ -1,4 +1,4 @@
-# Recursos adicionales
+# Recursos adicionales {#sec-add-resources}
 
 ### Ejercicios y referencias sobre `tidyverse`
 
@@ -40,3 +40,6 @@ adicionales para resolver:
 libro *Modern Dive into R* de C. Ismay y A.Y. Kim, contiene más ejemplos y
 explicaciones gráficas para entender todas estas operaciones.
 
+## Recursos para investigación en Agricultura
+
+- [R Packages for Agricultural Research](https://agstats.io/post/keeping-up-with-r/) (j. Piaskowski, Univ. of Idaho, 2024).

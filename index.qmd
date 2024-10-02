@@ -1,30 +1,39 @@
 # Introducción {.unnumbered}
 
-This book describes how to use Quarto, a software for scientific
-document production, to create publications in the areas of Ecology
-and Plant Research.
+Bienvenidos al Taller de Introducción a R para estudiantes del Programa
+de Doctorado en Ciencias Agrarias y Ambientales de la UCLM.
 
-Quarto has become a powerful and verstaile addition in the research
-toolkit, providing complete support to implement **reproducible** research
-workflows. The quest for open access research, including not only the final
-product (manuscripts) but also ancillary research materials (source code,
-datasets, figures, pipelines, setup files, etc.) is a prominent concern
-among scholars and practitioners in many fields. Prestigious publicatons
-require authors to submit these materials with manuscript drafts to let 
-other colleagues reproduce and validate the results, replicate
-studies in new cohorts or improve the intepretability of results.
+En este taller se introducen los elementos básicos para programar con el
+lenguaje R. Este es un lenguaje de programación científica, creado originalmente
+para aplicaciones matemáticas y estadísticas y que está disponible como
+software libre, bajo licencia GNU GPL 3.
 
-Quarto let us combine formatted text and executable source code into
-a single document. That source code *chunks* can be written in different programming
-langugaes such as R, Python, Julia or Observable. As we will see, it is 
-even possible to combine different programming languages in the same document 
-or collection of documents, providing even more versatility to the mix.
+Por otra parte, este no es un taller de introducción a la programación. Si
+no estás familiarizado con conceptos básicos como variables, sentencias o comandos,
+control de flujo de ejecución, funciones, etc. podrás seguir los contenidos desde
+un punto de vista práctico, pero muy probablemente no comprendas del todo
+bien cómo funcionan los ejemplos que se muestran. En este caso, te recomendamos
+que te familiarices primero con los conceptos básicos de programación antes
+repasar estos contenidos. Puedes consultar el capítulo @sec-add-resources para
+encontrar referencias que te ayuden a aprender conceptos básicos de programación.
 
-This is a **practical guide**, presenting hands-on examples and commands to 
-produce your own Quarto documents in short time. In addition,
-along this way key concepts and best practices are also presented to steer
-new Quarto apprentices in the right direction.
+Este es un **taller práctico**, que presenta numerosos ejemplos de comandos y código
+ejecutable para aprender a programar con el lenguaje R. Nuestro objetivo no es
+realizar una presentación exhaustiva de todas las posibilidades que ofrece R, sino
+solo los elementos básicos para adquirir destreza a nivel elemental. A partir de
+aquí, deberías ser capaz de seguir aprendiendo sobre aspectos del lenguaje R y las
+opciones que ofrecen multitud de paquetes de expansión de funcionalidad publicados en
+el repositorio CRAN (consulta la sección @sec-r-packages).
 
-To learn more about Quarto visit the comprehensive guide at
-<https://quarto.org/docs/guide/>. In particular, Quarto books like this one
-are documented at <https://quarto.org/docs/books>.
+Este manual que acompaña al Taller de Introducción a R ha sido elaborado con Quarto
+(<https://quarto.org>), una herramienta de creación de documentación científica compatible,
+entre otros lenguajes, con R. Para aprender más detalles sobre Quarto puedes visitar
+la completa guía disponible en <https://quarto.org/docs/guide/>. En concreto, la creación
+de libros como este utilizando Quarto está documentada en <https://quarto.org/docs/books>.
+
+## Licencia
+
+A menos que explícitamente se indque lo contrario, los materiales proporcionados en este
+taller se publican bajo una licencia Creative Commons Atribución-Compartir-Igual (CC-BY-SA)
+versión 4.0. Se puede acceder a los términos legales y el texto completo de esta licencia
+mediante [este enlace](https://creativecommons.org/licenses/by-sa/4.0/deed.es).

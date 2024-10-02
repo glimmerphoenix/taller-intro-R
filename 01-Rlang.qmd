@@ -3,11 +3,11 @@
 ## ¿Qué es R?
 
 R es un lenguje de programación especialmente pensado para el análisis y la visualización de datos. Fue creado por Ross Ihaka y Robert Gentleman como una versión libre del lenguaje estadístico S, creado en Bell Labs. Su uso está ampliamente extendido en investigación, docencia e industria. Empresas como Google, Facebook, Twitter, NYT, Pfizer, Santander, BBVA y Teléfonica, entre otras, utilizan este lenguje en sus desarrollos. Entre otras características, R cuenta con:
-- capacidad para el almacenamiento y manipulación efectiva de datos,
-- operadores para realizar cálculos sobre variables indexadas (Arrays), en particular matrices,
-- una amplia colección de herramientas para el análisis de datos,
-- multitud de opciones para el análisis gráfico de datos, y
-- como cualquier otro lenguaje de programación, también incluye sentencias condicionales, ciclos, funciones recursivas y posibilidad de entradas y salidas.
+- Capacidad para el almacenamiento y manipulación efectiva de datos.
+- Operadores para realizar cálculos sobre variables indexadas (Arrays), en particular matrices.
+- Una amplia colección de herramientas para el análisis de datos.
+- Multitud de opciones para el análisis gráfico de datos.
+- Como cualquier otro lenguaje de programación, también incluye sentencias condicionales, ciclos, funciones recursivas y posibilidad de entradas y salidas.
 
 ## RStudio
 
@@ -17,9 +17,9 @@ RStudio es un entorno de programación con R creado por la compañía norteameri
 
 Por un lado está la **R Foundation**, una fundación sin ánimo de lucro que gestiona IPR. Por otro lado tenemos **RCore Team**, un grupo de personas con privilegios para cambiar el codigo base de R. Adicionalmente están los **R Contributors**, numerosos desarrolladores que han realizado diversas aportaciones al proyecto. 
 
-**R Consortium**, recientemente constituido. https://www.r-consortium.org.
+**R Consortium**: <https://www.r-consortium.org>.
 
-**Comunidad R Hispano**. (http://r-es.org) Organiza jornadas anuales (conferencias, talleres...). Grupos locales, meetups (http://madrid.r-es.org)
+**Comunidad R Hispano** (<http://r-es.org>): Organiza jornadas anuales (conferencias, talleres...). Grupos locales, meetups (http://madrid.r-es.org)
 
 ## Ventajas e inconvenientes de R.
 
@@ -32,22 +32,75 @@ Dentro de las ventajas de R podemos destacar las siguientes:
 - Casi cualquier innovación en estadística ya está implementada en R.
 - Facilita la creación y autorimatización de flujos de trabajo y análisis reproducibles, utilizando herramientas adicionales como [Quarto](https://quarto.org).
 
-A pesar de todas sus bondades, podemos encontrar algún inconveniente:
+A pesar de todas sus bondades, podemos encontrar algunos inconvenientes:
 - Hay que aprender a programar (aunque solo sea un poco).
-- Para aquellos que saben programar en otros lenguajes, sobre todo viniendo de orientación a objetos, el lenguaje R no resulta intuitivo, es decir, presenta una cierta curva de aprendizaje.
-- Existen interfaces gráficas, pero es importante acostumbrarse a revisar el código y la salida. Solo así comprendemos qué hace realemnte el método o algoritmo que estamos aplicando.
+- Para aquellos que saben programar en otros lenguajes, sobre todo siguiendo el paradigma de orientación a objetos, el lenguaje R no resulta intuitivo, es decir, presenta una cierta curva de aprendizaje.
+- Existen interfaces gráficas, pero es importante acostumbrarse a revisar el código fuente y la salida. Solo así comprendemos qué hace realemnte el método o algoritmo que estamos aplicando.
 
 
-## Paquetes R.
+## Paquetes R {#sec-r-packages}
 
+Una de las características más potentes de R es la disponibilidad de una enorme cantidad de
+**paquetes** que amplían su funcionalidad. Podemos ver los paquetes R como módulos que podemos
+conectar dinamicamente a nuestros programas para disponer de inmediato de un nuevo catálogo de
+funciones y elementos para realizar diversar tareas: trabajar con nuevos tipos de modelos
+estadísticos o de aprendizaje automático, lectura y escritura de datos, preparación y limpieza de
+datos, etc.
+
+En la página web <https://cran.r-project.org/>, si pulsamos en el enlace *Packages* en el menú lateral
+izquierdo se mostrará una página que resume información sobre los paquetes R disponibles para ampliar
+la funcionalidad de nuestros programas. En este momento, existen más de 21.400 paquetes publicados, lo
+que da una idea del vasto catálogo de herramientas que la comunidad R pone a nuestra disposición.
+
+Una ventaja que conviene resaltar es que muchos de estos paquetes han sido desarrollados por destacados/as
+cientficos/as y profesionales de diferentes ámbitos (Matemáticas, Estadística, Ciencias de la Computación),
+así como de numerosas áreas de aplicación, entre ellas las Ciencias Agrarias y Medioambientales. Para
+cada paquete, existe una página de descripción en la que podemos consultar los datos sobre las personas
+que lo han creado y las encargadas de mantenerlo.
+
+Para poder utilizar un paquete primero debemos instalarlo (sólo **una vez**), mediante el comando
+`install.packages("nombre-del-paquete")`. Por ejemplo, para instalar el paquete `dplyr` ejecutamos:
+
+```{r install-pkg, eval=FALSE}
+install.packages("dplyr")
+```
+
+Una vez que el paquete se instala sin errores, a partir de ese momento podemos ya cargarlo directamente
+en cualquier *script* o programa de R mediante el comando `library`:
+
+```{r call-library, eval=FALSE}
+library(dplyr)
+```
+
+Después de ejecutar el comando, todas las funciones y resto de elementos (como conjuntos de datos)
+contenidos en el paquete pasan a estar disponibles para ser utilizados en nuestros programas.
+
+::: {.callout-warning}
+## Orden de carga de los paquetes
+
+Debemos ser cuidadosos al decidir en qué orden vamos a cargar paquetes adicionales
+en nuestro *script* o programa de R. Algunso paquetes pueden tener elementos (funciones,
+objetos, *datasets*, etc.) cuyo nombre coincida con el de otro elemento previamente cargado
+en un paquete anterior.
+
+En estos casos de coincidencia de nombres, ocurre que el último elemento cargado sobrescribe
+a otro del mismo nombre cargado desde un paquete anterior. En estos casos, podemos fijarnos en
+que el intérprete de R nos avisará mediante mensajes de qué elementos han sustituido a otros
+con el mismo identificador cargados con anterioridad.
+
+Una solución para indicar exactamente qué elemento queremos invocar y a qué paquete pertenece es
+utilizar la sintaxis ```paquete::funcion()```.
+:::
 
 ## Fuentes de información sobre R
 
-Cuenta de Posit PBC en Instagram
+- [Cuenta de Posit PBC en Instagram](https://www.instagram.com/posit.pbc).
 
-Grupos de usuarios R
+- [Canal Posit PBC en Youtube](https://www.youtube.com/@PositPBC).
 
-Meetups sobre R
+- [Grupos locales de usuarios R](https://r-es.org/grupos-locales/).
 
-Canal Posit PBC en Youtube
+- [Meetups sobre R](https://www.meetup.com/es-ES/grupo-de-usuarios-de-r-de-madrid/)
+
+
 

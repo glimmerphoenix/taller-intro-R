@@ -1,16 +1,269 @@
 # Análisis exploratorio de datos
 
-## Overview
+El Análisis Exploratorio de Datos (*Exploratory Data Analysis* o EDA) [@tukey1977]
+es un conjunto de técnicas estadísticas y de visualización de datos que permiten
+identificar las características más relevantes de un conjunto de datos sin intentar
+aplicar un modelo o algoritmo en particular.
+
+A continuación, veremos varios ejemplos que ilustran cómo realizar operaciones
+básicas de EDA con R.
+
+## Datos de ejemplo
+
+Utilizaremos ejemplos del paquete `agriTutorial` [@agriTutorial2020], que incluye conjuntos de datos
+y ejemplos de modelos sobre exprimentos en agricultura. También usaremos el paquete R `agridat` [@agridat2024], 
+que contiene conjuntos de datos provenientes de publicaciones relacionadas con la agricultura,
+incluyendo cultivos de campo, cultivos arbóreos o estudios con animales, entre otros.
+
+**Paquete `agriTutorial`**
+
+- `greenrice`: Datos de un experimento sobre absorción de nitrogeno (N), medido en g/maceta en un
+experimento de doble factor en invernadero [@gomez1984]. Se considera la duración del estrés hídrico (W) y el
+nivel de aplicación de nitrógeno. El experimento se llevó a cabo con cuatro niveles de estrés
+hídrico (0, 10, 20 y 40 días) como tratamientos de parcela principal (*main-plot treatment*) y
+cuatro dosis de nitrógeno (0, 90, 180 y 270 kg/ha) como tratamientos de subparcela (*sub-plot treatment*).
+Las parcelas principales se aleatorizaron en cuatro bloques completos (cada bloque incluye todos
+las posibles combinaciones de tratamientos).
+
+- `rice`: Datos de un experimento con tres prácticas de gestión (`minimum`, `optimum`, `intensive`), cinco
+cantidades distintas de fertilizante de nitrógeno (N) (0, 50, 80, 110, 140 kg/ha) y tres variedades de planta
+(`V1`, `V2`, `V3`) [@gomez1984]. El experimento sigue un diseño de parcelas divididas (*split-plot design*), donde la
+variedad de planta y el tipo de gestión son factores de tratamiento cualitativos y la cantidad de fertilizante
+de nitrógeno es un factor de tratamiento cuantitativo.
+
+**Paquete `agridat`**
+
+- `nass.barley`, `nass.corn`, `nass.rice`, `nass.soybean` y
+`nass.wheat`: Cinco conjunto de datos con valores de producción y
+superficie (en acres) cosechados en cada estado de EE.UU. para los
+cultivos agrícolas más importantes en este país, entre aproximadamente
+el año 1900 y el 2011. [*Fuente*: United States Department of Agriculture, 
+National Agricultural Statistics Service. <https://quickstats.nass.usda.gov/>]
+
+## Carga de datos y esquema (tipos de datos)
+
+Los conjuntos de datos de ejemplo ya se encuentran disponibles en cada
+uno de los paquetes mencionados. Sin embargo, vamos a hacer una prueba
+para verificar cómo podemos escribir y leer datos en R, por ejemplo
+utilizando un fichero CSV (muy común para almacenamiento de datos estructurados).
+
+::: {.callout-tip}
+Podemos utilizar la función `write.csv()` para escribir datos en un fichero en
+formato CSV que almacenemos en una ubicación de nuestro disco.
+:::
+
+```{r write-data}
+library(agridat)
+library(agriTutorial)
+# Carga de datos en memoria
+data("nass.corn")
+data("nass.corn")
+data("greenrice")
+# Escritura de datos a un fichero CSV
+write.csv(nass.barley, "data/nass_barley.csv", row.names = F)
+write.csv(nass.corn, "data/nass_corn.csv", row.names = F)
+write.csv(greenrice, "data/greenrice.csv", row.names = F)
+```
+
+::: {.callout-tip}
+Podemos utilizar la función `read_csv()` del paquete `readr` para leer datos de un 
+fichero en formato CSV almacenado en una ubicación de nuestro disco.
+
+La lectura de datos será más rápida si indicamos explícitamente el tipo de dato
+que almacena cada columna mediante la función `cols()` y utilizando las funciones
+que denotan cada tipo de datos específico: `col_integer()`, `col_character()`,
+`col_double()`, etc.).
+:::
 
 
+```{r read-data}
+library(readr)
+library(tibble)
+# Leemos los datos de los ficheros CSV creados antes
+nass_barley <- read_csv("data/nass_barley.csv", col_types = cols(col_integer(), col_character(),
+                      col_double(), col_double()))
+nass_corn <- read_csv("data/nass_corn.csv", col_types = cols(col_integer(), col_character(),
+                      col_double(), col_double()))
+green_rice <- read_csv("data/greenrice.csv", col_types = cols(col_double(), col_integer(), 
+                       col_integer(), col_integer(), col_integer()))
+```
 
-## Source code publication
+Una vez que hemos cargado los datos de un paquete R o los hemos leído de un fichero, podemos
+imprimir en pantalla información acerca de la tabla de datos para comprobar, por ejemplo, que
+todas las columnas se han identificado correctamente y el tipo de dato de cada columna es correcto.
+
+::: {.callout-tip}
+Los datos en muchos paquetes R están en formato `data.frame`, menos potente que los objetos
+`tibble` creados mediante funciones como `read_csv()`. Podemos crear automáticamente un objeto
+`tibble` a partir de un `data.frame` con la función `tibble()`:
+
+`my_tibble <- tibble(greenrice)`
+:::
+
+::: {.callout-tip}
+Para comprobar los metadatos de un tabla en formato `tibble` podemos usar la función `str()`.
+:::
+
+```{r str-func}
+str(nass_barley)
+```
 
 
-## Dataset publication
+## Operaciones básicas
+
+```{r}
+#| message: false
+#| warning: false
+library(dplyr) # Operaciones de selección y filtrado de datos
+library(tidyr) # Operaciones de transformación y procesado de datos
+```
+
+### Operaciones de selección
+
+**Selección de columnas**
+
+Para seleccionar determinadas columnas (y todas sus filas) usamos la función `select()`.
+
+```{r}
+#| label: select-i
+green_rice_uptake <- select(green_rice, Replicate, Main, uptake)
+str(green_rice_uptake)
+```
+
+**Filtrado de filas**
+
+Podemos añadir condiciones adicionales de filtrado (mediante expresiones booleanas) que se 
+utilicen para recuperar sólo las filas de esa columna o columnas que cumplan cierta condición.
+
+```{r}
+#| label: select-filtering-i
+
+corn_MI <- filter(nass_corn, state == "Michigan")
+head(corn_MI)
+```
+
+También se pueden imponer simultáneamente varias condiciones de filtrado. En ese caso, es
+común utilizar el operador `%in%`, para comprobar valores dentro de un conjunto finito de
+opciones válidas.
+
+```{r}
+#| label: select-filtering-ii
+
+corn_pnw <- filter(nass_corn, state %in% c("Idaho", "Oregon", "Washington"))
+head(corn_pnw)
+```
+
+Por último, también se pueden usar valores obtenidos como resultado de otras operaciones.
+Por ejemplo, veamos cómo recuperar sólo las filas que tengan un valor de superficie menor que
+la mediana de esa variable.
+
+```{r}
+#| label: select-filtering-iii
+
+corn_low_surf <- filter(nass_corn, acres < median(nass_corn$acres))
+head(corn_low_surf)
+```
+
+**Filtrado de columnas**
+
+```{r}
+#| label: select-ii
+green_rice_W <- select(green_rice, -uptake, -N)
+str(green_rice_W)
+```
+
+**Ordenación de datos**
+
+Es posible ordenar en función de los valores de una columna o de
+varias mediante la función `arrange()`. En el caso de que usemos varias, primero se ordena por los
+valores de la primera columna y, para cada uno de ellos, por los valores
+de la siguiente columna especificada.
+
+```{r}
+#| label: barley_byState
+barley_byState <- arrange(nass_barley, state)
+head(barley_byState)
+```
+
+```{r}
+#| label: barley_byYear_yield
+barley_byYear_yield <- arrange(nass_barley, year, yield)
+head(barley_byYear_yield)
+```
+
+Por defecto, la ordenación se hace en sentido ascendente para valores
+numéricos (de menor a mayor valor) y en orden alfabético para cadenas
+de caracteres (datos cualitativos).
+
+Si queremos invertir el orden de la operación de ordenación podemos
+usar la función `desc()`.
+
+```{r}
+#| label: barley_byYear_desc
+barley_byYear_desc <- arrange(nass_barley, desc(year),)
+head(barley_byYear_desc)
+```
+
+**Selección de filas**
+
+La función `slice()` nos permite seleccionar un conjunto de filas según su índice, teniendo
+en cuenta que la primera fila tiene el índice 1.
+
+```{r}
+#| label: select-rows
+
+# Recuperamos 90 observaciones, de la fila 11 a la 100
+barley_10_100 <- nass_barley |>
+                 slice(11:100)
+nrow(barley_10_100)
+```
+
+::: {.callout-tip}
+La función `slice()` viene acompañada de otras funciones de ayuda que implementan
+casos comunes: `slice_head()`, `slice_tail()`, `slice_sample()`, `slice_min()`, `slice_max()`.
+Para conocer más detalles consulta la
+[página de documentación de `slice()`](https://dplyr.tidyverse.org/reference/slice.html).
+:::
+
+### Transformación de datos
+
+**Definición de nuevas variables**
+
+Se pueden definir nuevas columnas que representen variables adicionales mediante la función
+`mutate()`. Para cada nueva variable, especificamos el nombre de la columna y la operación
+a realizar para obtener cada valor de esa nueva columna. Se pueden utilizar los valores de
+otras columnas previas.
+
+```{r}
+#| label: func-mutate
+
+corn_high_surf <- mutate(nass_corn, 
+                    harvest_index = acres/yield,
+                    year_factor = as.factor(year),
+                    is_high = acres > median(acres),
+                    crop = "corn", 
+                    relative_yld = yield/mean(yield))
+
+head(corn_high_surf)
+```
+
+**Renombrado de columnas**
+
+Se puede cambiar el nombre de una columna con la función `rename(dataframe, newname = "oldname")`.
+
+**Separación de valores**
+
+Puede ocurrir que los datos no cumplan los criterios de *tidy data*, por ejemplo, porque existan
+múltiples valores en una misma celda.
 
 
-## Reference management
+### Combinación de tablas de datos (funciones `join`)
+
+
+## Resúmenes estadísticos
+
+
+## Gráficos exploratorios
 
 
 
