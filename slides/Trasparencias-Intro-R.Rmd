@@ -26,7 +26,7 @@ library(tidyverse)
 
 # 1.1 ¿Qué es R y RStudio?
 
-## ¿Qué es R?
+## ¿Qué es R y RStudio?
 
 - R: lenguje de programación para el análisis y la visualización de datos. 
 
@@ -37,8 +37,6 @@ library(tidyverse)
   - Herramientas para el análisis de datos.
   - Multitud de opciones para el análisis gráfico.
   - Sentencias condicionales, ciclos, funciones recursivas y posibilidad de entradas y salidas.
-
-## ¿Qué es RStudio?
 
 - RStudio: entorno de progrmación. 
 
@@ -55,7 +53,7 @@ library(tidyverse)
 ## Ventajas e inconvenientes de R.
 
 |    Ventajas   |   Inconvenientes  |
-|:--------------| :-----------------|
+|:--------------| -----------------:|
 | Herramienta de software libre, gratuito | Aprender a programar |
 | Comunidad sólida con participantes del mundo académico y la industria   | No intuitivo |
 | Desarrollar funciones, paquetes o plantillas de documentos |  Comprender lo que hace el código |
@@ -95,7 +93,7 @@ knitr::include_graphics("imagenes/consola.jpg")
 ```
 
 
-## Panel de programación
+## Enviroment
 
 Panel de programación: variables de entorno, el historial de comandos, el control de versiones, etc. 
 
@@ -115,7 +113,7 @@ Historial de comandos introducidos.
 - Todas las instrucciones de la línea de comandos se guardan aquí. 
 - Guardar en un fichero .Rhistory. 
 - Cargar un fichero .Rhistory. 
-- *Escoba* borrar todo el histórico de instrucciones.
+- *escoba* borrar todo el histórico de instrucciones.
 
 ```{r imagen-history, echo=FALSE, out.width = "60%"}
 # Controlamos tamaño de la figura
@@ -140,7 +138,7 @@ knitr::include_graphics("imagenes/packages.jpg")
 ```
 
 
-# 1.4 Como hacer un proyecto en RStudio
+# 1.4 Como hacer proyectos en RStudio
 
 ## Directorio de trabajo
 
@@ -153,32 +151,30 @@ knitr::include_graphics("imagenes/session.jpg")
 
 ## Nuevo proyecto
 
-1º. Menú *File* -> *New Porject*.
+1. Menú *File* -> *New Porject*.
 
-```{r imagen-newproject, echo=FALSE, out.width = "30%"}
+```{r imagen-newproject, echo=FALSE, out.width = "60%"}
 # Controlamos tamaño de la figura
 knitr::include_graphics("imagenes/new_project.jpg")
 ```
 
-2º. Opción *New Directory*, seleccionams la opción *New Project*:
+2. Opción *New Directory*, seleccionams la opción *New Project*:
 
-```{r imagen-newproject2, echo=FALSE, out.width = "30%"}
+```{r imagen-newproject2, echo=FALSE, out.width = "60%"}
 # Controlamos tamaño de la figura
 knitr::include_graphics("imagenes/new_project_step2.jpg")
 ```
 
-## Nuevo proyecto
+3. Nombre del proyecto y hacemos click en *Create Project*.
 
-3º. Nombre del proyecto y hacemos click en *Create Project*.
-
-```{r imagen-newproject3, echo=FALSE, out.width = "40%"}
+```{r imagen-newproject3, echo=FALSE, out.width = "60%"}
 # Controlamos tamaño de la figura
 knitr::include_graphics("imagenes/new_project_step3.jpg")
 ```
 
 
 
-# 2. Programación científica en R
+# 2. Introducción al lenguaje R. Programación científica en R
 
 # 2.1 Tipos de datos
 
@@ -235,6 +231,7 @@ nom
 ```
 
 ## Tipos de objetos
+
 ```{r data-func, echo=TRUE}
 # Lista de los objetos creados:
 ls()
@@ -278,7 +275,7 @@ c
 ```
 
 
-# 1.2 Funciones
+# 2.2 Funciones
 
 ## Funciones: definición
 
@@ -338,7 +335,7 @@ convUnitsToMeters(56.2,"km")
 convUnitsToMeters(56.2, from="km")
 ```
 
-# 1.3 Vectores.
+# 2.3 Vectores.
 
 ## Vectores: definición
 
@@ -475,7 +472,60 @@ v2 = c(10, 2, 4)
 v1 + v2
 ```
 
-# 1.4 Factores.
+# 2.4 Control de flujo.
+
+## Sentencias condicionales
+
+```{r condicionales, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/estructura_condicional.png")
+```
+
+## Bucles
+
+```{r bucles, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/bucle.png")
+```
+
+## Vectorizar
+
+- Bucles `for` son muy lentos
+- Funciones de R vectorizadas
+- Mejor solución: vectorizar
+
+```{r vectorizacion, echo=TRUE}
+n=100000
+x=1:n
+tiempo1=system.time({y1=integer(n)
+             for (i in 1:n) y1[i]=x[i]^2
+             })
+tiempo1
+
+tiempo2=system.time({y2=x^2})
+tiempo2
+```
+
+## Función `apply()`
+
+- Aplicar una función a todos los elementos de un objeto
+- `apply(matrix, i, fun)`
+  
+  - Si `i=1`: aplica `fun` a todas las ficlas de `matrix`
+  - Si `i=2`: aplica `fun` a todas las columnas de `matrix`
+
+- `lapply(lista, fun)`
+
+```{r apply, echo=TRUE}
+
+A = matrix(runif(50),nrow=10)
+sumCuadrados=function(x){sum(x^2)}  # Función que calcula la suma de cuadrados de 
+                                    # los términos de un vector x
+apply(A,1,sumCuadrados)  # Devuelve la suma de cuadrados de cada fila de A
+```
+
+
+# 2.5 Factores.
 
 ## Factores: definición
 
@@ -526,7 +576,7 @@ gl(2, 5, labels = c("female", "male"))
 ```
 
 
-# 1.5 Matrices y Arrays
+# 2.6 Matrices y Arrays
 
 ## Matrices: definición y creación
 
@@ -659,7 +709,7 @@ m1 - m2
 ```
 
 
-# 1.6 Listas
+# 2.7 Listas
 
 ## Listas: definición y construcción
 
@@ -729,7 +779,7 @@ l1
 La importancia de las listas radica en que muchos de los tipos complejos de R se derivan de listas.
 
 
-# 1.7 Data Frames: datos estructurados en R
+# 2.8 Data Frames: datos estructurados en R
 
 ## Datos estructurados y no estructurados
 
@@ -841,7 +891,7 @@ class(grupos)
 grupos
 ```
 
-# 1.8 Fechas
+# 2.9 Fechas
 
 ## Fechas
 
@@ -859,7 +909,7 @@ now()
 ```
 
 
-# 1.9 Importación y exportación de datos
+# 2.10 Importación y exportación de datos
 
 ## Importar datos
 
@@ -908,7 +958,7 @@ write.csv(x = lista2, file = "data/lista2_csv.csv")
 ```
 
 
-# 1.10 Tidy data
+# 2.11 Tidy data
 
 ## Principio de tidy Data
 
