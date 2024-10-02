@@ -254,10 +254,20 @@ Se puede cambiar el nombre de una columna con la función `rename(dataframe, new
 **Separación de valores**
 
 Puede ocurrir que los datos no cumplan los criterios de *tidy data*, por ejemplo, porque existan
-múltiples valores en una misma celda.
+múltiples valores en una misma celda. Para este caso podemos usar varias funciones del paquete
+`tidyr` que operan sobre [vectores de tipo caracter](https://tidyr.tidyverse.org/reference/index.html#character-vectors).
+
+Por otro lado, también podemos necesitar unir dos o más columnas, creando un valor único a partir
+del valor de origen de cada columna. Esto puede ser útil, por ejemplo, para usar esa nueva columna
+en la búsqueda de valores coincidentes entre dos conjuntos de datos. En ese caso podemos usar
+la función `unite()` (<https://tidyr.tidyverse.org/reference/unite.html>).
 
 
-### Combinación de tablas de datos (funciones `join`)
+<!-- ### Combinación de tablas de datos (funciones `join`)
+
+Las operaciones de tipo `join` permiten combinar las filas de dos o más tablas
+atendiendo a los valores de una o varias columnas que se toman como referencia
+de la comparación. -->
 
 
 ## Resúmenes estadísticos

@@ -46,6 +46,7 @@ csl: apa.csl
 format:
   html:
     theme: cosmo
+    css: styles.css
   pdf:
     documentclass: scrbook
 

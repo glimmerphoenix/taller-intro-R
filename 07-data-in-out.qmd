@@ -15,7 +15,7 @@ de fuente externa a R:
 * **Archivo textual**: Los datos pueden estar almacenados en formato libre,
 pero lo normal es que sigan una pauta para organizar su presentación, según
 algún **formato estándar** de representación de datos.
-  * **CSV** (Comma Separated Values): Los datos se escriben insertando una
+  * **CSV** (*Comma Separated Values*): Los datos se escriben insertando una
   línea por cada fila de la tabla, y separando los valores de cada columna
   mediante comas. Los strings suelen ir delimitados por dobles comillas (").
   Desgraciadamente, no existe una convención única sobre qué carácteres usar
@@ -24,7 +24,7 @@ algún **formato estándar** de representación de datos.
   sobre el formato empleado o descubrirlo nosotros, inspeccionando algunas
   líneas del archivo en crudo.
   
-  * **JSON** (JavaScript Object Notation): Es un formato que se ha popularizado
+  * **JSON** (*JavaScript Object Notation*): Es un formato que se ha popularizado
   bastante, porque lo suelen emplear muchos servicios y APIs web que exportan
   datos. Es bastante compacto y permite representar arrays y listas arbitrarias
   de objetos. También se puede usar este formato para guardar datos en
@@ -63,10 +63,8 @@ help(package="readr")
 Todas las funciones que comienzan por `readr_` están pensadas para automatizar
 la lectura de datos de archivos textuales. Por desgracia, no existe un formato
 universal de representación de datos en CSV. Así que hay diferentes funciones
-para cada caso. Presentamos en la tabla \@ref(tab:funcs-read) las principales.
+para cada caso. Presentamos en la tabla @tbl-funcs-read las principales.
 
-Table: (\#tab:funcs-read) Funciones típicas de lectura de datos en formato CSV
-y similares.
 
 | Nombre función | Descripción                                                |
 |:---------------|:-----------------------------------------------------------|
@@ -74,6 +72,8 @@ y similares.
 | `read_csv()`   | Asume delimitador es "," y que "." separa decimales. |
 | `read_csv2()`  | Asume delimitador es ";" y que "," separa decimales. |
 | `read_tsv()`   | Asume delimitador es "\\t" (tabulador) |
+
+: Funciones típicas de lectura de datos en formato CSV y similares. {#tbl-funcs-read}
 
 Veamos un ejemplo que muestre la potencia de estas funciones. En el subdirectorio 
 `data` del directorio de este manual, tenemos el archivo `ACMETelephoneABT.csv`.
@@ -109,7 +109,7 @@ limpiar intensamente los datos de esa columna o ya vienen en buen estado.
 * Es imprtante especificar qué convención se usa para indicar los datos faltantes en el
 archivo. Suele ser arbitrario (y, por desgracia, a veces caótico), obligándonos a limpiar
 los datos siguiendo el método de prueba y error. Por defecto, la función considera el
-argumento `na = c("", "NA")`, es decir un stríng vacío o el string "NA" marcan un dato
+argumento `na = c("", "NA")`, es decir un stríng vacío o el string `"NA"` marcan un dato
 faltante en la tabla. En nuestro caso, bien porque nos han avisado o por una inspección
 preliminar del contenido del archivo sabemos que, en su lugar, los datos faltantes se
 marcan con string vacío o con espacio en blanco (" ").

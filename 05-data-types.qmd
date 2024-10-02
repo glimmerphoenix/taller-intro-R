@@ -8,7 +8,8 @@ Es el objeto básico de R. Incluso cuando estamos asignando un valor a una varia
 
 Existen varias formas de definir un vector:
 
-- Mediante el operador ":". Es una forma sencilla de generar secuencias de valores. Este operador tiene la máxima prioridad en una expresión.
+- Mediante el operador `:`. Es una forma sencilla de generar secuencias de valores. Este operador tiene la máxima prioridad en una expresión.
+
 ```{r vectores0, echo=TRUE}
 v = 1:10
 v
@@ -19,7 +20,7 @@ v
 5:0
 ```
 
-- Una forma fácil de crear un vector en R es mediante la función **c()**, a la que se le indica entre paréntesis los elementos que va contener el vector. El número de elementos de un vector es su tamaño y podemos obtenerlo mediante la función **length()**.
+- Una forma fácil de crear un vector en R es mediante la función `c()`, a la que se le indica entre paréntesis los elementos que va contener el vector. El número de elementos de un vector es su tamaño y podemos obtenerlo mediante la función `length()`.
 ```{r vectores, echo=TRUE}
 v = c(5, 2, 53.85, 43.2, 30)
 v
@@ -30,8 +31,10 @@ v = c(5, 2, 53.85, 43.2, 30, "abc")
 v
 mode(v)
 ```
-- Y mediante la función **seq()**. Esta función tiene cinco argumentos, aunque no se utilizan todos simultáneamente. Si se dan los dos primeros indican el comienzo y el final del vector. Si solo se facilitan estos dos argumentos, el resultado coincide con
+
+- Y mediante la función `seq()`. Esta función tiene cinco argumentos, aunque no se utilizan todos simultáneamente. Si se dan los dos primeros indican el comienzo y el final del vector. Si solo se facilitan estos dos argumentos, el resultado coincide con
 el operador 'dos puntos'.
+
 ```{r vectores1, echo=TRUE}
 x = seq(-3, 3, by=.5) #inicio, fin, salto
 x
@@ -42,15 +45,16 @@ seq(from = 1, to = 5, length = 4)
 seq(length = 10, from = -2, by = 0.2)
 ```
 
+- Otra forma frecuente de generar secuencias es mediante la función `rep()`:ç
 
-- Otra forma frecuente de generar secuencias es mediante la función **rep()**:
 ```{r secuencias3, echo=TRUE}
 rep(5, 4)
 rep(1:2, 3)
 rep(1:2, each = 3)
 ```
 
-- R también tiene diversas funciones parar generar secuencias aleatorias. Todas ellas siguen esta estructura: `rfunc(n, par1, par2, ...)`, donde *func* es el nombre de la distribución de probabilidad, *n* es el número de elementos que se van a generar, y *par1, par2, ...* son el resto de parámetros propios de cada tipo de distribución de probabilidad.
+- R también tiene diversas funciones parar generar secuencias aleatorias. Todas ellas siguen esta estructura: `rfunc(n, par1, par2, ...)`, donde `func` es el nombre de la distribución de probabilidad, `n` es el número de elementos que se van a generar, y `par1, par2, ...` son el resto de parámetros propios de cada tipo de distribución de probabilidad.
+
 ```{r secuencias5, echo=TRUE}
 # Distribución normal
 rnorm(10)
@@ -59,7 +63,8 @@ rnorm(4, mean=10, sd=3)
 rt(5, df=10)
 ```
 
-- La función **vector()** nos permite crear vectores vacios.
+- La función `vector()` nos permite crear vectores vacios.
+
 ```{r vectores2, echo=TRUE}
 x = vector()
 x
@@ -75,14 +80,16 @@ vl
 
 Algunas funciones de gran utilidad al a hora de trabajar con vectores son: 
 
-- **min()** y **max()** que seleccionan respectivamente el menor y el mayor valor de sus argumentos, incluso cuando el argumentos son varios vectores,
-- **range()** cuyo valor es el vector de longitud dos: c(min(x), max(x)),
-- **sum(x)** que es la suma de todos los elementos de x, 
-- **prod(x)** que es el producto de todos ellos, y
-- **sort(x)** que devuelve un vector del mismo tamaño que x con los elementos ordenados en orden creciente.
+- `min()` y `max()` que seleccionan respectivamente el menor y el mayor valor de sus argumentos, incluso cuando el argumentos son varios vectores,
+- `range()` cuyo valor es el vector de longitud dos: c(min(x), max(x)),
+- `sum(x)` que es la suma de todos los elementos de `x`, 
+- `prod(x)` que es el producto de todos ellos, y
+- `sort(x)` que devuelve un vector del mismo tamaño que `x` con los elementos ordenados en orden creciente.
 
 ### Indexación de elementos
+
 Se puede acceder a un elemento en particular mediante el índice de la posición que ocupa.
+
 ```{r vectores4, echo=TRUE}
 # Elemento que se encuentra en la 1º posición
 vl[1]
@@ -93,6 +100,7 @@ vl[7]
 ```
 
 El tamaño de un vector se puede modificar añadiendo más elementos.
+
 ```{r vectores5, echo=TRUE}
 # x era un vector con elementos de -3.0 a 3.0 con salto de 0.5
 # Añadimos el elemento 28 en la posición 15:
@@ -102,6 +110,7 @@ x
 ```
 
 Podemos seleccionar determinados valores de un vector atendiendo a una condición lógica. A esta condición o expresión lógica se la denomina **máscara**. También podemos ver esta opción como otra forma de construir un nuevo vector a partir de uno existente.
+
 ```{r subsecuencia, echo=TRUE}
 x = c(0, -3, 4, -1, 45, 90, -5)
 x[x>0]
@@ -110,12 +119,14 @@ x[x>40 & x<100]
 ```
 
 La máscara también puede ser un vector de enteros, de manera que se seleccionan aquellos elementos que están en esas posiciones:
+
 ```{r subsecuencia2, echo=TRUE}
 x[c(4,6)]
 x[1:3]
 ```
 
 Si los índices de las máscaras son negativos, cambia el significado de la máscara en el sentido en que lo que se está indicando son los índices que no se quieren coger.
+
 ```{r subsecuencia3, echo=TRUE}
 x[-1]
 x[-c(4, 6)]
@@ -123,6 +134,7 @@ x[-(1:3)]
 ```
 
 Como R te permite darle nombre a los elementos de un vector, la máscara también puede estar formada por un vector de string, de manera que en ella se nombre solo a los elementos que se quieren.
+
 ```{r subsecuencia4, echo=TRUE}
 pH = c(4, 5, 7, 7.3, 8.2, 6.3)
 names(pH) = c("area1", "area2", "mud", "dam", "middle")
@@ -133,7 +145,9 @@ pH2[c("area1","dam")]
 ```
 
 ### Vectorización.
+
 Uno de los aspectos más importantes de R es la vectorización de varias de sus funciones, es decir, la operación se realiza elemento a elemento. Estas funciones pueden ser aplicadas directamente a un vector generando otro vector resultado del mismo tamaño.
+
 ```{r vectorizacion, echo=TRUE}
 v = c(4, 7.5, 15, 76.2, 78)
 # La función sqrt() cálcula la raiz cuadrada de su argumento. Al pasarle un vector la función 
@@ -147,6 +161,7 @@ v1+v2
 ```
 
 Si los vectores no son del mismo tamaño, R repite el vector pequeño tantas veces como sea necesario hasta rellenar todas las posiciones del grande:
+
 ```{r vectorizacion2, echo=TRUE}
 v1 = c(4, 6, 8, 24)
 v2 = c(10, 2)
@@ -155,6 +170,7 @@ v1 + v2
 ```
 
 Si el tamaño del vector pequeño no es un múltiplo del tamaño del vector grande, sacaría un warning avisándonos de ello pero realizaría la operación rellenando el vector pequeño hasta la posición necesaria.
+
 ```{r vectorizacion3, echo=TRUE}
 v1 = c(4, 6, 8, 24)
 v2 = c(10, 2, 4)
@@ -166,6 +182,7 @@ v1 + v2
 Los factores son la forma que tiene R de manejar datos categóricos. Los factores tienen niveles que son los posibles valores que pueden tomar. 
 
 Veamos un ejemplo de definición de factor a partir de un vector.
+
 ```{r factores, echo=TRUE}
 cats = c(rep("malo", 2), rep("regular", 2), rep("bueno", 3) )
 # Transformación de un vector en un factor:
@@ -178,6 +195,7 @@ levels(fcats)
 ```
 
 Otros ejemplos para ver como podemos trabajar con factores:
+
 ```{r factores2, echo=TRUE}
 fgenero = factor(c("m", "m", "m", "m", "m"), levels = c("f","m"))
 fgenero
@@ -193,7 +211,8 @@ margin.table(t, 1)
 margin.table(t, 2)
 ```
 
-La función **gl()** puede utilizarse para generar secuencias a partir de factores. Esta función recibe dos paráemtros, el primer indica el número de niveles y el segundo indica el número de repeticiones de cada nivel.
+La función `gl()` puede utilizarse para generar secuencias a partir de factores. Esta función recibe dos paráemtros, el primer indica el número de niveles y el segundo indica el número de repeticiones de cada nivel.
+
 ```{r secuencias4, echo=TRUE}
 gl(3, 5)
 gl(2, 5, labels = c("female", "male"))
@@ -201,10 +220,12 @@ gl(2, 5, labels = c("female", "male"))
 
 ## Matrices y Arrays.
 
-Los arrays nos permiten almacenar elementos en diversas dimensiones. Las matrices son un caso especial de arrays con dos dimensiones. Tanto los arrays como las matrices en R no son más que vectores con un atributo particular que es la dimensión. Por lo tanto, también son estructuras **homogénes** de almacenamiento.
+Los arrays nos permiten almacenar elementos en diversas dimensiones. Las matrices son un caso especial de arrays con dos dimensiones. Tanto los arrays como las matrices en R no son más que vectores con un atributo particular que es la dimensión. Por lo tanto, también son estructuras **homogéneas** de almacenamiento.
 
 ### Construcción de arrays a partir de vectores.
+
 Por lo comentado anteriormente podemos construir un array sin más que proporcionandole al vector donde están almacenados los datos con unas dimensiones.
+
 ```{r matrices1, echo=TRUE}
 m = c(45, 23, 66, 77, 33, 44, 56, 12, 78, 23)
 m
@@ -213,8 +234,9 @@ dim(m) = c(2, 5)
 m
 ```
 
-### Función **matrix()**.
-También se puede definir directamente una matriz haciendo uso de la función **matrix()**:
+### Función `matrix()`.
+También se puede definir directamente una matriz haciendo uso de la función `matrix()`:
+
 ```{r matrices2, echo=TRUE}
 # 1º argumento: contenido de la matriz en forma de vector
 # 2º argumento: número de filas
@@ -227,8 +249,10 @@ m = matrix(c(45, 23, 66, 77, 33, 44, 56, 12, 78, 23), 2, 5, byrow = TRUE)
 m
 ```
 
-### Función **array()**.
-Para facilitar la creacción de arrays tenemos la función **array()**, que funciona de un modo similar a **matrix()**. En el primer argumento se le indica el contenido del array y mediante el argumento dim le podemos especificar el tamaño de cada una de las dimensiones.
+### Función `array()`
+
+Para facilitar la creacción de arrays tenemos la función `array()`, que funciona de un modo similar a `matrix()`. En el primer argumento se le indica el contenido del array y mediante el argumento dim le podemos especificar el tamaño de cada una de las dimensiones.
+
 ```{r array, echo=TRUE}
 # Array de dimensión 4x3x2
 a = array(5:29, dim=c(4, 3, 2))
@@ -236,7 +260,8 @@ a
 ```
 
 ### Nombres de filas y columnas.
-En R tenemos las funciones **colnames()** y **rownames()** que nos permiten dar nombres a las filas y a las columnas de una matriz.
+
+En R tenemos las funciones `colnames()` y `rownames()` que nos permiten dar nombres a las filas y a las columnas de una matriz.
 ```{r nombres, echo=TRUE}
 results = matrix(c(10, 20, 30, 40, 21, 32, 43, 13), 2, 4, byrow = TRUE)
 colnames(results) = c("1qrt", "2qrt", "3qrt", "4qrt")
@@ -281,7 +306,7 @@ results["row2", c("1qrt", "4qrt")]
 
 
 ### Unión de matrices y vectores
-Las funciones **cbind()** y **rbind()** nos permiten construir arrays mediante la unión (por columnas o por filas, respectivamente) de vectores o matrices.
+Las funciones `cbind()` y `rbind()` nos permiten construir arrays mediante la unión (por columnas o por filas, respectivamente) de vectores o matrices.
 ```{r union, echo=TRUE}
 m1 = matrix(c(45, 23, 66, 77, 33, 44, 56, 12, 78, 23), 2, 5)
 m1
@@ -315,7 +340,7 @@ m1 + m2
 Una lista en R consiste en una colección ordeanda de elemntos. Los elementos u objetos almacenados en ella se conocen con el nombre de componentes. A diferencia de los vectores o arrays, los componentes de una lista pueden ser de diferente tipo. A estos componentes les podemos dar nombres igual que hacíamos en los arrays.
 
 ### Creacción de una lista.
-Para crear una lista no hay más que darle un nombre a la lista e indicarle a la función **list()** cuales van a ser los elementos que vamos a guardar en ella. A cada uno de estos elementos le podemos dar un nombre.
+Para crear una lista no hay más que darle un nombre a la lista e indicarle a la función `list()` cuales van a ser los elementos que vamos a guardar en ella. A cada uno de estos elementos le podemos dar un nombre.
 ```{r lista1, echo=TRUE}
 # Lista de tres componentes que llamamos stud.id, stud.name y stud.marks
 my.lst = list(stud.id=69449, stud.name="Ana", stud.marks=c(5.25, 10, 7.5, 9.25))
@@ -329,7 +354,7 @@ names(my.lst2) = c("id", "name", "marks")
 my.lst2
 ```
 
-La función **unlist()** nos devuelve un vector con tantos elementos como elementos hubiera en la lista que se le pasa por parámetro. Como los vectores solo pueden estar compuestos por elementos del mismo tipo, el uso de esta función además provocará cambios en los tipos de elementos. Lo más normal es que transforme todos los elementos a cadenas de caracteres.
+La función `unlist()` nos devuelve un vector con tantos elementos como elementos hubiera en la lista que se le pasa por parámetro. Como los vectores solo pueden estar compuestos por elementos del mismo tipo, el uso de esta función además provocará cambios en los tipos de elementos. Lo más normal es que transforme todos los elementos a cadenas de caracteres.
 ```{r lista3, echo=TRUE}
 unlist(my.lst2)
 ```
@@ -369,7 +394,7 @@ lst = c(my.lst, other)
 lst
 ```
 
-Mediante la función **length()** podemos saber el número de componentes de una lista en todo momento.
+Mediante la función `length()` podemos saber el número de componentes de una lista en todo momento.
 ```{r lista8, echo=TRUE}
 length(my.lst)
 ```
@@ -390,9 +415,10 @@ información valiosa.
 El Data Frame es la estructura de datos recomendada para almacenar tablas de datos en R. Desde el punto de vista estructural son similares a las matrices, ya que se trata de estructuras de datos bi-dimensionales. Sin embargo, al contrario que las matrices, e imitando el comportamiento de las listas, los datos que se almacenan en un Data Frame pueden ser de diferentes tipos. En este sentido pueden verse como una extensión de las listas. En definitiva, se trata de **estructuras de almacenamiento bi-dimensioanles de datos heterogéneos**.
 
 ### Creacción de un Data Frame.
-Para la creacción de un Data Frame en R tenemos la función **data.frame()**. La forma de definir el Data Frame es equivalente a la lista, indicamos el nombre de cada columna y los valores que se van almacenar en ella.
+Para la creacción de un Data Frame en R tenemos la función `data.frame()`. La forma de definir el Data Frame es equivalente a la lista, indicamos el nombre de cada columna y los valores que se van almacenar en ella.
 
 Es conveniente identificar cada columna con una variable y cada fila con una observación (compuesta por el conjunto de valores de cada una de las variables).
+
 ```{r dataframe1, echo=TRUE}
 my.dataset = data.frame(site=c('A','B','A','A','B'),
                         estacion=c('Inverno','Verano','Verano','Primavera','Otoño'),
@@ -403,14 +429,16 @@ my.dataset
 Normalmente crearemos un Data Frame a partir de la lectura de los datos de un fichero. En el siguiente capítulo veremos como se realiza esta operación.
 
 ### Características de un Data Frame.
-Podemos conocer el número de filas, columnas y la dimensión de un Data Frame mediante las funciones **nrow()**, **ncol()** y **dim()**.
+Podemos conocer el número de filas, columnas y la dimensión de un Data Frame mediante las funciones `nrow()`, `ncol()` y `dim()`.
+
 ```{r dataframe2, echo=TRUE}
 nrow(my.dataset)
 ncol(my.dataset)
 dim(my.dataset)
 ```
 
-También podemos conocer o cambiar el nombre de las columnas de un Data Frame mediante la función **names()**.
+También podemos conocer o cambiar el nombre de las columnas de un Data Frame mediante la función `names()`.
+
 ```{r dataframe3, echo=TRUE}
 names(my.dataset)
 names(my.dataset)=c("area","season","pH")
@@ -420,6 +448,7 @@ my.dataset
 
 ### Indexación de elementos.
 Podemos acceder a los elementos de un Data Frame del mismo modo que accedemos a los elementos de una matriz, tanto por su posición como por el nombre de la columna.
+
 ```{r dataframe4, echo=TRUE}
 my.dataset[3, 2]
 # Acceso a una columna determina mediante su nombre:
@@ -428,6 +457,7 @@ my.dataset[["site"]]
 ```
 
 Aprovechando la capacidad de R para obtener sub-secciones, esta opción también es posible con un Data Frame. Es decir, a partir de un Data Frame podemos obtener otro Data Frame que consista solo en una parte del primero. Esta operación se realiza mediante la aplicación de una máscara, que no es más que una expresión lógica. 
+
 ```{r dataframe5, echo=TRUE}
 # Construimos un nuevo Data Frame con las filas que tengan pH mayores que 7:
 my.dataset[my.dataset$pH>7, ]
@@ -438,13 +468,15 @@ my.dataset[my.dataset$site == "A", "pH"]
 my.dataset[my.dataset$season == "Summer", c("area","pH")]
 ```
 
-Otra opción de obtener una sub-sección de un Data Frame es usando la función **subset()**.
+Otra opción de obtener una sub-sección de un Data Frame es usando la función `subset()`.
+
 ```{r dataframe6, echo=TRUE}
 subset(my.dataset, pH >8)
 subset(my.dataset, season == "Summer", season:pH)
 ```
 
-La diferencia con el procedimiento anterior es que, si queremos asignar nuevos valores a una sub-sección de un Data Frame, no podemos hacerlo con la función **subset()**, tenemos que obtener la sub-sección con la aplicación de una máscara.
+La diferencia con el procedimiento anterior es que, si queremos asignar nuevos valores a una sub-sección de un Data Frame, no podemos hacerlo con la función `subset()`, tenemos que obtener la sub-sección con la aplicación de una máscara.
+
 ```{r dataframe7, echo=TRUE}
 my.dataset[my.dataset$season == "Summer", "pH"] = 
   my.dataset[my.dataset$season == "Summer", "pH"]+1
@@ -452,19 +484,21 @@ my.dataset[my.dataset$season == "Summer", "pH"] =
 
 ### Añadir nuevas columnas.
 Se pueden añadir nuevas columnas a un Data Frame del mismo modo que hacíamos con las listas. La única restricción que debemos tener en cuenta es que la nueva columna debe tener el mismo número de filas que las anteriores.
+
 ```{r dataframe8, echo=TRUE}
 my.dataset$N03 = c(234.5, 256.6, 654.1, 356.7, 776.4)
 my.dataset
 ```
 
 ### Extensión de Data Frames: tibble.
-Los paquetes **tibble** (Wickham et al., 2016) y **dplyr** (Wickham and Fancis, 2015) nos proporcionan un conjunto de operaciones muy útil para facilitar la manipulación de datos. El paquete **tiblle** define la estructura de datos denominada *tibbles* considerada como un caso especial de Data Frame. Los *tibbles* modifican algunos de los comportamientos estandar que hemos visto de los Data Frame:
+Los paquetes `tibble` (Wickham et al., 2016) y `dplyr` (Wickham and Fancis, 2015) nos proporcionan un conjunto de operaciones muy útil para facilitar la manipulación de datos. El paquete `tiblle` define la estructura de datos denominada *tibbles* considerada como un caso especial de Data Frame. Los *tibbles* modifican algunos de los comportamientos estandar que hemos visto de los Data Frame:
 
 - los *tibbles* nunca cambian las columnas caracter en factores como hacen los Data Frame por defecto
 - los *tibbles* tienen más flexibilidad a la hora de nombrar a las columnas.
 - los métodos de representación que tienen los *tibbles* son más convenientes que los de los Data Frame cuando se trabaja con grandes cantidades de datos.
 
-Para crear un *tibble* utilizamos la función **tibble()** de R. Su funcionamiento es muy similar al de la función **data.frame()**. Como se puede observar en el siguiente ejemplo, los valores de cada columna se calculan secuencialmente permitiendonos usar los valores de la columna anterior, y los vectores de caracteres no se convierten en factores.
+Para crear un *tibble* utilizamos la función `tibble()` de R. Su funcionamiento es muy similar al de la función `data.frame()`. Como se puede observar en el siguiente ejemplo, los valores de cada columna se calculan secuencialmente permitiendonos usar los valores de la columna anterior, y los vectores de caracteres no se convierten en factores.
+
 ```{r tibble1, echo=TRUE}
 library(tibble)
 dat = tibble(TempCels = sample(-10:40, size=100, replace=TRUE),
@@ -474,6 +508,7 @@ dat
 ```
 
 Cualquier Data Frame estandar se puede convertir en un *tibble*. Como ejemplo para visualizar este comportamiento vamos a usar el famoso dataset *Iris*, está disponible directamente en R y contiene 150 filas con 5 variables.
+
 ```{r tibble2, echo=TRUE}
 # Cargamos el dataset Iris en un Data Frame estandar
 data(iris)
@@ -490,6 +525,7 @@ ir
 ```
 
 Otra diferencia fundamental entre los *tibbles* y los Data Frame es la indexación de elementos. Después de aplicar una máscara a un Data Frame hemos visto que lo que obteníamos era un vector. Sin embargo, con los *tibbles* esto no pasa, después de aplicar una máscara lo que obtenemos es otro *tibble*. Veamos esta diferencia de comportamiento en el siguiente ejemplo:
+
 ```{r tibble3, echo=TRUE}
 iris[1:15, "Petal.Length"]
 class(iris[1:15, "Petal.Length"])
@@ -499,17 +535,18 @@ class(iris[1:15, "Petal.Length",drop=FALSE])
 ir[1:15, "Petal.Length"]
 ```
 
-El paquete **dplyr** nos proporciona las funciones **select()** y **filter()** para hacer indexación de elementos. La función **select()** se usa pra seleccionar un conjunto de columnas y la función **filter()** para seleccionar un conjunto de filas.
+El paquete `dplyr` nos proporciona las funciones `select()` y `filter()` para hacer indexación de elementos. La función `select()` se usa pra seleccionar un conjunto de columnas y la función `filter()` para seleccionar un conjunto de filas.
+
 ```{r tibble4, echo=TRUE}
 library(dplyr)
 # Nos quedamos con las filas de la especie "setosa", de la cual solo queremos las columnas
 # que se llaman Petal.Width y Petal.Length
 select(filter(ir, Species=="setosa"), Petal.Width,Petal.Length)
 # Podemos hacer lo mismo utilizando el operador pipe:
-filter(ir, Species=="setosa") %>% select(Petal.Width, Petal.Length)
+filter(ir, Species=="setosa") |> select(Petal.Width, Petal.Length)
 ```
 
-NOTA: el operador pipe (%>%) se puede aplicar a cualquier función de R. Significa que, lo que está a su izquierda se pasa como el primer argumento a la función que está a su derecha. Es decir, una expresión del tipo x %>% f(y) es equivalente a f(x,y).
+NOTA: el operador pipe (`|>`) se puede aplicar a cualquier función de R. Significa que, lo que está a su izquierda se pasa como el primer argumento a la función que está a su derecha. Es decir, una expresión del tipo `x |> f(y)` es equivalente a `f(x,y)`.
 
 
 

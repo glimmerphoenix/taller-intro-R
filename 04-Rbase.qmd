@@ -6,8 +6,8 @@ En este apartado se ofrece un breve repaso a la sintáxis básica de R.
 
 Los objetos o variables de R pueden almacenar información de diferentes tipos:
 
-- *valores numéricos* en variables de tipo numérico.
-- *valores alfabéticos* en variables de tipo carácter, que en realidad son cadenas de caracteres que van entre comillas dobles o comillas simples.
+- *valores numéricos* en variables de tipo numérico;
+- *valores alfabéticos* en variables de tipo carácter, que en realidad son cadenas de caracteres que van entre comillas dobles o comillas simples;
 - *valores lógicos* en variables de tipo booleano, que solo pueden tomar los valores TRUE o FALSE.
 
 Cuando se crea una variable, la asingación de un valor a esta variable puede hacerse de la siguiente manera:
@@ -39,25 +39,26 @@ i
 
 Por lo tanto, la asingación es una operación en la que se evalua la expresión que hay a la derecha y se le asigna ese valor a la variable de la izquierda.
 
-### Función ls().
+### Función `ls()`.
 Muestra una lista de todos los objetos o variables que se han creado.
 
-### Función rm().
+### Función `rm()`.
 Libera el espacio de memoria que ocupa el objeto o variable que hayamos indicado entre paréntesis.
 
 ### Operadores aritméticos.
-Los operadores aritméticos elementales son los habituales +, -, *, / y ^ para elevar a una potencia. 
+Los operadores aritméticos elementales son los habituales `+`, `-`, `*`, `/` y `^` para elevar a una potencia. 
 Además están disponibles las funciones `log`, `exp`, `sin`, `cos`, `tan` y `sqrt`.
 
 ### Operadores lógicos.
-Los operadores lógicos son: < (menor), <= (menor o igual), > (mayor), >= (mayor o igual), == (igual), y != (distinto). 
-Si v1 y v2 son dos expresiones lógicas, entonces v1&v2 es su intersección ("conjunción"), v1|v2 es su unión ("disyunción") y !v1 es la negación de V1.
+Los operadores lógicos son: `<` (menor), `<=` (menor o igual), `>` (mayor), `>=` (mayor o igual), `==` (igualdad lógica), y `!=` (distinto). 
+Si `v1` y `v2` son dos expresiones lógicas, entonces `v1&v2` es su intersección ("conjunción"), `v1|v2` es su unión ("disyunción") y `!v1` es la negación de `v1`.
 
 ## Funciones.
 
 Las funciones en R son un tipo especial de objeto diseñado para llevar a cabo alguna operación. Se aplican a un conjunto de argumentos y producen un resulado.
 
 R tiene una amplia variedad de funciones que el usuario puede utilizar. Pero también puede crearse las suyas propias. En el caso de querer utilizar una función R, no hay más que llamarla escribiendo su nombre y su lista de argumentos (en caso de tenerlos). La lista de argumentos siempre va entre paréntesis y separados por comas.
+
 ```{r funcion-max, echo=TRUE}
 # Esta instrucción devuelve el máximo de todos los números que se le han pasado por argumento
 max(4,5,6,12,-4)
@@ -65,10 +66,11 @@ max(4,5,6,12,-4)
 max(sample(1:100, 30))
 ```
 
-Al igual que en otros lenguajes de programación, resulta interesante implementar una función cuando necesitas que varias líneas de código se ejecuten varias veces en diferentes puntos de nuestro código. En este caso, ese bloque de código lo encampsulamos dentro de una función, la cual llamaremos cada vez que la necesitemos. Antes de darle un nombre a una función que implementemos nosotros, podemos comprobar si ese nombre no se ha utilizado ya, mediante la función **exists()** (devuelve un TRUE o un FALSE en función de si el nombre de la función ya existe o no, respectivamente).
+Al igual que en otros lenguajes de programación, resulta interesante implementar una función cuando necesitas que varias líneas de código se ejecuten varias veces en diferentes puntos de nuestro código. En este caso, ese bloque de código lo encampsulamos dentro de una función, la cual llamaremos cada vez que la necesitemos. Antes de darle un nombre a una función que implementemos nosotros, podemos comprobar si ese nombre no se ha utilizado ya, mediante la función `exists()` (devuelve `TRUE` o `FALSE` en función de si el nombre de la función ya existe o no, respectivamente).
 
 La forma de implementar una función es la siguiente:
 
+```{r eval=FALSE}
 nombreFuncion = *fuction*(argumento1, argumento2,...){
    instrucción1
    instrucción2
@@ -77,8 +79,10 @@ nombreFuncion = *fuction*(argumento1, argumento2,...){
    .
    return resultado
 }
+```
 
-El cuerpo de la función está delimitado por {} y cada instrucción debe ocupar una línea 
+El cuerpo de la función está delimitado por `{}` y cada instrucción debe ocupar una línea.
+
 ```{r funcion, echo=TRUE}
 # Función que calcula el error estandar (raiz cuadrada de la varianza entre el tamaño de la muestra)
 se = function(x){
@@ -92,6 +96,7 @@ se = function(x){
 ```
 
 Una vez que hemos creado la función, podemos usarla:
+
 ```{r funcion2, echo=TRUE}
 # rnorm(): función de R que devuelve una muestra de 100 números aleatorios tomados una distribución normal con media=20 y desviación estandar=4.
 mySample = rnorm(100, mean=20, sd=4)
@@ -99,7 +104,9 @@ se(mySample)
 ```
 
 ### Parámetros con valores por defecto.
+
 Si alguno de los parámetros de nuestra función tiene que tomar algún valor por defecto debemos indicarlo en la cabecera de la función.
+
 ```{r funcion3, echo=TRUE}
 #Función que convierte un valor en km, decímetros, centímetros o milímetros a metros.
 convUnitsToMeters = function(val, from="km"){
@@ -119,18 +126,23 @@ convUnitsToMeters(40)
 ```
 
 ### Llamada a una función.
+
 La llamada a una función se puede realizar de dos formas:
+
 - Indicando el nombre de los parámetros. En este caso el valor que toma cada parámetro es el indicado.La ventana que ofrece el llamar a una función indicando el nombre de los parámetros, es que podemos omitir el nombre de parámetros que tengan valor por defecto y no queramos modificar ese valor e indicar solo aquel parámetro o parámetros que si queramos modificar.
+
 ```{r funcion4, echo=TRUE}
 convUnitsToMeters(from="km",val=56.2)
 ```
 
-- Sin indicar el nombre de los parámetros. En este caso el valor de los parámetros se susittye por posición. En el ejemplo que se muestra a continuación, el 1º argumento toma el valor 56.2 y el segundo toma el valor "yard".
+- Sin indicar el nombre de los parámetros. En este caso el valor de los parámetros se susittye por posición. En el ejemplo que se muestra a continuación, el primer argumento toma el valor 56.2 y el segundo toma el valor `"yard"`.
+
 ```{r funcion5, echo=TRUE}
 convUnitsToMeters(56.2,"km")
 ```
 
 También es posible mezclar ambas formas de llamar a una función:
+
 ```{r funcion6, echo=TRUE}
 convUnitsToMeters(56.2, from="km")
 ```

@@ -26,8 +26,8 @@ muchas funcionalidades y, sobre todo, marcando un estilo de trabajo y organizaci
 de los datos consistente en todos sus componentes.
 
 En las siguientes secciones nos concentraremos en los dos paquetes básicos de
-tidyverse: `dplyr` y `tidyr`. Estos dos paquetes junto con el operador `%>%` (pipe)
-del paquete `magrittr` forman el núcleo básico de trabajo del tidyverse.
+tidyverse: `dplyr` y `tidyr`. Estos dos paquetes junto con el operador `|>` (pipe)
+forman el núcleo básico de trabajo del tidyverse.
 
 Para cargar el tidyverse en nuestra sesión ejecutamos:
 
@@ -75,42 +75,40 @@ Podemos notar rápidamente la influencia de estos principios en un ejemplo senci
 Consideremos la siguiente tabla, presentada como ejemplo en el artículo
 original de Wickham, con datos de un hipotético análisis clínico sobre pacientes:
 
-Table: (\#tab:messy-data-1) Ejemplo de un conjunto de datos típico.
-
 |         |   treatment_a  |  treatment_b  |
 |:--------| --------------:|--------------:|
 | John Smith | --- | 2 |
 | Jane Doe   | 16 | 11 |
 | Mary Johnson | 3 | 1 |
 
+: Ejemplo de un conjunto de datos que no sigue los principios de *tidy data*. {#tbl-messy-data-1}
 
 Si tenemos alguna experiencia previa analizando datos con herramientas como hojas de
 cálculo, y reflexionamos un poco, es muy probable que hayamos visto con anterioridad
 una estructura de organización de datos parecida. Ahora, presentamos una segunda
 versión, con los mismos datos pero organizados de manera distinta:
 
-Table: (\#tab:messy-data-2) El mismo dataset que en la Tabla \@ref(tab:messy-data-1), pero
-con estructura diferente.
-
 |            |  John Smith  | Jane Doe  |  Mary Johnson  |
 |:-----------|-------------:|----------:|---------------:|
 | treatment_a | --- | 16 | 3 |
 | treatment_b | 2 | 11 | 1 |
 
-Si comparamos la Tabla \@ref(tab:messy-data-1) y la Tabla \@ref(tab:messy-data-2)
+: El mismo dataset que en la Tabla @tbl-messy-data-1, pero con estructura diferente. {#tbl-messy-data-2} 
+
+Si comparamos la tabla @tbl-messy-data-1 y la tabla @tbl-messy-data-2
 podemos comprobar que contienen la misma información. Sin embargo, la estructura
-es diferente. En la Tabla \@ref(tab:messy-data-1) la primera columna contiene los
+es diferente. En la tabla @tbl-messy-data-1 la primera columna contiene los
 nombres de los pacientes, mientras que las dos siguientes hacia la derecha contienen
 los resultados de la prueba de cada paciente para el tratamiento A y el B,
-respectivamente. En su lugar, en la Tabla \@ref(tab:messy-data-2) las filas recogen
+respectivamente. En su lugar, en la Tabla @tbl-messy-data-2 las filas recogen
 los datos de todos los pacientes para cada tratamiento, y las columnas corresponden
 a los datos de cada paciente.
 
 Aunque en ambos casos los datos son "correctos" en sentido técnico (la información
 es la misma en ambos casos y suponemos que no hay fallos en la introducción de datos),
 enseguida podemos imaginar que un script de R (o cualquier otro lenguaje) que espere
-recibir los datos en el formato de la Tabla \@ref(tab:messy-data-1) y, en cambio,
-los reciba en el formato de la Tabla \@ref(tab:messy-data-2) seguramente va a devolver
+recibir los datos en el formato de la Tabla @tbl-messy-data-1 y, en cambio,
+los reciba en el formato de la Tabla @tbl-messy-data-2 seguramente va a devolver
 errores. Y ello pese a que la información es correcta en ambos casos.
 
 En consecuencia, es importante establecer explícitamente un acuerdo entre los investigadores
@@ -118,8 +116,6 @@ para organizar siempre los datos de la misma manera. De esta forma, sabemos qué
 de datos esperamos encontrar y se puede intentar "reclamar" al origen de los datos que
 siga esta convención de representación de la información (aunque no siempre esto es
 posible).
-
-Table: (\#tab:tidy-data) El mismo dataset, pero ahora en formato *tidy data*.
 
 | name   |  treatment  | result  |
 |:-----------|:-------------|----------:|
@@ -130,8 +126,10 @@ Table: (\#tab:tidy-data) El mismo dataset, pero ahora en formato *tidy data*.
 | Jane Doe | b | 11 |
 | Mary Johnson | b | 1 |
 
-La tabla \@ref(tab:tidy-data) muestra cómo se representan los datos siguiendo la
-convención establecida por las reglas de tidy data:
+: El mismo dataset, pero ahora en formato *tidy data*. {#tbl-tidy-data}
+
+La tabla @tbl-tidy-data muestra cómo se representan los datos siguiendo la
+convención establecida por las reglas de *tidy data*:
 
 - Hay 3 variables (nombre de paciente, tratamiento y resultado), una en cada
 columna.
@@ -187,45 +185,27 @@ estable y consolidada.
 
 ### Resumen de paquetes principales en tidyverse
 
-La Tabla \@ref(tab:tidyverse-packages) resume algunos de los paquetes 
+La tabla @tbl-tidyverse-packages resume algunos de los paquetes 
 más importantes que encontraremos en el ecosistema tidyverse.
 
-```{r tidyverse-packages, echo=FALSE}
+| Paquete         | Descripción                                                                                    |
+|-----------------|:-----------------------------------------------------------------------------------------------|
+| `tibble`        | Tipo de datos básico para almacenar tablas de datos, similar a un data frame pero con nuevas              funcionalidades                                                                                                    |
+| `dplyr`         | Proporciona una gramática para manipulación de datos, inspirada en las operaciones que se pueden realizar en bases de datos                                                                                                              |
+| `tidyr`         | Herramientas que ayudan a transformar los datos para que cumplan las reglas de *tidy data*     |
+| `ggplot2`       | Sistema que proporciona un lenguaje declarativo para crear visualizaciones de datos, basado en una gramática de gráficos. Siguen un procedimiento estructurado para describir el diseño del gráfico a realizar                     | 
+| `readr`         | Funciones eficientes para lectura/escritura de datos estructurados, que proprociona herramientas para resolver problemas comunes en este proceso                                                                                  |
+| `purrr`         | Herramientas para programación funcional con R, que permite reemplazar bucles (como `for`) por código más eficiente, expresivo y conciso                                                                                                | 
+| `stringr`       | Funciones para operativizar el trabajo con cadenas de caracteres en el contexto del tidyverse  |
+| `forcats`       | Funciones para trabajo con variables categóricas (llamadas *factores* en R)                    |
 
-text_tbl <- data.frame(
-  Paquete = c("`tibble`","`dplyr`", "`tidyr`", "`ggplot2`", "`readr`",
-            "`purrr`", "`stringr`", "`forcats`"),
-  Descripcion = c(
-    "Tipo de datos básico para almacenar tablas de datos, similar a un data frame
-    pero con nuevas funcionalidades.",
-    "Proporciona una gramática para manipulación de datos, inspirada en las operaciones
-    que se pueden realizar en bases de datos.",
-    "Herramientas que ayudan a transformar los datos para que cumplan las reglas de
-    tidy data.", 
-    "Sistema que proporciona un lenguaje declarativo para crear visualizaciones
-    de datos, basado en una gramática de gráficos. Siguen un procedimiento
-    estructurado para describir el diseño del gráfico a realizar.",
-    "Funciones eficientes para lectura/escritura de datos estructurados, que
-    proprociona herramientas para resolver problemas comunes en este proceso.",
-    "Conjunto de herramientas para programación funcional con R, que permite
-    reemplazar bucles (como `for`) por código más eficiente, expresivo y conciso.",
-    "Conjunto de funciones para operativizar el trabajo con cadenas de caracteres
-    en el contexto del tidyverse.",
-    "Conjunto de funciones para trabajo con variables categóricas (llamadas *factores*
-    en R."
-  )
-)
+: Paquetes relevantes del ecosistema `tidyverse`. {#tbl-tidyverse-packages .striped .hover}
 
-kable(text_tbl, caption="Paquetes principales del ecosistema *tidyverse*") %>%
-  kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  column_spec(1, bold = TRUE) 
-
-```
 
 ### Método de trabajo con tidyverse
 
 El método de trabajo en tidyverse suele estar fuertemente ligado a la utilización
-del operador *pipe* (`%>%`) del paquete `magrittr`. Esencialmente, este operador
+del operador *pipe* (`|>`). Esencialmente, este operador
 simplifica la sintaxis necesaria para realizar llamadas anidadas a funciones,
 de forma que el resultado de la operación anterior actúe como entrada del
 siguiente paso. Imaginemos que tenemos un objeto similar a un data frame
@@ -239,15 +219,15 @@ f2(f1(df), arg_f2)  # Se complica rápido con muchas funciones
                     # a realizar
 ```
 
-Por el contrario, si usamos el operador `%>%` podemos escribir cada paso de la
+Por el contrario, si usamos el operador `|>` podemos escribir cada paso de la
 cadena de operaciones en una línea diferente. De esta manera, podemos sintácticamente
 separar cada paso de nuestra cadena de operaciones, de forma que el código queda
 mucho más legible:
 
 ```{r eval=FALSE}
-# x %>% f(y) se convierte en f(x, y)
-df %>% 
-  f1 %>%     # Recibe como primer argumento de entrada df
+# x |> f(y) se convierte en f(x, y)
+df |> 
+  f1 |>     # Recibe como primer argumento de entrada df
   f2(arg_f2) # Recibe el resultado del paso anterior, f1(df)
              # arg_f2 se pasa a continuación como argumento de entrada
 ```
@@ -308,46 +288,22 @@ los datos de entrada cumplen estos requisitos.
 
 En caso contrario, el paquete `tidyr` porporciona una serie de herramientas que
 nos van a facilitar el trabajo de convertir nuestros datos a este formato. Algunas
-de ellas se resumen en la Tabla \@ref(tab:tidyr-funcs).
+de ellas se resumen en la Tabla @tbl-tidyr-funcs.
 
-```{r tidyr-funcs, echo=FALSE}
-text_tbl <- data.frame(
-  Funciones = c("Pivoting",
-                "`pivot_longer()`","`pivot_wider()`", 
-                "Nested data",
-                "`nest()`", "`unnest()`",
-                "Rectangling", 
-                "`unnest_longer()`", "`unnest_wider()`", "`unnest_auto()`"),
-  Descripcion = c(
-    "Operación: Cambiar estructura y dimensiones.",
-    "Reemplaza a la función `gather()` en versiones anteriores del paquete. Disminuye
-    el número de columnas e incrementa el número de filas de la tabla (haciéndola
-    más alargada. Por ejemplo, permite
-    colapsar varias columnas cuyos títulos son valores de una variable en una sola
-    columna con un nuevo nombre.",
-    "Reemplaza a la función `spread()` en versiones anteriores del paquete. Aumenta
-    el número de columnas y disminuye el número de filas, haciendo la tabla más
-    ancha. Por ejemplo, permite expandir los nombres de variables que sean valores
-    de una sola columna en varias columnas, con los valores correspondientes en cada
-    una.",
-    "Operación: Anidar datos o extraer datos anidados.",
-    "Permite anidar tablas tidy data dentro de otras, de modo que una columna de
-    la tabla sea una lista de data frames (tibbles, en tidyverse).", 
-    "Implementa la operación contraria a `nest()` extrayendo las data frames
-    anidada en una columna anexándolas por filas y replicando el resto de columnas
-    para alinear los datos.",
-    "Operación: Tratamiento de lista de datos anidadas (JSON, XML).",
-    "Toma cada elemento de una columna-lista y lo convierte en una nueva fila.",
-    "Toma cada argumento de una columna lista y lo convierte en una nueva columna.",
-    "Intenta adivinar la operación apropiada para preparar los datos."
-  )
-)
+| Funciones         | Descripción                                                                                                 |
+|-------------------|:------------------------------------------------------------------------------------------------------------|
+| ***Pivoting***    | ***Operación: Cambiar estructura y dimensiones***                                                           |
+| `pivot_longer()`  | Reemplaza a la función `gather()` en versiones anteriores del paquete. Disminuye el número de columnas e incrementa el número de filas de la tabla (haciéndola más alargada. Por ejemplo, permite colapsar varias columnas cuyos títulos son valores de una variable en una sola columna con un nuevo nombre                                                                                  |
+| `pivot_wider()`   | Reemplaza a la función `spread()` en versiones anteriores del paquete. Aumenta el número de columnas y disminuye el número de filas, haciendo la tabla más ancha. Por ejemplo, permite expandir los nombres de variables que sean valores de una sola columna en varias columnas, con los valores correspondientes en cada una                                                                  |
+| ***Nested data*** | ***Operación: Anidar datos o extraer datos anidados***                                                      |
+| `nest()`          | Permite anidar tablas tidy data dentro de otras, de modo que una columna de la tabla sea una lista de data frames (`tibbles`, en `tidyverse`)                                                                                                       |
+| `unnest()`        | Implementa la operación contraria a `nest()` extrayendo las data frames anidada en una columna anexándolas por filas y replicando el resto de columnas para alinear los datos                                                                    |
+| ***Rectangling*** | ***Operación: Tratamiento de lista de datos anidadas (JSON, XML)***            |
+| `unnest_longer()` | Toma cada elemento de una columna-lista y lo convierte en una nueva fila       |
+| `unnest_wider()`  | Toma cada argumento de una columna lista y lo convierte en una nueva columna   |
+| `unnest_auto()`   | Intenta adivinar la operación apropiada para preparar los datos                |
 
-kable(text_tbl, caption="Principales funciones del paquete `tidyr`") %>%
-  kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  column_spec(1, bold = TRUE) 
-
-```
+: Principales funciones del paquete `tidyr` {#tbl-tidyr-funcs .striped .hover}
 
 
 La página web del paquete `tidyr` <https://tidyr.tidyverse.org/> incluye varios
@@ -409,7 +365,7 @@ normas de tidy data:
 # - values_to: nombre de la columna que contendrá como valores los valores de las
 # columnas colapsadas, procedentes de la tabla original.
 tib_exp_long <-
-  experiment_wide %>%
+  experiment_wide |>
   pivot_longer(cols = c('control', 'cond1', 'cond2'), names_to = 'condition',
                values_to = 'measurement')
 tib_exp_long
@@ -435,7 +391,7 @@ original:
 # Argumentos:
 # - 
 tib_exp_wide <-
-  experiment_long %>%
+  experiment_long |>
   pivot_wider(names_from = 'condition', values_from = 'measurement')
 tib_exp_wide
 ```
@@ -466,82 +422,40 @@ más claros y explícitos.
 
 ### Funciones principales en dplyr
 
-La Tabla \@ref(tab:dplyr-funcs) resume las principales funciones
-del paquete `dplyr`.
+La Tabla @tbl-dplyr-funcs resume las principales funciones del paquete `dplyr`.
 
-```{r dplyr-funcs, echo=FALSE}
+| Funciones          | Descripción                                                                                                |
+|--------------------|:-----------------------------------------------------------------------------------------------------------|
+| ***Básicas***      | ***Operaciones básicas de recuperación de datos y creación de nuevas variables***                          |
+| `select()`         | Selecciona las columnas de la tabla que se van a devolver como resultado                                   |
+| `filter()`         | Filtra filas de la tabla, solo se devuelven las que cumplan las condiciones impuestas mediante una expresión lógica (simple o compuesta)    |
+| `summarise()`      | Calcula estadísticos resumen sobre las columnas de la tabla que se van a recuperar; en combinación con `group_by()` calcula los resúmenes por cada grupo identificado    |
+| `arrange()`        | Ordena las filas que se van a devolver, según los valores de una o varias variables; el orden puede ser creciente o decreciente; admite variables numéricas o categóricas (orden alfabético)    |
+| `mutate()`         | Crea nuevas columnas a partir de valores de otras columnas ya presentes en la tabla; los valores se pueden combinar mediante múltiples operaciones    |
+| ***Agrupación***   | ***Indica que las operaciones de sucesivos pasos se calcularán por grupos, identificados segun los valores de una o varias variables (columnas)***           |
+| `group_by()`       | Agrupar por el valor de una o varias variables    |
+| ***Funciones de dos (o más) tablas*** | ***Permiten combinar valores de dos tablas (operaciones con conjuntos, álgebra relacional)*** |
+| *Mutating joins*   | *Combinan dos o más tablas atendiendo a valores en las columnas*    |
+| `inner_join()`     | Combina dos o más tablas, dejando solo las filas con valores coincidentes en una o varias columnas de ambas o todas las tablas     |
+| `left_join()`      | Combina dos tablas, mostrando todos los valores de una o varias columnas de la primera tabla; si la segunda tabla tiene valores coincidentes en la columna(s) indicada(s) se muestra la correspondencia, si no, se muestra un nulo    |
+| `right_join()`     | Combina dos tablas, mostrando todos los valores de una o varias columnas de la segunda tabla; si la primera tabla tiene valores coincidentes en la columna(s) indicada(s) se muestra la correspondencia, si no, se muestra un nulo    |
+| `full_join()`      | Realiza el producto cartesiano entre las filas de las dos tablas, es decir, se combina cada fila de la primera tabla con todas las filas de la segunda tabla    |
+| *Filtering joins*  | *Unen dos o más tablas pero devolviendo solo filas de la primera tabla*    |
+| `semi_join()`      | Devuelve datos de la primera tabla que tengan coincidencias en la segunda, atendiendo a los valores de una o varias columnas; no se devuelven datos de la segunda tabla    |
+| `anti_join()`      | Devuelve datos de la primera tabla que *no tengan* coincidencias en la segunda tabla, atendiendo a los valores de una o varias columnas; no se devuelven datos de la segunda tabla    |
+| *Operaciones con conjuntos*  | *Operaciones con conjuntos*        |
+| `union()`          | Se unen todas las filas de ambas tablas (unión de conjuntos)    |
+| `intersect()`      | Solo se devuelven las filas con valores coincidentes en ambas tablas (intersección de conjuntos)    |
+| `setdiff()`        | Solo se devuelven las filas con valores *no coincidentes* en ambas tablas (diferencia de conjuntos) |
 
-text_tbl <- data.frame(
-  Funciones = c("Básicas",
-                "`select()`","`filter()`", "`summarise()`", "`arrange()`", "`mutate()`",
-                
-                "Agrupación",
-                "`group_by()`",
-                
-                "Funciones de dos (o más) tablas",
-                "*Mutating joins*",
-                "`inner_join()`", "`left_join()`", "`right_join()`", "`full_join()`",
-                
-                "*Filtering joins*",
-                "`semi_join()`", "`anti_join()`",
-                
-                "*Operaciones con conjuntos*",
-                "`union()`", "`intersect()`", "`setdiff()`"
-                ),
-  Descripcion = c(
-    "Operaciones básicas de recuperación de datos y creación de nuevas variables.",
-    
-    "Selecciona las columnas de la tabla que se van a devolver como resultado.",
-    "Filtra filas de la tabla, solo se devuelven las que cumplan las condiciones
-    impuestas mediante una expresión lógica (simple o compuesta).",
-    "Calcula estadísticos resumen sobre las columnas de la tabla que se van a
-    recuperar; en combinación con `group_by()` calcula los resúmenes por cada
-    grupo identificado.",
-    "Ordena las filas que se van a devolver, según los valores de una o varias
-    variables; el orden puede ser creciente o decreciente; admite variables numéricas
-    o categóricas (orden alfabético).",
-    "Crea nuevas columnas a partir de valores de otras columnas ya presentes en
-    la tabla; los valores se pueden combinar mediante múltiples operaciones.",
-    
-    "Indica que las operaciones de sucesivos pasos se calcularán por grupos, 
-    identificados segun los valores de una o varias variables (columnas).",
-    "Agrupar por el valor de una o varias variables.",
-    
-    "Permiten combinar valores de dos tablas (operaciones con conjuntos, álgebra
-    relacional).",
-    "Combinan dos o más tablas atendiendo a valores en las columnas.",
-    "Combina dos o más tablas, dejando solo las filas con valores coincidentes
-    en una o varias columnas de ambas o todas las tablas.",
-    "Combina dos tablas, mostrando todos los valores de una o varias columnas
-    de la primera tabla; si la segunda tabla tiene valores coincidentes en la
-    columna(s) indicada(s) se muestra la correspondencia, si no, se muestra un nulo.",
-    "Combina dos tablas, mostrando todos los valores de una o varias columnas
-    de la segunda tabla; si la primera tabla tiene valores coincidentes en la
-    columna(s) indicada(s) se muestra la correspondencia, si no, se muestra un nulo.",
-    "Realiza el producto cartesiano entre las filas de las dos tablas, es decir, se
-    combina cada fila de la primera tabla con todas las filas de la segunda tabla.",
-    
-    "Unen dos o más tablas pero devolviendo solo filas de la primera tabla.",
-    "Devuelve datos de la primera tabla que tengan coincidencias en la segunda,
-    atendiendo a los valores de una o varias columnas; no se devuelven datos de
-    la segunda tabla.",
-    "Devuelve datos de la primera tabla que *no tengan* coincidencias en la
-    segunda tabla, atendiendo a los valores de una o varias columnas; no se devuelven
-    datos de la segunda tabla.",
-    
-    "Operaciones con conjuntos",
-    "Se unen todas las filas de ambas tablas (unión de conjuntos).",
-    "Solo se devuelven las filas con valores coincidentes en ambas tablas (intersección
-    de conjuntos).",
-    "Solo se devuelven las filas con valores *no coincidentes* en ambas tablas (diferencia
-    de conjuntos)."
-  )
-)
+: Principales funciones del paquete `dplyr` {#tbl-dplyr-funcs .striped .hover}
 
-kable(text_tbl, caption="Principales funciones del paquete `tidyr`") %>%
-  kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  row_spec(c(0), color = "white", background = "#003366") %>%
-  row_spec(c(1,7,9), color = "white", background = "#006699") %>%
+```{r dplyr-funcs, echo=FALSE, eval=FALSE}
+
+kable(text_tbl, caption="") |>
+  kable_styling(bootstrap_options = c("striped", "hover")) |>
+  row_spec(c(0), color = "white", background = "#003366") |>
+  row_spec(c(1,7,9), color = "white", background = "#006699") |>
   row_spec(c(10,15,18), color = "white", background = "#0099FF")
 ```
 
@@ -642,8 +556,8 @@ UN_tibble <- as_tibble(UN, rownames = NA)  # Mantener nombres de fila
   
 ```{r select-1}
 # Utilizamos un select para recuperar las columnas por nombre
-UN_tibble %>%
-  select("fertility", "ppgdp") %>%
+UN_tibble |>
+  select("fertility", "ppgdp") |>
   head()
 ```
 
@@ -653,13 +567,13 @@ UN_tibble %>%
   
 ```{r select-2}
 # Quitamos suelo urbanizado
-UN_tibble %>%
-  select(-"pctUrban") %>%
+UN_tibble |>
+  select(-"pctUrban") |>
   head()
 
 # Ahora, quitamos además esperanza de vida
-UN_tibble %>%
-  select(-c("pctUrban", "lifeExpF")) %>%
+UN_tibble |>
+  select(-c("pctUrban", "lifeExpF")) |>
   head()
 ```
 
@@ -669,8 +583,8 @@ UN_tibble %>%
 ```{r select-3}
 # Podemos utilizar argumentos numéricos para indicar posición de columna
 # En ese caso, no llevan comillas.
-UN_tibble %>%
-  select(1,3,4) %>%
+UN_tibble |>
+  select(1,3,4) |>
   head()
 ```
 
@@ -681,13 +595,13 @@ UN_tibble %>%
 ```{r select-4}
 # Usamos la notación de rango consecutivo con nombres de columnas
 # Atención: ambos extremos del rango están incluidos en la selección
-UN_tibble %>% 
-  select("group":"lifeExpF") %>%
+UN_tibble |> 
+  select("group":"lifeExpF") |>
   head()
 
 # Para la segunda usamos la misma notación, pero con números de columnas
-UN_tibble %>%
-  select(1:3) %>%
+UN_tibble |>
+  select(1:3) |>
   head()
 ```
 
@@ -700,8 +614,8 @@ UN_tibble %>%
 # Imaginemos que el contenido del vector después de las operaciones es este
 nombres_cols = c("fertility", "ppgdp", "infantMortality")
 
-UN_tibble %>%
-  select(nombres_cols) %>%
+UN_tibble |>
+  select(nombres_cols) |>
   head() 
 ```
 
@@ -716,14 +630,14 @@ UN_tibble %>%
 ```{r filter-1}
 # Usamos los operadores de comparación lógica de R para imponer las
 # condiciones de selección de datos
-UN_tibble %>%
-  filter(group == "other" & fertility > 2.1) %>%
+UN_tibble |>
+  filter(group == "other" & fertility > 2.1) |>
   head()
 ```
 
 ```{r filter-2}
-UN_tibble %>%
-  filter((region %in% c("Europe", "Latin Amer")) & ppgdp > 25000) %>%
+UN_tibble |>
+  filter((region %in% c("Europe", "Latin Amer")) & ppgdp > 25000) |>
   head()
 ```
 
@@ -741,16 +655,16 @@ que hayan sido creados si antes hemos llamado a `group_by()`.
     
 ```{r summarise-1}
 # ¿Qué ocurre si no ponemos el argumento na.rm = TRUE? ¿Por qué?
-UN_tibble %>%
+UN_tibble |>
   summarise(avg_fertility = mean(fertility, na.rm = TRUE),
             avg_ppgdp = mean(ppgdp, na.rm = TRUE))
 ```
 
   
 ```{r summarise-2}
-UN_tibble %>%
-  filter(!is.na(region)) %>%  # Quitamos NA's
-  group_by(region) %>%  # Pedimos el resumen agrupados por región
+UN_tibble |>
+  filter(!is.na(region)) |>  # Quitamos NA's
+  group_by(region) |>  # Pedimos el resumen agrupados por región
   summarise(num_countries = n())
 ```
 
@@ -762,9 +676,9 @@ UN_tibble %>%
   de países dentro de cada grupo?*
   
 ```{r group-by-1}
-UN_tibble %>%
-  filter(!is.na(group)) %>%  # Quitamos NA's en grupo
-  group_by(group) %>%  # Pedimos el resumen agrupados por región
+UN_tibble |>
+  filter(!is.na(group)) |>  # Quitamos NA's en grupo
+  group_by(group) |>  # Pedimos el resumen agrupados por región
   summarise(avg_ppgdp_group = mean(ppgdp, na.rm = TRUE)) # Filtramos NA's en ppgdp
 ```
 
@@ -774,9 +688,9 @@ UN_tibble %>%
   del mismo, según la región a la que pertenecen?
 
 ```{r group-by-2}
-UN_tibble %>%
-  filter(!is.na(group) & !is.na(region)) %>%  # Quitamos NA's en grupo
-  group_by(group, region) %>%  # Pedimos el resumen agrupados por grupo, región
+UN_tibble |>
+  filter(!is.na(group) & !is.na(region)) |>  # Quitamos NA's en grupo
+  group_by(group, region) |>  # Pedimos el resumen agrupados por grupo, región
   summarise(avg_fertility = mean(fertility, na.rm = TRUE)) # Filtramos NA's en ppgdp
 ```
 
@@ -789,10 +703,10 @@ de menor a mayor. Si queremos ordenar a la inversa usamos `desc()`.
 ```{r arrange-1}
 # Después de la consulta, usamos head() para restringir el número de filas
 # En el siguiente capítulo presentamos top_n() para el mismo uso
-UN_tibble %>%
-  select("region", "ppgdp") %>%
-  filter(region == "Europe") %>%
-  arrange(desc(ppgdp)) %>% 
+UN_tibble |>
+  select("region", "ppgdp") |>
+  filter(region == "Europe") |>
+  arrange(desc(ppgdp)) |> 
   head(5)
 ```
 
@@ -801,12 +715,12 @@ UN_tibble %>%
   y región, de forma que primero aparezcan las regiones en orden alfabético
   y, para cada región, los grupos en orden alfabético*.
 ```{r arrange-2}
-UN_tibble %>% 
-  select(region, group, fertility) %>% 
-  filter(!is.na(group) & !is.na(region)) %>% 
-  group_by(group, region) %>% 
-  summarise(avg_fertility = mean(fertility, na.rm = TRUE)) %>% 
-  select(2,1,3) %>% # Volvemos a llamar a select para cambiar el orden de columnas
+UN_tibble |> 
+  select(region, group, fertility) |> 
+  filter(!is.na(group) & !is.na(region)) |> 
+  group_by(group, region) |> 
+  summarise(avg_fertility = mean(fertility, na.rm = TRUE)) |> 
+  select(2,1,3) |> # Volvemos a llamar a select para cambiar el orden de columnas
   arrange(region, group) # Aquí ordenamos por región y dentro de cada una por grupo
 ```
 
@@ -824,8 +738,8 @@ datos original**.
 
 ```{r mutate-1}
 # Transformar el valor de `ppgdp con log()
-UN_tibble %>% 
-  mutate(log_ppgdp = log(ppgdp)) %>% 
+UN_tibble |> 
+  mutate(log_ppgdp = log(ppgdp)) |> 
   head()
 ```
 
@@ -834,8 +748,8 @@ UN_tibble %>%
   y fertilidad de las mujeres para cada ubicación*.
 
 ```{r mutate-2}
-UN_tibble %>% 
-  mutate(mort_by_fert = infantMortality/fertility) %>% 
+UN_tibble |> 
+  mutate(mort_by_fert = infantMortality/fertility) |> 
   head()
 ```
 
@@ -876,10 +790,10 @@ en cada tabla.
 # https://tibble.tidyverse.org/reference/rownames.html.
 # Aquí usamos `rownames_to_column()`
 
-UN_tibble %>% 
-  rownames_to_column(var="location") %>% 
-  select("location","region", "pctUrban") %>% 
-  inner_join(UN2, by="region") %>% 
+UN_tibble |> 
+  rownames_to_column(var="location") |> 
+  select("location","region", "pctUrban") |> 
+  inner_join(UN2, by="region") |> 
   mutate(urban_km2 = pctUrban/100 * area)
   #rmarkdown::paged_table(options = list(rows.print = 15))
 ```

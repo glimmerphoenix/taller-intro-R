@@ -100,7 +100,7 @@ utilizar la sintaxis ```paquete::funcion()```.
 
 - [Grupos locales de usuarios R](https://r-es.org/grupos-locales/).
 
-- [Meetups sobre R](https://www.meetup.com/es-ES/grupo-de-usuarios-de-r-de-madrid/)
+- [Meetups sobre R](https://www.meetup.com/es-ES/grupo-de-usuarios-de-r-de-madrid/).
 
 
 
