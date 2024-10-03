@@ -268,10 +268,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#ggally" id="toc-ggally" class="nav-link" data-scroll-target="#ggally"><span class="header-section-number">C.3</span> <code>GGally</code></a></li>
   <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">C.4</span> <em>Pipelines</em></a></li>
   <li><a href="#data.table" id="toc-data.table" class="nav-link" data-scroll-target="#data.table"><span class="header-section-number">C.5</span> data.table</a></li>
-  <li><a href="#modelos-estadísticos-y-aprendizaje-automático" id="toc-modelos-estadísticos-y-aprendizaje-automático" class="nav-link" data-scroll-target="#modelos-estadísticos-y-aprendizaje-automático"><span class="header-section-number">C.6</span> Modelos estadísticos y aprendizaje automático</a>
+  <li><a href="#pola.rs" id="toc-pola.rs" class="nav-link" data-scroll-target="#pola.rs"><span class="header-section-number">C.6</span> Pola.rs</a></li>
+  <li><a href="#modelos-estadísticos-y-aprendizaje-automático" id="toc-modelos-estadísticos-y-aprendizaje-automático" class="nav-link" data-scroll-target="#modelos-estadísticos-y-aprendizaje-automático"><span class="header-section-number">C.7</span> Modelos estadísticos y aprendizaje automático</a>
   <ul class="collapse">
-  <li><a href="#tidymodels" id="toc-tidymodels" class="nav-link" data-scroll-target="#tidymodels"><span class="header-section-number">C.6.1</span> <code>tidymodels</code></a></li>
-  <li><a href="#mlr" id="toc-mlr" class="nav-link" data-scroll-target="#mlr"><span class="header-section-number">C.6.2</span> <code>mlr</code></a></li>
+  <li><a href="#tidymodels" id="toc-tidymodels" class="nav-link" data-scroll-target="#tidymodels"><span class="header-section-number">C.7.1</span> <code>tidymodels</code></a></li>
+  <li><a href="#mlr" id="toc-mlr" class="nav-link" data-scroll-target="#mlr"><span class="header-section-number">C.7.2</span> <code>mlr</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -300,26 +301,51 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="tidyverse" class="level2" data-number="C.1">
 <h2 data-number="C.1" class="anchored" data-anchor-id="tidyverse"><span class="header-section-number">C.1</span> <code>tidyverse</code></h2>
+<ul>
+<li><a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>.</li>
+</ul>
 </section>
 <section id="ggplot2" class="level2" data-number="C.2">
 <h2 data-number="C.2" class="anchored" data-anchor-id="ggplot2"><span class="header-section-number">C.2</span> <code>ggplot2</code></h2>
+<ul>
+<li><a href="https://ggplot2.tidyverse.org/" class="uri">https://ggplot2.tidyverse.org/</a>.</li>
+</ul>
 </section>
 <section id="ggally" class="level2" data-number="C.3">
 <h2 data-number="C.3" class="anchored" data-anchor-id="ggally"><span class="header-section-number">C.3</span> <code>GGally</code></h2>
+<ul>
+<li><a href="https://ggobi.github.io/ggally/">GGally: extensiones de gráficos para <code>ggplot2</code></a>.</li>
+</ul>
 </section>
 <section id="pipelines" class="level2" data-number="C.4">
 <h2 data-number="C.4" class="anchored" data-anchor-id="pipelines"><span class="header-section-number">C.4</span> <em>Pipelines</em></h2>
+<ul>
+<li><p>El paquete <code>targets</code> ofrece potentes funcionalidades para crear <em>pipelines</em> de procesamiento de datos con R. Si te encuentras con proyectos en los que debes repetir las mismas operaciones de obtención, limpieza y preparación de datos una y otra vez sobre decenas de <em>datasets</em> deberías plantearte definir <strong>flujos de trabajo</strong> (<em>workflow</em>) para gestionar mejor el progreso de las distintas operaciones.</p></li>
+<li><p><a href="https://books.ropensci.org/targets/walkthrough.html">A walkthrough to get started with <code>targets</code></a>.</p></li>
+</ul>
 </section>
 <section id="data.table" class="level2" data-number="C.5">
 <h2 data-number="C.5" class="anchored" data-anchor-id="data.table"><span class="header-section-number">C.5</span> data.table</h2>
+<p>El paquete <code>data.table</code> (<a href="https://rdatatable.gitlab.io/data.table/" class="uri">https://rdatatable.gitlab.io/data.table/</a>) presenta una alternativa para el procesamiento de datos distinta a <code>tidyverse</code>. Su sintaxis es menos accesible (sobre todo para programadores sin mucha experiencia), peor a cambio suele ofrecer mucho mayor rendimiento que sus competidores, completando las mismas tareas en menos tiempo (y, con frecuencia, consumiendo menos recursos como memoria RAM).</p>
 </section>
-<section id="modelos-estadísticos-y-aprendizaje-automático" class="level2" data-number="C.6">
-<h2 data-number="C.6" class="anchored" data-anchor-id="modelos-estadísticos-y-aprendizaje-automático"><span class="header-section-number">C.6</span> Modelos estadísticos y aprendizaje automático</h2>
-<section id="tidymodels" class="level3" data-number="C.6.1">
-<h3 data-number="C.6.1" class="anchored" data-anchor-id="tidymodels"><span class="header-section-number">C.6.1</span> <code>tidymodels</code></h3>
+<section id="pola.rs" class="level2" data-number="C.6">
+<h2 data-number="C.6" class="anchored" data-anchor-id="pola.rs"><span class="header-section-number">C.6</span> Pola.rs</h2>
+<p>Incluimos también en este apéndice el nuevo proyecto <a href="https://pola.rs/">Polars</a>. Esta es una nueva biblioteca de gestión de DataFrames escrita en el lenguaje de programación Rust con API nativa para este lenguaje y también para Python.</p>
+<p>El paquete <code>polars</code> en R nos da acceso a las funciones de este nuevo proyecto, que promete mejorar la eficiencia de nuestros proyectos sustancialmente, con paralelización de la ejecución y gestión eficiente de datos en memoria gracias a la integración de <a href="https://arrow.apache.org/overview/">Apache Arrow</a>.</p>
 </section>
-<section id="mlr" class="level3" data-number="C.6.2">
-<h3 data-number="C.6.2" class="anchored" data-anchor-id="mlr"><span class="header-section-number">C.6.2</span> <code>mlr</code></h3>
+<section id="modelos-estadísticos-y-aprendizaje-automático" class="level2" data-number="C.7">
+<h2 data-number="C.7" class="anchored" data-anchor-id="modelos-estadísticos-y-aprendizaje-automático"><span class="header-section-number">C.7</span> Modelos estadísticos y aprendizaje automático</h2>
+<section id="tidymodels" class="level3" data-number="C.7.1">
+<h3 data-number="C.7.1" class="anchored" data-anchor-id="tidymodels"><span class="header-section-number">C.7.1</span> <code>tidymodels</code></h3>
+<ul>
+<li><a href="https://www.tidymodels.org/" class="uri">https://www.tidymodels.org/</a>.</li>
+</ul>
+</section>
+<section id="mlr" class="level3" data-number="C.7.2">
+<h3 data-number="C.7.2" class="anchored" data-anchor-id="mlr"><span class="header-section-number">C.7.2</span> <code>mlr</code></h3>
+<ul>
+<li><a href="https://mlr3.mlr-org.com/" class="uri">https://mlr3.mlr-org.com/</a>.</li>
+</ul>
 
 
 </section>

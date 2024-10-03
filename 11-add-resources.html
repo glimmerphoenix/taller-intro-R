@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -283,8 +317,18 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#ejercicios-y-referencias-sobre-tidyverse" id="toc-ejercicios-y-referencias-sobre-tidyverse" class="nav-link active" data-scroll-target="#ejercicios-y-referencias-sobre-tidyverse"><span class="header-section-number">11.0.1</span> Ejercicios y referencias sobre <code>tidyverse</code></a></li>
-  <li><a href="#recursos-para-investigación-en-agricultura" id="toc-recursos-para-investigación-en-agricultura" class="nav-link" data-scroll-target="#recursos-para-investigación-en-agricultura"><span class="header-section-number">11.1</span> Recursos para investigación en Agricultura</a></li>
+  <li><a href="#recursos-para-ciencias-agrícolas-y-medioambientales" id="toc-recursos-para-ciencias-agrícolas-y-medioambientales" class="nav-link active" data-scroll-target="#recursos-para-ciencias-agrícolas-y-medioambientales"><span class="header-section-number">11.1</span> Recursos para Ciencias Agrícolas y Medioambientales</a></li>
+  <li><a href="#recursos-de-aprendizaje-generales" id="toc-recursos-de-aprendizaje-generales" class="nav-link" data-scroll-target="#recursos-de-aprendizaje-generales"><span class="header-section-number">11.2</span> Recursos de aprendizaje generales</a>
+  <ul class="collapse">
+  <li><a href="#ejercicios-y-referencias-sobre-tidyverse" id="toc-ejercicios-y-referencias-sobre-tidyverse" class="nav-link" data-scroll-target="#ejercicios-y-referencias-sobre-tidyverse"><span class="header-section-number">11.2.1</span> Ejercicios y referencias sobre <code>tidyverse</code></a></li>
+  </ul></li>
+  <li><a href="#creación-de-gráficos-en-r" id="toc-creación-de-gráficos-en-r" class="nav-link" data-scroll-target="#creación-de-gráficos-en-r"><span class="header-section-number">11.3</span> Creación de gráficos en R</a></li>
+  <li><a href="#modelos-estadísticos-y-aprendizaje-automático" id="toc-modelos-estadísticos-y-aprendizaje-automático" class="nav-link" data-scroll-target="#modelos-estadísticos-y-aprendizaje-automático"><span class="header-section-number">11.4</span> Modelos estadísticos y aprendizaje automático</a>
+  <ul class="collapse">
+  <li><a href="#tidymodels" id="toc-tidymodels" class="nav-link" data-scroll-target="#tidymodels"><span class="header-section-number">11.4.1</span> Tidymodels</a></li>
+  <li><a href="#mlr3" id="toc-mlr3" class="nav-link" data-scroll-target="#mlr3"><span class="header-section-number">11.4.2</span> <code>mlr3</code></a></li>
+  </ul></li>
+  <li><a href="#bioconductor" id="toc-bioconductor" class="nav-link" data-scroll-target="#bioconductor"><span class="header-section-number">11.5</span> Bioconductor</a></li>
   </ul>
 </nav>
     </div>
@@ -310,14 +354,29 @@ div.csl-indent {
 </header>
 
 
-<section id="ejercicios-y-referencias-sobre-tidyverse" class="level3" data-number="11.0.1">
-<h3 data-number="11.0.1" class="anchored" data-anchor-id="ejercicios-y-referencias-sobre-tidyverse"><span class="header-section-number">11.0.1</span> Ejercicios y referencias sobre <code>tidyverse</code></h3>
-<p>Llegados a este punto, lo más importante es realizar la mayor cantidad posible de ejercicios y ejemplos para afianzar nuestro conocimiento de la interfaz de <code>dplyr</code>. En este punto, sobre todo si tenemos todavía poca experiencia en programación (pero si la tenemos, <em>también</em>), es importante tener <strong>mucha paciencia</strong> tanto con el propio lenguaje como con nosotros mismos.</p>
+<section id="recursos-para-ciencias-agrícolas-y-medioambientales" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="recursos-para-ciencias-agrícolas-y-medioambientales"><span class="header-section-number">11.1</span> Recursos para Ciencias Agrícolas y Medioambientales</h2>
+<ul>
+<li><p><a href="https://agstats.io/post/keeping-up-with-r/">R Packages for Agricultural Research</a> (J. Piaskowski, Univ. of Idaho, 2024).</p></li>
+<li><p><a href="https://datacarpentry.org/R-ecology-lesson/">Data Analysis and Visualization in R for Ecologist</a> (Data Carpentry).</p></li>
+<li><p><a href="https://rstats4ag.org/">Statistical Analysis of Agricultural Experiments using R</a> (A. Kniss y J. Streibig, 2019).</p></li>
+</ul>
+</section>
+<section id="recursos-de-aprendizaje-generales" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="recursos-de-aprendizaje-generales"><span class="header-section-number">11.2</span> Recursos de aprendizaje generales</h2>
+<ul>
+<li><a href="https://education.rstudio.com/learn/">Finding Your Way to R</a>: Tutorial creado por el equipo educativo de Posit.</li>
+<li><a href="https://www.tidyverse.org/learn/">Learn the tidyverse</a>: Recursos para profundizar en el análisis de datos con R y los paquetes del Tidyverse.</li>
+<li><a href="https://moderndive.com/">Statistical Inference via Data Science</a> (C. Ismay y A.Y. Kim, 2024): Un libro estupendo para repasar conceptos estadísticos con una aproximación práctica, utilizando R y los paquetes del Tidyverse.</li>
+</ul>
+<section id="ejercicios-y-referencias-sobre-tidyverse" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="ejercicios-y-referencias-sobre-tidyverse"><span class="header-section-number">11.2.1</span> Ejercicios y referencias sobre <code>tidyverse</code></h3>
+<p>Llegados a este punto, lo más importante es realizar la mayor cantidad posible de ejercicios y ejemplos para afianzar nuestro conocimiento de las funciones de los paquetes <code>dplyr</code> y <code>tidyr</code>. Sobre todo si tenemos todavía poca experiencia en programación (y aunque sí la tengamos, <em>también</em>), es importante tener <strong>mucha paciencia</strong> tanto con el propio lenguaje como con nosotros mismos.</p>
 <p><code>dplyr</code> define una serie de operaciones para manipulación y consulta de datos que no son arbitrarias. Llevan definidas desde hace décadas, cuando expertos en bases de datos pensaron en la forma de organizar la información de manera más eficiente y cómo recuperarla y modificarla posteriormente.</p>
 <p>Por tanto, es importante no desesperarse y poco a poco ir habituándose a las funciones existentes y a <strong>construir consultas</strong> con estas piezas básicas.</p>
 <p>Recomendamos a continuación varias fuentes en las que se pueden encontrar muchos ejemplos adicionales y ejercicios para practicar:</p>
 <ol type="1">
-<li>La versión online del libro <em>R for Data Science</em> de H. Wikcham <span class="citation" data-cites="Wickham2017">(<a href="references.html#ref-Wickham2017" role="doc-biblioref">Wickham &amp; Grolemund, 2017</a>)</span> incluye en el <a href="https://r4ds.had.co.nz/transform.html">capítulo 5</a> más ejemplos de estas mismas operaciones, utilizando datos del paquete <code>nycflights13</code>.</li>
+<li>La versión online del libro <em>R for Data Science</em> de H. Wikcham <span class="citation" data-cites="Wickham2017">(<a href="references.html#ref-Wickham2017" role="doc-biblioref">Wickham et&nbsp;al., 2023</a>)</span> incluye en el <a href="https://r4ds.had.co.nz/transform.html">capítulo 5</a> más ejemplos de estas mismas operaciones, utilizando datos del paquete <code>nycflights13</code>.</li>
 <li>Los materiales en línea del curso <code>Stat545</code> (<a href="https://stat545.com/" class="uri">https://stat545.com/</a>), creado por J. Bryan contienen varios capítulos relevantes para repasar y practicar. Varios de estos capítulos también proponen ejercicios adicionales para resolver:</li>
 </ol>
 <ul>
@@ -330,16 +389,55 @@ div.csl-indent {
 <li>El <a href="https://moderndive.com/3-wrangling.html">capítulo 3</a> del libro <em>Modern Dive into R</em> de C. Ismay y A.Y. Kim, contiene más ejemplos y explicaciones gráficas para entender todas estas operaciones.</li>
 </ol>
 </section>
-<section id="recursos-para-investigación-en-agricultura" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="recursos-para-investigación-en-agricultura"><span class="header-section-number">11.1</span> Recursos para investigación en Agricultura</h2>
+</section>
+<section id="creación-de-gráficos-en-r" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="creación-de-gráficos-en-r"><span class="header-section-number">11.3</span> Creación de gráficos en R</h2>
 <ul>
-<li><a href="https://agstats.io/post/keeping-up-with-r/">R Packages for Agricultural Research</a> (j. Piaskowski, Univ. of Idaho, 2024).</li>
+<li><p><a href="https://r-graph-gallery.com/">The R Graph Gallery</a>: Ofrece cientos de ejemplos de construcción de gráficos en R, algunos muy sofisticados.</p></li>
+<li><p>Libro <a href="https://socviz.co/">Data Visualization: A practical introduction</a> (K. Healy, Duke Univ., 2018): Aunque el código puede haber quedado algo desfasado por la evolución de los paquetes software en R, sigue siendo la fuente de referencia principal sobre creación de gráficos (en general) para visualización de datos.</p></li>
+</ul>
+</section>
+<section id="modelos-estadísticos-y-aprendizaje-automático" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="modelos-estadísticos-y-aprendizaje-automático"><span class="header-section-number">11.4</span> Modelos estadísticos y aprendizaje automático</h2>
+<section id="tidymodels" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="tidymodels"><span class="header-section-number">11.4.1</span> Tidymodels</h3>
+<ul>
+<li><a href="https://www.tidymodels.org/">Tidymodels</a>: Se trata de un <em>framework</em> para trabajar con modelos estadísticos siguiendo los principios de trabajo y organización del Tidyverse. Los principales paquetes se encuentran reunidos en un solo metapaquete denominado <code>tidymodels</code>, que podemos instalar directamente para probar toda la suite de herramientas que incluye:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidymodels"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><a href="https://www.tidymodels.org/start/">Getting started with Tidymodels</a>.</li>
+<li><a href="https://www.tidymodels.org/learn/">Learn Tidymodels</a>: Colección de tutoriales sobre ajuste de modelos con Tidymodels.</li>
+</ul>
+</section>
+<section id="mlr3" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="mlr3"><span class="header-section-number">11.4.2</span> <code>mlr3</code></h3>
+<p>El paquete <code>mlr3</code> <span class="citation" data-cites="mlr3">(<a href="references.html#ref-mlr3" role="doc-biblioref">Lang et&nbsp;al., 2019</a>)</span> es una alternativa menos conocida pero muy potente para implementar modelos de aprendizaje automático en R.</p>
+<ul>
+<li><a href="https://mlr3.mlr-org.com/"><code>mlr3</code> website</a></li>
+</ul>
+<p>Esta versión ha sido rediseñada para favorecer la claridad del código y su modularidad, separando otras funciones no principales en muchos paquetes complementarios que también forman un ecosistema alrededor de <code>mlr3</code>.</p>
+</section>
+</section>
+<section id="bioconductor" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="bioconductor"><span class="header-section-number">11.5</span> Bioconductor</h2>
+<p>La lista de recursos adicionales no quedaría completa sin mencionar el que, quizá, es uno de los proyectos más importantes dentro del universo R: Bioconductor <span class="citation" data-cites="bioconductor">(<a href="references.html#ref-bioconductor" role="doc-biblioref">Huber et&nbsp;al., 2015</a>)</span>. Se trata de un enorme ecosistema de paquetes (más de 3.000) que incluyen numerosas herramientas para Bioinformática, datos experimentales y automatización de flujos de trabajo.</p>
+<ul>
+<li><a href="https://www.bioconductor.org/about/">About Bioconductor</a>.</li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-bioconductor" class="csl-entry" role="listitem">
+Huber, W., Carey, V. J., Gentleman, R., Anders, S., Carlson, M., Carvalho, B. S., Bravo, H. C., Davis, S., Gatto, L., Girke, T., Gottardo, R., Hahne, F., Hansen, K. D., Irizarry, R. A., Lawrence, M., Love, M. I., MacDonald, J., Obenchain, V., Ole’s, A. K., … Morgan, M. (2015). <span>O</span>rchestrating high-throughput genomic analysis with <span>B</span>ioconductor. <em>Nature Methods</em>, <em>12</em>(2), 115-121. <a href="http://www.nature.com/nmeth/journal/v12/n2/full/nmeth.3252.html">http://www.nature.com/nmeth/journal/v12/n2/full/nmeth.3252.html</a>
+</div>
+<div id="ref-mlr3" class="csl-entry" role="listitem">
+Lang, M., Binder, M., Richter, J., Schratz, P., Pfisterer, F., Coors, S., Au, Q., Casalicchio, G., Kotthoff, L., &amp; Bischl, B. (2019). <span>mlr3</span>: A modern object-oriented machine learning framework in <span>R</span>. <em>Journal of Open Source Software</em>. <a href="https://doi.org/10.21105/joss.01903">https://doi.org/10.21105/joss.01903</a>
+</div>
 <div id="ref-Wickham2017" class="csl-entry" role="listitem">
-Wickham, H., &amp; Grolemund, G. (2017). <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em> (1st ed.). O’Reilly Media, Inc.
+Wickham, H., Cetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em><span>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</span></em> (2.ª ed.). O’Reilly Media. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
 </div>
 </div>
 </section>

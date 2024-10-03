@@ -415,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Máximo de una secuencia de 30 elementos elegidos al azar de entre el 1 y el 100.</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">30</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 100</code></pre>
+<pre><code>[1] 98</code></pre>
 </div>
 </div>
 <p>Al igual que en otros lenguajes de programación, resulta interesante implementar una función cuando necesitas que varias líneas de código se ejecuten varias veces en diferentes puntos de nuestro código. En este caso, ese bloque de código lo encampsulamos dentro de una función, la cual llamaremos cada vez que la necesitemos. Antes de darle un nombre a una función que implementemos nosotros, podemos comprobar si ese nombre no se ha utilizado ya, mediante la función <code>exists()</code> (devuelve <code>TRUE</code> o <code>FALSE</code> en función de si el nombre de la función ya existe o no, respectivamente).</p>
@@ -448,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mySample <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean=</span><span class="dv">20</span>, <span class="at">sd=</span><span class="dv">4</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">se</span>(mySample)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3880236</code></pre>
+<pre><code>[1] 0.388467</code></pre>
 </div>
 </div>
 <section id="parámetros-con-valores-por-defecto." class="level3" data-number="4.2.1">

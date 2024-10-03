@@ -324,8 +324,10 @@ div.csl-indent {
   <li><a href="#operaciones-de-selección" id="toc-operaciones-de-selección" class="nav-link" data-scroll-target="#operaciones-de-selección"><span class="header-section-number">8.3.1</span> Operaciones de selección</a></li>
   <li><a href="#transformación-de-datos" id="toc-transformación-de-datos" class="nav-link" data-scroll-target="#transformación-de-datos"><span class="header-section-number">8.3.2</span> Transformación de datos</a></li>
   </ul></li>
-  <li><a href="#resúmenes-estadísticos" id="toc-resúmenes-estadísticos" class="nav-link" data-scroll-target="#resúmenes-estadísticos"><span class="header-section-number">8.4</span> Resúmenes estadísticos</a></li>
-  <li><a href="#gráficos-exploratorios" id="toc-gráficos-exploratorios" class="nav-link" data-scroll-target="#gráficos-exploratorios"><span class="header-section-number">8.5</span> Gráficos exploratorios</a></li>
+  <li><a href="#resúmenes-estadísticos" id="toc-resúmenes-estadísticos" class="nav-link" data-scroll-target="#resúmenes-estadísticos"><span class="header-section-number">8.4</span> Resúmenes estadísticos</a>
+  <ul class="collapse">
+  <li><a href="#el-paquete-hmisc" id="toc-el-paquete-hmisc" class="nav-link" data-scroll-target="#el-paquete-hmisc"><span class="header-section-number">8.4.1</span> El paquete <code>Hmisc</code></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -389,10 +391,11 @@ Tip
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"nass.corn"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"nass.corn"</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"greenrice"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Escritura de datos a un fichero CSV</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(nass.barley, <span class="st">"data/nass_barley.csv"</span>, <span class="at">row.names =</span> F)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(nass.corn, <span class="st">"data/nass_corn.csv"</span>, <span class="at">row.names =</span> F)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(greenrice, <span class="st">"data/greenrice.csv"</span>, <span class="at">row.names =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"rice"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Escritura de datos a un fichero CSV</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(nass.barley, <span class="st">"data/nass_barley.csv"</span>, <span class="at">row.names =</span> F)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(nass.corn, <span class="st">"data/nass_corn.csv"</span>, <span class="at">row.names =</span> F)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(greenrice, <span class="st">"data/greenrice.csv"</span>, <span class="at">row.names =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -659,25 +662,253 @@ de la comparación. -->
 </section>
 <section id="resúmenes-estadísticos" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="resúmenes-estadísticos"><span class="header-section-number">8.4</span> Resúmenes estadísticos</h2>
-</section>
-<section id="gráficos-exploratorios" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="gráficos-exploratorios"><span class="header-section-number">8.5</span> Gráficos exploratorios</h2>
+<ul>
+<li><p>La función <code>group_by()</code> permite obtener resúmenes de datos agrupando por una variable categórica (o bien una cuantitativa que tratemos como categórica, por ejemplo año, mes, etc.).</p></li>
+<li><p>Por otro lado, la función <code>summarise()</code> suele aparecer detrás de un comando de agrupación como el anterior, para aplicar una función de resumen de datos (media, mediana, etc.) a todo el conjunto de datos o a cada uno de los grupos que hemos generado.</p></li>
+</ul>
+<p>La utilización del operador integrado <em>pipe</em> (<code>|&gt;</code>) elimina la necesidad de utilizar muchos objetos/variables para guardar los resultados intermedios, quedando un código más limpio y fácil de interpretar.</p>
+<p>Por ejemplo, calculamos el promedio de producción anual de cebada en todos los estados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>barley_annual_mean <span class="ot">&lt;-</span> nass_barley <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_yield =</span> <span class="fu">mean</span>(yield, <span class="at">na.rm =</span> T))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(barley_annual_mean)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+   year mean_yield
+  &lt;int&gt;      &lt;dbl&gt;
+1  1866       23.3
+2  1867       22.9
+3  1868       22.2
+4  1869       23.9
+5  1870       22.4
+6  1871       22.2</code></pre>
+</div>
+</div>
+<p>Para el estudio con parcelas divididas del arroz en invernadero, podemos obtener la mediana de producción por cada tipo de estrategia de gestión en todas las combinaciones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>rice_mean_yield <span class="ot">&lt;-</span> rice <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(management) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_yield =</span> <span class="fu">median</span>(yield, <span class="at">na.rm =</span> T))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rice_mean_yield)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  management median_yield
+  &lt;fct&gt;             &lt;dbl&gt;
+1 Minimum            5.78
+2 Optimum            6.36
+3 Intensive          7.25</code></pre>
+</div>
+</div>
+<p>Y ahora también tenemos en cuenta la replica experimental para desglosar aún más la mediana de la producción.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>rice_mean_yield_by_rep <span class="ot">&lt;-</span> rice <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(management, Replicate) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_yield =</span> <span class="fu">median</span>(yield, <span class="at">na.rm =</span> T))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'management'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rice_mean_yield_by_rep)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+# Groups:   management [2]
+  management Replicate median_yield
+  &lt;fct&gt;      &lt;fct&gt;            &lt;dbl&gt;
+1 Minimum    R1                5.60
+2 Minimum    R2                5.99
+3 Minimum    R3                5.39
+4 Optimum    R1                6.40
+5 Optimum    R2                6.46
+6 Optimum    R3                5.90</code></pre>
+</div>
+</div>
+<section id="el-paquete-hmisc" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="el-paquete-hmisc"><span class="header-section-number">8.4.1</span> El paquete <code>Hmisc</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>Hmisc<span class="sc">::</span><span class="fu">html</span>(<span class="fu">describe</span>(green_rice))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<style>
+.earrows {color:silver;font-size:11px;}
+
+fcap {
+ font-family: Verdana;
+ font-size: 12px;
+ color: MidnightBlue
+ }
+
+smg {
+ font-family: Verdana;
+ font-size: 10px;
+ color: 󅒐
+}
+
+hr.thinhr { margin-top: 0.15em; margin-bottom: 0.15em; }
+
+span.xscript {
+position: relative;
+}
+span.xscript sub {
+position: absolute;
+left: 0.1em;
+bottom: -1ex;
+}
+</style>
+
+<title>green_rice Descriptives</title>
+<font color="MidnightBlue"><div align="center"><span style="font-weight:bold">green_rice <br><br> 5  Variables   64  Observations</span></div></font>
+<hr class="thinhr">
+<span style="font-weight:bold">uptake</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAJcAAAANCAMAAACTvAxuAAAB2lBMVEUAAAABAQECAgIDAwMEBAQGBgYICAgJCQkKCgoLCwsNDQ0PDw8QEBARERESEhIUFBQVFRUWFhYXFxcYGBgZGRkaGhobGxsdHR0gICAiIiIjIyMkJCQlJSUmJiYnJycoKCgpKSkqKiorKysuLi4vLy8wMDAxMTEzMzM0NDQ1NTU3Nzc4ODg5OTk8PDw9PT1BQUFCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlLS0tMTExOTk5QUFBSUlJTU1NWVlZXV1daWlpbW1tdXV1hYWFlZWVpaWltbW1wcHBycnJzc3N0dHR1dXV2dnZ6enp8fHx+fn5/f3+AgICFhYWHh4eIiIiJiYmKioqLi4uNjY2QkJCRkZGSkpKTk5OVlZWZmZmcnJydnZ2enp6fn5+hoaGioqKmpqapqamqqqqtra2vr6+ysrK0tLS1tbW3t7e6urq8vLy9vb2/v7/Dw8PExMTFxcXHx8fIyMjJycnKysrMzMzOzs7Pz8/Q0NDU1NTV1dXW1tbY2NjZ2dna2trb29vc3Nze3t7f39/g4ODh4eHi4uLk5OTl5eXm5ubo6Ojr6+vt7e3u7u7v7+/w8PDy8vL09PT19fX29vb5+fn6+vr7+/v8/Pz9/f3+/v7///+Peqk2AAAB0ElEQVQ4je2V11NTURCHfymQAKEjvYMi2EECIQEEpMYSlGYDsVCkQ0Clu0AEAwcuYERx/1fvMckMmUkenMEZHvI97J3fnbN7vzn3YSH8LOG5CMXlu2dTY0rIg+cG2M82XnMorlrOpvupIQ+eG2Gvf+Mie21M9DmF8hadm/63q4fDB2vq033w9TMr3zx5ZnYd8+9VPp1RPIsNSYMKu+e//GQ+/uA6+bjgkT1uhU6Odtiztev0TTmc+xH4MbHHvLvPm8t/0/qv4Erft6QXERkAfYUZ0CWTl1GUogzTRIU2E4bqc9qRRqYWeofxfljsujgNblIutL1EVsR0abQdsinfqnvSlEptUQVY8I6p0zgogPJrRMU1dMkog1PzjILSGq0WeV96VclcBWgTfcazKFHNVpjz66Mw1Zj5GOlsfMBj+DSEGgdigRucDfQz22B4BThkU64NL5qT+JE+DzveMffQE3gTldeZi2ycHCmDC2+C39fDCN9/DHuFvf6bl7qLVC/t7TtqifctpzEU4wpmhcixGjFSl96BNGFoEe8xOYBKO0xAmcgA+oSohqEbsMumLAueNiWINn02lr1jauEIXHq3SoUosIjESBkW8TL4amyNUMsfKE2QmoPRqXgAAAAASUVORK5CYII=" alt="image"></div>
+<pre style="font-size:85%;">        n  missing distinct     Info     Mean      Gmd      .05      .10      .25 
+       64        0       61        1   0.4582   0.3277  0.09815  0.10540  0.21400 
+      .50      .75      .90      .95 
+  0.45500  0.61450  0.83450  1.02910  </pre>
+
+<span style="font-size: 85%;"><font color="MidnightBlue">lowest</font>&nbsp;: 0.084 0.089 0.093 0.098 0.099 ,  <font color="MidnightBlue">highest</font>: 1.007 1.033 1.034 1.089 1.297</span>
+<hr class="thinhr">
+<span style="font-weight:bold">W</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAMFBMVEUAAACQkJCcnJyjo6OpqamwsLC2tra/v7/ExMTKysrV1dXZ2dna2trr6+vs7Oz////AoE3/AAAAM0lEQVQIma3OORIAIAjAwHjgBcj/f2trr2WanYBmhiDursCurE6PiP1QM9EKxczmN/P+PLQ+BNgnVP4YAAAAAElFTkSuQmCC" alt="image"></div>
+<style>
+ .hmisctable659242 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable659242 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable659242 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable659242">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th><th>Info</th><th>Mean</th><th>Gmd</th></tr>
+ <tr><td>64</td><td>0</td><td>4</td><td>0.938</td><td>17.5</td><td>16.51</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value         0   10   20   40
+ Frequency    16   16   16   16
+ Proportion 0.25 0.25 0.25 0.25 </pre>
+
+
+For the frequency table, variable is rounded to the nearest 0
+<hr class="thinhr">
+<span style="font-weight:bold">N</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAJFBMVEUAAACWlpaioqKwsLC+vr7KysrOzs7Z2dna2trr6+vs7Oz///9owtBAAAAAMklEQVQIma3OuREAIAzEQOEDP7j/fknJIVSyI4gyZk2sAtgtvB31fqiVA6UYub6Z9+cBMcMDW4Oz1acAAAAASUVORK5CYII=" alt="image"></div>
+<style>
+ .hmisctable646602 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable646602 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable646602 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable646602">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th><th>Info</th><th>Mean</th><th>Gmd</th></tr>
+ <tr><td>64</td><td>0</td><td>4</td><td>0.938</td><td>135</td><td>114.3</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value         0   90  180  270
+ Frequency    16   16   16   16
+ Proportion 0.25 0.25 0.25 0.25 </pre>
+
+
+For the frequency table, variable is rounded to the nearest 0
+<hr class="thinhr">
+<span style="font-weight:bold">Replicate</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAJFBMVEUAAACWlpaioqKwsLC+vr7KysrOzs7Z2dna2trr6+vs7Oz///9owtBAAAAAMklEQVQIma3OuREAIAzEQOEDP7j/fknJIVSyI4gyZk2sAtgtvB31fqiVA6UYub6Z9+cBMcMDW4Oz1acAAAAASUVORK5CYII=" alt="image"></div>
+<style>
+ .hmisctable164099 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable164099 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable164099 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable164099">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th><th>Info</th><th>Mean</th><th>Gmd</th></tr>
+ <tr><td>64</td><td>0</td><td>4</td><td>0.938</td><td>2.5</td><td>1.27</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value         1    2    3    4
+ Frequency    16   16   16   16
+ Proportion 0.25 0.25 0.25 0.25 </pre>
+
+
+For the frequency table, variable is rounded to the nearest 0
+<hr class="thinhr">
+<span style="font-weight:bold">Main</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAJFBMVEUAAACWlpaioqKwsLC+vr7KysrOzs7Z2dna2trr6+vs7Oz///9owtBAAAAAMklEQVQIma3OuREAIAzEQOEDP7j/fknJIVSyI4gyZk2sAtgtvB31fqiVA6UYub6Z9+cBMcMDW4Oz1acAAAAASUVORK5CYII=" alt="image"></div>
+<style>
+ .hmisctable338846 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable338846 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable338846 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable338846">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th><th>Info</th><th>Mean</th><th>Gmd</th></tr>
+ <tr><td>64</td><td>0</td><td>4</td><td>0.938</td><td>2.5</td><td>1.27</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value         1    2    3    4
+ Frequency    16   16   16   16
+ Proportion 0.25 0.25 0.25 0.25 </pre>
+
+
+For the frequency table, variable is rounded to the nearest 0
+<hr class="thinhr">
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-gomez1984" class="csl-entry" role="listitem">
-Gomez, K. A., &amp; Gomez, A. A. (1984). <em>Statistical Procedures for Agricultural Research</em>. John Wiley &amp; Sons.
+Gomez, K. A., &amp; Gomez, A. A. (1984). <em><span>Statistical Procedures for Agricultural Research</span></em>. John Wiley &amp; Sons.
 </div>
 <div id="ref-agriTutorial2020" class="csl-entry" role="listitem">
-Rodney Edmondson, Hans-Peter Piepho, &amp; Muhammad Yaseen. (2020). <em>agriTutorial: Tutorial Analysis of Some Agricultural Experiments</em>.
+Rodney Edmondson, Hans-Peter Piepho, &amp; Muhammad Yaseen. (2020). <em><span>agriTutorial: Tutorial Analysis of Some Agricultural Experiments </span></em>.
 </div>
 <div id="ref-tukey1977" class="csl-entry" role="listitem">
 Tukey, J. W. (1977). <em>Exploratory Data Analysis</em> (1.ª ed.). Addison-Wesley Pub.
 </div>
 <div id="ref-agridat2024" class="csl-entry" role="listitem">
-Wright, K. (2024). <em>agridat: Agricultural Datasets</em>. <a href="https://CRAN.R-project.org/package=agridat">https://CRAN.R-project.org/package=agridat</a>
+Wright, K. (2024). <em><span>agridat: Agricultural Datasets</span></em>. <a href="https://CRAN.R-project.org/package=agridat">https://CRAN.R-project.org/package=agridat</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
