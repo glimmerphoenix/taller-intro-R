@@ -1,5 +1,56 @@
 # Creación de gráficos
 
-In summary, this book has no content whatsoever.
+## Gráficos exploratorios
 
-See @knuth84 for additional discussion of literate programming.
+En un taller posterior trataremos más en profundidad cómo generar gráficos de calidad con R. En
+este punto, sólo mostramos unos ejemplos para ilustrar algunas de las posibilidades básicas
+de representación gráfica de datos.
+
+**Evolución de la producción media anual de cebada**
+
+```{r}
+#| label: fig-barley-annual-mean
+#| fig-cap: "Evolución de la media de producción anual de cebada en EE.UU."
+#| fig-width: 10
+#| fig-height: 8
+#| warning: false
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(ggpmisc)
+
+nass_barley <- read_csv("data/nass_barley.csv", col_types = cols(col_integer(), col_character(),
+  col_double(), col_double()))
+
+barley_annual_mean <- nass_barley |>
+  group_by(year) |>
+  summarise(mean_yield = mean(yield, na.rm = T))
+head(barley_annual_mean)
+
+ggplot(data = barley_annual_mean, aes(x = year, y = mean_yield)) +
+  geom_line(color = "navy") +
+  stat_valleys(geom = "point", span = 11, color = "red", size = 2) +
+  stat_valleys(geom = "label", span = 11, color = "red", angle = 0,
+               hjust = -0.1) +
+  stat_valleys(geom = "rug", span = 11, color = "red", sides = "b") +
+  ggtitle("Evolución de la media de producción anual de cebada (EE.UU.)")
+```
+
+
+**Distribución de valores de producción anual por estado a partir del año 2000**
+
+```{r}
+#| label: fig-yield-since-2000
+#| fig-cap: "Producción anual de cebada desde el año 2000 (EE.UU.)"
+#| fig-width: 10
+#| fig-height: 10
+
+barley_yield_2000 <- nass_barley |>
+  filter(year >= 2000)
+
+ggplot(data = barley_yield_2000, aes(x = year, y = yield, group = year, fill = year)) +
+  geom_boxplot(alpha = .5) +
+  ggtitle("Producción anual de cebada desde el año 2000 (EE.UU.)")
+```
+

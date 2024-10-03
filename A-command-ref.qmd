@@ -1,7 +1,21 @@
 # Comandos de utilidad
 
+## R base
+
+- [Base R Cheat Sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf).
+- [R cheat sheet](https://www.rob-mcculloch.org/bs_2024/webpage/learn-R/r_cheat_sheet.pdf) (R. McCulloch).
+
 ## Comandos en R Studio
 
-## Comandos con `dplyr`
+- [RStudio IDE Cheatsheet](https://rstudio.github.io/cheatsheets/html/rstudio-ide.html).
+
+## Preparación de datos con `dplyr` y `tidyr`
+
+- [Transformación de datos con `dplyr`](https://rstudio.github.io/cheatsheets/html/data-transformation.html).
+- [Organización de datos con `tidyr`](https://rstudio.github.io/cheatsheets/html/tidyr.html).
+
+## Otras hojas de referencia
+
+- [Catálogo de Posit Cheatsheets](https://posit.co/resources/cheatsheets/).
 
 

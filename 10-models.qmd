@@ -1,5 +1,10 @@
 # Modelos con R
 
-In summary, this book has no content whatsoever.
+Una de las características más potentes de R es la enorme cantidad de
+modelos estadísticos y de aprendizaje automático que podemos aplicar
+a nuestros datos.
 
-See @knuth84 for additional discussion of literate programming.
+
+## Ejemplos de experimentos en Ciencias Agrícolas
+
+- [Tutorial Analysis of Some Agricultural Experiments](https://myaseen208.com/agriTutorial/articles/IntroagriTutorial.pdf).

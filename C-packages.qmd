@@ -2,23 +2,52 @@
 
 ## `tidyverse`
 
+- <https://www.tidyverse.org/>.
 
 ## `ggplot2`
 
+- <https://ggplot2.tidyverse.org/>.
 
 ## `GGally`
 
+- [GGally: extensiones de gráficos para `ggplot2`](https://ggobi.github.io/ggally/).
+
 ## *Pipelines*
+
+- El paquete `targets` ofrece potentes funcionalidades para crear *pipelines* de procesamiento
+de datos con R. Si te encuentras con proyectos en los que debes repetir las mismas operaciones
+de obtención, limpieza y preparación de datos una y otra vez sobre decenas de *datasets* deberías
+plantearte definir **flujos de trabajo** (*workflow*) para gestionar mejor el progreso de las
+distintas operaciones.
+
+- [A walkthrough to get started with `targets`](https://books.ropensci.org/targets/walkthrough.html).
 
 ## data.table
 
+El paquete `data.table` (<https://rdatatable.gitlab.io/data.table/>) presenta una alternativa para
+el procesamiento de datos distinta a `tidyverse`. Su sintaxis es menos accesible (sobre todo para
+programadores sin mucha experiencia), peor a cambio suele ofrecer mucho mayor rendimiento que
+sus competidores, completando las mismas tareas en menos tiempo (y, con frecuencia, consumiendo menos
+recursos como memoria RAM).
+
+## Pola.rs
+
+Incluimos también en este apéndice el nuevo proyecto [Polars](https://pola.rs/). Esta es una nueva
+biblioteca de gestión de DataFrames escrita en el lenguaje de programación Rust con API nativa para
+este lenguaje y también para Python.
+
+El paquete `polars` en R nos da acceso a las funciones de este nuevo proyecto, que promete mejorar
+la eficiencia de nuestros proyectos sustancialmente, con paralelización de la ejecución y gestión
+eficiente de datos en memoria gracias a la integración de [Apache Arrow](https://arrow.apache.org/overview/).
 
 ## Modelos estadísticos y aprendizaje automático
 
 
 ### `tidymodels`
 
+- <https://www.tidymodels.org/>.
 
 ### `mlr`
 
+- <https://mlr3.mlr-org.com/>.
 

@@ -59,6 +59,7 @@ library(agriTutorial)
 data("nass.corn")
 data("nass.corn")
 data("greenrice")
+data("rice")
 # Escritura de datos a un fichero CSV
 write.csv(nass.barley, "data/nass_barley.csv", row.names = F)
 write.csv(nass.corn, "data/nass_corn.csv", row.names = F)
@@ -272,8 +273,60 @@ de la comparación. -->
 
 ## Resúmenes estadísticos
 
+- La función `group_by()` permite obtener resúmenes de datos agrupando por una variable
+categórica (o bien una cuantitativa que tratemos como categórica, por ejemplo año, mes, etc.).
 
-## Gráficos exploratorios
+- Por otro lado, la función `summarise()` suele aparecer detrás de un comando de agrupación
+como el anterior, para aplicar una función de resumen de datos (media, mediana, etc.) a todo el
+conjunto de datos o a cada uno de los grupos que hemos generado.
+
+La utilización del operador integrado *pipe* (`|>`) elimina la necesidad de utilizar muchos
+objetos/variables para guardar los resultados intermedios, quedando un código más limpio y
+fácil de interpretar.
+
+Por ejemplo, calculamos el promedio de producción anual de cebada en todos los estados.
+
+```{r}
+#| label: barley-annual-mean
+
+barley_annual_mean <- nass_barley |>
+    group_by(year) |>
+    summarise(mean_yield = mean(yield, na.rm = T))
+head(barley_annual_mean)
+```
+
+Para el estudio con parcelas divididas del arroz en invernadero, podemos obtener la
+mediana de producción por cada tipo de estrategia de gestión en todas las combinaciones.
+
+```{r}
+#| label: rice_median_yield
+
+rice_mean_yield <- rice |>
+  group_by(management) |>
+  summarise(median_yield = median(yield, na.rm = T))
+head(rice_mean_yield)
+```
 
 
+Y ahora también tenemos en cuenta la replica experimental para desglosar aún más la
+mediana de la producción.
 
+```{r}
+#| label: rice_median_yield_by_rep
+
+rice_mean_yield_by_rep <- rice |>
+  group_by(management, Replicate) |>
+  summarise(median_yield = median(yield, na.rm = T))
+head(rice_mean_yield_by_rep)
+```
+
+### El paquete `Hmisc`
+
+
+```{r}
+#| label: describe_greenrice
+#| warning: false
+
+library(Hmisc)
+Hmisc::html(describe(green_rice))
+```

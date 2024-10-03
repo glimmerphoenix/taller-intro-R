@@ -1,11 +1,28 @@
 # Recursos adicionales {#sec-add-resources}
 
+## Recursos para Ciencias Agrícolas y Medioambientales
+
+- [R Packages for Agricultural Research](https://agstats.io/post/keeping-up-with-r/) (J. Piaskowski, Univ. of Idaho, 2024).
+
+- [Data Analysis and Visualization in R for Ecologist](https://datacarpentry.org/R-ecology-lesson/) (Data Carpentry).
+
+- [Statistical Analysis of Agricultural Experiments using R](https://rstats4ag.org/) (A. Kniss y J. Streibig, 2019).
+
+## Recursos de aprendizaje generales
+
+- [Finding Your Way to R](https://education.rstudio.com/learn/): Tutorial creado por el equipo educativo de Posit.
+- [Learn the tidyverse](https://www.tidyverse.org/learn/): Recursos para profundizar en el análisis de datos con R y
+los paquetes del Tidyverse.
+- [Statistical Inference via Data Science](https://moderndive.com/) (C. Ismay y  A.Y. Kim, 2024): Un libro estupendo
+para repasar conceptos estadísticos con una aproximación práctica, utilizando R y los paquetes del Tidyverse.
+
+
 ### Ejercicios y referencias sobre `tidyverse`
 
 Llegados a este punto, lo más importante es realizar la mayor cantidad posible
-de ejercicios y ejemplos para afianzar nuestro conocimiento de la interfaz de
-`dplyr`. En este punto, sobre todo si tenemos todavía poca experiencia en
-programación (pero si la tenemos, *también*), es importante tener **mucha
+de ejercicios y ejemplos para afianzar nuestro conocimiento de las funciones de los paquetes
+`dplyr` y `tidyr`. Sobre todo si tenemos todavía poca experiencia en
+programación (y aunque sí la tengamos, *también*), es importante tener **mucha
 paciencia** tanto con el propio lenguaje como con nosotros mismos.
 
 `dplyr` define una serie de operaciones para manipulación y consulta de datos que
@@ -26,6 +43,7 @@ de estas mismas operaciones, utilizando datos del paquete `nycflights13`.
 creado por J. Bryan contienen varios capítulos relevantes para repasar
 y practicar. Varios de estos capítulos también proponen ejercicios
 adicionales para resolver:
+
   * El [capítulo 6](https://stat545.com/dplyr-intro.html) es una introducción a las
   operaciones básicas con `dplyr`.
   * El [capítulo 7](https://stat545.com/dplyr-single.html) amplía con más 
@@ -36,10 +54,58 @@ adicionales para resolver:
   * El [capítulo 15](https://stat545.com/join-cheatsheet.html) amplía 
   las operaciones *join*, explicando gráficamente y de forma clara cómo
   se combinan las tablas con cada operación y el resultado final.
+
 3. El [capítulo 3](https://moderndive.com/3-wrangling.html) del 
 libro *Modern Dive into R* de C. Ismay y A.Y. Kim, contiene más ejemplos y
 explicaciones gráficas para entender todas estas operaciones.
 
-## Recursos para investigación en Agricultura
 
-- [R Packages for Agricultural Research](https://agstats.io/post/keeping-up-with-r/) (j. Piaskowski, Univ. of Idaho, 2024).
+
+## Creación de gráficos en R 
+
+- [The R Graph Gallery](https://r-graph-gallery.com/): Ofrece cientos de ejemplos de construcción
+de gráficos en R, algunos muy sofisticados.
+
+- Libro [Data Visualization: A practical introduction](https://socviz.co/) (K. Healy, Duke Univ., 2018): Aunque el código
+puede haber quedado algo desfasado por la evolución de los paquetes software en R, sigue siendo la fuente
+de referencia principal sobre creación de gráficos (en general) para visualización de datos.
+
+## Modelos estadísticos y aprendizaje automático
+
+### Tidymodels
+
+- [Tidymodels](https://www.tidymodels.org/): Se trata de un *framework* para trabajar con
+modelos estadísticos siguiendo los principios de trabajo y organización del Tidyverse.
+Los principales paquetes se encuentran reunidos en un solo metapaquete denominado `tidymodels`,
+que podemos instalar directamente para probar toda la suite de herramientas que incluye:
+
+```{r}
+#| label: install-tidymodels
+#| eval: false
+
+install.packages("tidymodels")
+```
+
+- [Getting started with Tidymodels](https://www.tidymodels.org/start/).
+- [Learn Tidymodels](https://www.tidymodels.org/learn/): Colección de tutoriales sobre ajuste de
+modelos con Tidymodels.
+
+### `mlr3`
+
+El paquete `mlr3` [@mlr3] es una alternativa menos conocida pero muy potente para
+implementar modelos de aprendizaje automático en R.
+
+- [`mlr3` website](https://mlr3.mlr-org.com/)
+
+Esta versión ha sido rediseñada para favorecer la claridad del código y su modularidad,
+separando otras funciones no principales en muchos paquetes complementarios que también
+forman un ecosistema alrededor de `mlr3`.
+
+## Bioconductor
+
+La lista de recursos adicionales no quedaría completa sin mencionar el que, quizá, es uno
+de los proyectos más importantes dentro del universo R: Bioconductor [@bioconductor]. Se trata de
+un enorme ecosistema de paquetes (más de 3.000) que incluyen numerosas herramientas para
+Bioinformática, datos experimentales y automatización de flujos de trabajo.
+
+- [About Bioconductor](https://www.bioconductor.org/about/).

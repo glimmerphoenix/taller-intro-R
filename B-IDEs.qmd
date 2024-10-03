@@ -2,5 +2,17 @@
 
 ## R Studio
 
+[RStudio](https://posit.co/products/open-source/rstudio/) es un IDE para programación con R y
+otros lenguajes creado por la empresa Posit PBC.
 
-## Visual Studio
+Esta es la IDE principal que hemos usado en este tutorial.
+
+## VS Code
+
+Otra IDE alternativa para programación con R es [Microsoft VS Code](https://code.visualstudio.com/).
+
+Una ventaja de este entorno de programación es que su diseño es muy flexible, basado en extensiones
+que se pueden activar o desactivar en función del tipo de proyecto, herramientas tecnológicas y el 
+lenguaje de programación utilizado.
+
+- [R in Visual Studio Code](https://code.visualstudio.com/docs/languages/r).
