@@ -26,22 +26,27 @@ library(tidyverse)
 
 # 1.1 ¿Qué es R y RStudio?
 
-## ¿Qué es R y RStudio?
+## ¿Qué es R? 
 
 - R: lenguje de programación para el análisis y la visualización de datos. 
 
   - Creado por **Ross Ihaka** y **Robert Gentleman** a partir del lenguaje estadístico S.
   - Uso extendido en investigación, docencia e industria (Google, Facebook, Twitter, NYT, Pfizer, Santander, BBVA, Teléfonica, etc.).
+
+- Características:
+
   - Almacenamiento y manipulación efectiva de datos.
-  - Operadores para realizar cálculos sobre variables indexadas (Arrays), en particular matrices.
-  - Herramientas para el análisis de datos.
-  - Multitud de opciones para el análisis gráfico.
+  - Operadores para realizar cálculos sobre variables indexadas (arrays), en particular matrices.
   - Sentencias condicionales, ciclos, funciones recursivas y posibilidad de entradas y salidas.
+  - Herramienta para el análisis de datos.
+  - Multitud de opciones para el análisis gráfico.
+  
+
+## ¿Qué es RStudio?
 
 - RStudio: entorno de progrmación. 
 
   - Interprete de R que evalua expresiones (aritméticas, lógicas, llamadas a funciones o asignaciones). 
-  - Algunas de estas expresiones (siempre y cuando sean correctas) pueden producir una salida visible que se puede almacenar en alguna variable, en disco o en un fichero. 
   - Leer y escribir ficheros de datos.
   - Generar y guardar gráficos. 
   - Crear scripts.
@@ -53,7 +58,7 @@ library(tidyverse)
 ## Ventajas e inconvenientes de R.
 
 |    Ventajas   |   Inconvenientes  |
-|:--------------| -----------------:|
+|:--------------| :-----------------|
 | Herramienta de software libre, gratuito | Aprender a programar |
 | Comunidad sólida con participantes del mundo académico y la industria   | No intuitivo |
 | Desarrollar funciones, paquetes o plantillas de documentos |  Comprender lo que hace el código |
@@ -65,17 +70,10 @@ library(tidyverse)
 
 ## Entrorno de programación RStudio.
 
-Diagnóstico de sintáxis: 
-
-  - cruz roja (error sintáctico)
-  - exclamación amarilla (variable u objeto no utilizado o no declarado)
-  - círculo azul (ayuda)
-  
-```{r imagen-IDE, echo=FALSE, out.width = "60%"}
+```{r imagen-IDE, echo=FALSE, out.width = "80%"}
 # Controlamos tamaño de la figura
 knitr::include_graphics("imagenes/RStudio-IDE.png")
 ```
-
 
 ## Consola
 
@@ -92,28 +90,42 @@ Es un interprete interactivo de comandos.
 knitr::include_graphics("imagenes/consola.jpg")
 ```
 
+## Editor de texto
 
-## Enviroment
+Diagnóstico de sintáxis: 
+
+  - cruz roja (error sintáctico)
+  - exclamación amarilla (variable u objeto no utilizado o no declarado)
+  - círculo azul (ayuda)
+
+  
+```{r imagen-editor, echo=FALSE, out.width = "60%"}
+# Controlamos tamaño de la figura
+knitr::include_graphics("imagenes/editor_texto.png")
+```
+
+## Panel de programación
 
 Panel de programación: variables de entorno, el historial de comandos, el control de versiones, etc. 
 
 - *Enviroment*: contenido de los objetos
-- Los podemos guardar en un fichero .RData. -> recuperar los objetos de una sesión anterior
-- Conjunto de objetos almacenados en cada momento: *espacio de trabajo (workspace)*.  
+
+  - Los podemos guardar en un fichero .RData. -> recuperar los objetos de una sesión anterior
+  - Conjunto de objetos almacenados en cada momento: *espacio de trabajo (workspace)*.  
 
 ```{r imagen-enviroment, echo=FALSE, out.width = "60%"}
 # Controlamos tamaño de la figura
-knitr::include_graphics("imagenes/environment.jpg")
+knitr::include_graphics("imagenes/environment.png")
 ```
 
-## History
+## Panel de programación
 
-Historial de comandos introducidos.
+- *History*: Historial de comandos introducidos.
 
-- Todas las instrucciones de la línea de comandos se guardan aquí. 
-- Guardar en un fichero .Rhistory. 
-- Cargar un fichero .Rhistory. 
-- *escoba* borrar todo el histórico de instrucciones.
+  - Todas las instrucciones de la línea de comandos se guardan aquí. 
+  - Guardar en un fichero .Rhistory. 
+  - Cargar un fichero .Rhistory. 
+  - *escoba* borrar todo el histórico de instrucciones.
 
 ```{r imagen-history, echo=FALSE, out.width = "60%"}
 # Controlamos tamaño de la figura
@@ -151,21 +163,23 @@ knitr::include_graphics("imagenes/session.jpg")
 
 ## Nuevo proyecto
 
-1. Menú *File* -> *New Porject*.
+1º. Menú *File* -> *New Porject*.
 
-```{r imagen-newproject, echo=FALSE, out.width = "60%"}
+```{r imagen-newproject, echo=FALSE, out.width = "30%"}
 # Controlamos tamaño de la figura
 knitr::include_graphics("imagenes/new_project.jpg")
 ```
 
-2. Opción *New Directory*, seleccionams la opción *New Project*:
+2º. Opción *New Directory*, seleccionams la opción *New Project*:
 
-```{r imagen-newproject2, echo=FALSE, out.width = "60%"}
+```{r imagen-newproject2, echo=FALSE, out.width = "30%"}
 # Controlamos tamaño de la figura
 knitr::include_graphics("imagenes/new_project_step2.jpg")
 ```
 
-3. Nombre del proyecto y hacemos click en *Create Project*.
+## Nuevo proyecto
+
+3º. Nombre del proyecto y hacemos click en *Create Project*.
 
 ```{r imagen-newproject3, echo=FALSE, out.width = "60%"}
 # Controlamos tamaño de la figura
@@ -174,7 +188,7 @@ knitr::include_graphics("imagenes/new_project_step3.jpg")
 
 
 
-# 2. Introducción al lenguaje R. Programación científica en R
+# 2. Programación científica en R
 
 # 2.1 Tipos de datos
 
@@ -282,12 +296,9 @@ c
 - Tipo de objeto de R
 
   - Conjunto de líneas de código que definen una tarea
+  - Se pueden utilizar en cualquier punto del programa
 
-- Llevan a cabo una tarea concreta a partir de unos parámetros.
-
-- Se pueden utilizar en cualquier punto del programa.
-
-- Existen funciones que podemos utilizar: llamarla indicando su nombre y su lista de argumentos (entre paréntesis y separados por comas).
+- Existen funciones que podemos utilizar: `nombre_func(arg1, arg2...)`.
 
 ```{r funcion-max, echo=TRUE}
 # Esta instrucción devuelve el máximo de todos los números que se le han pasado por argumento
@@ -295,7 +306,6 @@ max(4,5,6,12,-4)
 # Media de una secuencia de 30 elementos elegidos al azar de entre el 1 y el 100.
 mean(sample(1:100, 30))
 ```
-
 
 ## Funciones: creación
 
@@ -322,7 +332,7 @@ Llamada a una función:
 
 - Indicando el nombre de los parámetros. Ventaja: omitir el nombre de parámetros que tengan valor por defecto y no queramos modificar.
 ```{r funcion4, echo=TRUE}
-convUnitsToMeters(from="km",val=56.2)
+convUnitsToMeters(val=56.2)
 ```
 
 - Sin indicar el nombre de los parámetros. Es necesario respetar la posición. 
@@ -409,6 +419,7 @@ rnorm(4, mean=10, sd=3)
 ```{r vectores1-2, echo=TRUE}
 x = vector()
 x
+x[1]
 ```
 
 
@@ -419,7 +430,7 @@ x
 ```{r indexacion, echo=TRUE}
 vl = c(FALSE, TRUE, NA, TRUE, TRUE)
 vl
-# Elemento que se encuentra en la 5º posición
+# Elementos que se encuentra entre la posición 1 y 3
 vl[1:3]
 # OJO: en R, el acceder a una posición que NO existe no genera ningún error
 vl[7]
@@ -506,12 +517,12 @@ tiempo2=system.time({y2=x^2})
 tiempo2
 ```
 
-## Función `apply()`
+## Familia `apply()`
 
 - Aplicar una función a todos los elementos de un objeto
 - `apply(matrix, i, fun)`
   
-  - Si `i=1`: aplica `fun` a todas las ficlas de `matrix`
+  - Si `i=1`: aplica `fun` a todas las filas de `matrix`
   - Si `i=2`: aplica `fun` a todas las columnas de `matrix`
 
 - `lapply(lista, fun)`
@@ -673,20 +684,32 @@ results["store2", c("1qrt", "4qrt")]
 ```{r matrices4, echo=TRUE}
 m1 = matrix(c(45, 23, 66, 77, 33, 44, 56, 12, 78, 23), 2, 5)
 m1
-# Añadimos el vector (4 ,76) en la 4º columna de m1
+# Añadimos el vector (4 ,76) a la 4º columna de m1
 m2 = cbind(c(4, 76), m1[, 4])
 m2
 ```
 
-## Matrices y Arrays: unión
+## Matrices y Arrays: añadir
+
+```{r matrices-añadir, echo=TRUE}
+# Añadimos al final
+m3 = cbind(m1, c(4, 76))
+m3
+
+#Añadimos en una posición concreta
+m4 = cbind(m1, c(4, 76))[, c(1, 2, 6, 3, 4, 5)]
+m4
+```
+
+## Matrices y Arrays: añadir
 
 ```{r matrices5, echo=TRUE}
 # Definimos una nueva matriz
-m3 = matrix(rep(12, 20), 4, 5)
-m3
-# Creamos una matriz a partir de la unión de la fila 1 de m1 y la fila 3 de m3
-m4 = rbind(m1[1, ], m3[3, ])
+m4 = matrix(rep(12, 20), 4, 5)
 m4
+# Creamos una matriz a partir de la unión de la fila 1 de m1 y la fila 3 de m4
+m5 = rbind(m1[1, ], m4[3, ])
+m5
 ```
 
 ## Matrices y Arrays: operaciones artiméticas
@@ -783,23 +806,17 @@ La importancia de las listas radica en que muchos de los tipos complejos de R se
 
 ## Datos estructurados y no estructurados
 
-- Los **datos estructurados** son aquellos que podemos organizar aplicando
-un esquema previo (estructura), que es conocido antes de realizar su análisis
-y se mantiene fijo.
+- **Datos estructurados**: se pueden organizar aplicando un esquema previo (estructura), que es conocido antes de realizar su análisis y se mantiene fijo.
     + Ejemplo: una tabla de una base de datos relacional, un archivo CSV.
-- Los **datos no estructurados** son aquellos que no podemos organizar a
-priori, puesto que pueden contener cualquier tipo de información en cualquier
-formato. 
-    + Ejemplo: transcripciones de conversaciones sobre las que aplicamos PLN.
+    
+- **Datos no estructurados**: no se puede organizar a priori, puesto que pueden contener cualquier tipo de información en cualquier formato. 
 
-- En el lenguaje R, se creo un tipo o estructura de datos que permite almacenar
-datos estructurados, semejante a una tabla en una base de datos.
-- Esperamos tener las variables por columnas y los casos (sujetos, elementos) en
-cada una de las filas.
-- Este tipo de datos se denominó `data.frame` (marco o tabla de datos).
-- Esta idea ha calado tan hondo en la ciencia de datos que **se ha replicado exactamente**
-en otros lenguajes y entornos.
-    + En Python (librería `Pandas`) o en Spark (`DataFrames` y derivados).
+- `data.frame`:
+
+  + Tipo o estructura de datos que permite almacenar datos estructurados, semejante a una tabla en una base de datos.
+  + Esperamos tener las variables por columnas y los casos (sujetos, elementos) en las filas.
+  + **Se ha replicado exactamente** en otros lenguajes y entornos.
+    - En Python (librería `Pandas`) o en Spark (`DataFrames` y derivados).
     
 ## Data Frames: creación
 
@@ -860,10 +877,10 @@ También se pueden utilizar **máscaras**.
 ## Imponemos condición booleana en indexación
 ## ¡Cuidado, la coma al final es importante!
 ## Con esa coma seleccionamos todas las columnas
-df1[df1$B < 0.2,]  
+df1[df1$col2 < 0.2,]  
 
 ## Una columna en concreto
-df1[df1$B < 0.2, 3]
+df1[df1$col2 < 0.2, 3]
 ```
 
 ## Data Frames: añadir columnas
